@@ -1,3 +1,5 @@
+![FitTribe Frontend Banner](docs/readme_images/frontend_banner.png)
+
 # FitTribe Frontend
 
 **Developer : Radleigh Smith**
