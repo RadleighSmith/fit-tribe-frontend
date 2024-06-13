@@ -1,4 +1,5 @@
 import logo from './logo.svg';
+import Button from 'react-bootstrap/Button';
 import './App.css';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <p>
           The Fitness Social Media App
         </p>
+        <Button variant="primary">Button Test</Button>
       </header>
     </div>
   );
