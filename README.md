@@ -8,11 +8,11 @@ Opening Paragraph here
 
 **Live links:**
 
-Live Site Link here
+Live Site Link: [FitTribe](https://fittribe-876c83cc52a2.herokuapp.com/)
 
-Live API Site Link here
+Live API Site Link: [FitTribe API Backend](https://fit-tribe-api-97fb1c20a2ee.herokuapp.com/)
 
-Frontend Repo Link here
+Backend Repo Link: [FitTribe Backend Repo](https://github.com/RadleighSmith/fit-tribe-api)
 
 
 
