@@ -527,15 +527,55 @@ Mobile
 
 <br>
 
-
-
-
-
-
-
 ### The Surface Plane
 
----
+#### Colour Scheme
+
+In the colour scheme section of our Surface Plane, we've carefully selected a palette that enhances the overall user experience while reflecting our design goals. Our approach balances clean, minimalist design with vibrant accents to guide user attention and encourage engagement.
+
+__Background and Component Colours__
+
+- __Contrasting Background:__ #F0F0F0 - This light grey shade provides a subtle contrast against the primary white background, adding depth and dimension to the overall design.
+
+- __Component Background:__ #FFFFFF - Pure white is used for the background of components, creating a clean and spacious feel that ensures readability and focus on content.
+
+__Primary and Accent Colours__
+
+__Main Colour:__ #5ac8fa - A vibrant blue hue is used for primary elements and call-to-action items, drawing users' attention and encouraging interaction. This colour adds a fresh and energetic vibe to the site.
+
+__Contrast Colour:__ #2992a5 - A deeper blue is used to contrast the main blue colour, providing variety and visual interest while maintaining a cohesive colour scheme.
+
+__Text and Shadows__
+
+__Text Colour:__ #000000 - Black is used for text elements, ensuring maximum readability and sharp contrast against lighter backgrounds. This choice promotes clarity and ease of reading across all sections of the website.
+
+__Shadow Colour:__ #000000 - Subtle shadows using black help to create depth and highlight interactive elements, enhancing the overall user experience.
+
+![Colour Preview](docs/readme_images/colour-preview.png)
+
+To ensure our chosen colour scheme meets accessibility standards and provides optimal readability for all users, we employed a [contrast grid](https://contrast-grid.eightshapes.com/) to evaluate the contrast ratios between text and background colours. This systematic approach allows us to assess the colour combinations used throughout the website and verify adherence to accessibility guidelines.
+
+![Contrast Grid](docs/readme_images/colour-contrast-grid.png)
+
+Overall, our carefully curated colour scheme aims to create a harmonious and visually appealing experience for our users, balancing contrast, readability, and engagement throughout the website. This palette ensures that our design is inclusive and accessible to all users, including those with visual impairments or disabilities.
+
+#### Typography
+
+In crafting our website's visual identity, we've carefully selected typography to ensure optimal readability and aesthetic appeal. Our choices of Monserrat and Roboto Mono work in harmony to create a clean, modern, and distinctive appearance across all text elements.
+
+__Content Text__
+
+Font: Monserrat
+
+Usage: Monserrat is used for body text, providing a clean and modern look that enhances readability. Its sleek and contemporary design ensures that lengthy descriptions and informative articles are easy to read, contributing to a seamless user experience.
+
+__Titles and Headers__
+
+Font: Roboto Mono
+
+Usage: Roboto Mono is employed for titles and headers, offering a distinctive and stylish appearance that helps differentiate headings from body text. Its unique, monospaced design commands attention and adds a touch of sophistication to our headers, making them stand out while maintaining readability across different devices and screen sizes.
+
+By combining Monserrat and Roboto Mono, we've created a balanced typographic system that ensures both functionality and visual appeal, enhancing the overall user experience on our website.
 
 ## Features
 
