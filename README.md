@@ -164,6 +164,23 @@ __User stories here__
 
 ### The Structure Plane
 
+The structure plane focuses on defining how the various features and functions of our fitness social media site fit together. This includes outlining the information architecture and the user flow, ensuring a seamless and intuitive experience for our users.
+
+#### Site Map
+
+This site diagram, crafted using [Lucidchart](https://www.lucidchart.com/), offers a structured overview of our platform's architecture and user navigation. It serves as a clear visualization of the pathways and interactions within the system, with each element precisely positioned to illustrate the flow of information and user movement.
+
+![FitTribe Site Map Diagram](docs/readme_images/site_map.png)
+
+---
+#### Database Plan
+
+This diagram presents a comprehensive overview of our database structure, meticulously crafted using Lucidchart. It visually represents the relationships between various entities and the flow of data within our system.
+
+We've chosen PostgreSQL as our database solution for its robust features, reliability, and cost-effectiveness as an open-source relational database system. To meet our hosting needs, we've selected ElephantSQL, a trusted platform renowned for its seamless PostgreSQL hosting services. This strategic choice ensures our database management is efficient, secure, and scalable, aligning perfectly with our business objectives.
+
+![FitTribe Entity Relationship Diagram (ERD)](docs/readme_images/erd_diagram.png)
+
 ### The Skeleton Plane
 
 ### The Surface Plane
