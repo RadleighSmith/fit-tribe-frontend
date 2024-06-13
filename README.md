@@ -91,6 +91,77 @@ By focusing on these aspects within the strategy plane, we ensure that our proje
 
 ### The Scope Plane
 
+Guided by our product strategy, the scope plane outlines the specific features and functions that our fitness social media site will include. These features are designed to meet the needs of our target audience and support our project aims.
+
+#### User Accounts:
+- Account creation and secure login
+- Profile customization (profile picture, bio, profile banner, etc.)
+- Age verification process to ensure users are over 18
+
+#### Content Creation and Sharing:
+- Ability to create and share workout posts (including text, images, and videos)
+- Blog writing and publishing platform
+- Regular posts for status updates and fitness milestones
+
+#### Interaction and Community Engagement:
+- Follow/unfollow other users
+- Like and comment on blogs and workouts
+- View other users' profiles and blogs and workouts
+- Join and participate in groups and group events centered around specific fitness interests
+
+#### Privacy and Safety:
+- Content moderation tools to prevent inappropriate or harmful content
+- Secure authentication to protect user accounts
+
+#### Navigation and User Interface:
+- Intuitive home feed displaying recent posts from followed users and groups
+- Search function to find users and specific posts
+- Notifications for interactions (likes, comments, follows)
+
+__Exclusions:__
+
+To maintain focus and manage development resources effectively, certain features will be outside the scope of the initial release. These include:
+
+- __Advanced Fitness Tracking and Analytics:__ Comprehensive tracking of fitness metrics, detailed analytics, and performance summaries.
+
+- __Integration with External Fitness Devices and Apps__: Compatibility with fitness trackers, smartwatches, and other health apps.
+
+- __E-commerce Functionalities:__ Features for selling fitness products or services directly on the platform.
+
+- __Educational Content:__ In-depth articles, videos, and tutorials related to fitness, nutrition, and wellness.
+
+- __Group Discussion Threads and Posts:__ Advanced functionalities for group discussions and community posts.
+
+- __Enhanced Privacy Settings:__ More robust options for controlling who can view user content and profile information.
+
+- __User Instant Messaging:__ Real-time chat capabilities between users.
+
+- __User-Generated Events:__ Features allowing users to create, manage, and join fitness-related events.
+
+- __Custom Workout Plans:__ Personalized workout routines generated based on user goals and preferences.
+
+- __Diet and Nutrition Tracking:__ Tools for logging meals, tracking macros, and receiving dietary advice.
+
+- __Professional Consultations:__ Integration with fitness trainers, nutritionists, and health consultants for booking sessions
+
+- __Video Streaming and Live Workouts:__ Hosting live workout sessions and video classes.
+
+- __Automated Workout Suggestions:__ AI-driven suggestions for workouts based on user performance and goals.
+
+- __Leaderboard and Competitions:__ Gamification elements such as leaderboards and fitness challenges.
+
+- __Detailed Progress Reports:__ Generation of detailed reports tracking user progress over time.
+
+- __Third-Party App Integrations:__ Seamless integration with other popular health and fitness apps.
+
+- __Advanced Social Features:__ Including features like fitness communities, follower recommendations, and trending workouts.
+
+By clearly defining the scope, we ensure that our development efforts are concentrated on delivering the most critical features and functions that align with our strategic goals and meet the needs of our users. This focused approach allows us to create a robust and user-friendly platform within a manageable timeline and budget.
+
+#### User Stories:
+
+__User stories here__ 
+
 ### The Structure Plane
 
 ### The Skeleton Plane
