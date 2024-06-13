@@ -183,6 +183,356 @@ We've chosen PostgreSQL as our database solution for its robust features, reliab
 
 ### The Skeleton Plane
 
+We developed wireframes for desktop, tablet, and mobile views to outline the layout and design of our website across different devices. These wireframes act as a blueprint for our site's structure, showing the placement of elements, navigation flow, and overall user interface design. By creating these wireframes, we can clearly communicate our design concepts, collaborate with stakeholders, gather feedback, and make informed decisions before moving into the development phase.
+
+Using [Uizard's](https://app.uizard.io/), an innovative wireframing tool, we streamlined the wireframing process, enhancing our design iteration cycles. [Uizard's](https://app.uizard.io/) intuitive interface allows us to quickly transform ideas into concrete wireframes, saving time and effort. With [Uizard's](https://app.uizard.io/), we can easily experiment with different layouts, iterate on design variations, and visualize our website's appearance and functionality across various devices.
+
+#### Wireframes:
+
+**Landing Page: (This is the Homepage of a user that is not authenticated)**
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop Landing Page Wireframes](docs/readme_images/wireframes/desktop/landing_page.png)
+</details>
+<details>
+<summary>
+Tablet
+</summary>
+ 
+![Tablet Landing Page Wireframes](docs/readme_images/wireframes/tablet/landing_page_tablet.png)
+</details>
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile Landing Page Wireframes](docs/readme_images/wireframes/mobile/landing_page_mobile.png)
+</details>
+
+<br>
+
+**Homepage: (This is the homepage of authenticated users)**
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop Homepage Wireframes](docs/readme_images/wireframes/desktop/homepage.png)
+</details>
+<details>
+<summary>
+Tablet
+</summary>
+ 
+![Tablet Homepage Wireframes](docs/readme_images/wireframes/tablet/homepage_tablet.png)
+</details>
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile Homepage Wireframes](docs/readme_images/wireframes/mobile/homepage_mobile.png)
+</details>
+
+<br>
+
+**Login Page:**
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop Login Wireframes](docs/readme_images/wireframes/desktop/login.png)
+</details>
+<details>
+<summary>
+Tablet
+</summary>
+ 
+![Tablet Login Wireframes](docs/readme_images/wireframes/tablet/login_tablet.png)
+</details>
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile Login Wireframes](docs/readme_images/wireframes/mobile/login_mobile.png)
+</details>
+
+<br>
+
+**Account Creation:**
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop Account Creation Wireframes](docs/readme_images/wireframes/desktop/account_creation.png)
+</details>
+<details>
+<summary>
+Tablet
+</summary>
+ 
+![Tablet Account Creation Wireframes](docs/readme_images/wireframes/tablet/account_creation_tablet.png)
+</details>
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile Account Creation Wireframes](docs/readme_images/wireframes/mobile/account_creation_mobile.png)
+</details>
+
+<br>
+
+**Blog Creation Page**
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop Blog Creation Wireframes](docs/readme_images/wireframes/desktop/blog_creation.png)
+</details>
+<details>
+<summary>
+Tablet
+</summary>
+ 
+![Tablet Blog Creation Wireframes](docs/readme_images/wireframes/tablet/blog_creation_tablet.png)
+</details>
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile Blog Creation Wireframes](docs/readme_images/wireframes/mobile/blog_creation_mobile.png)
+</details>
+
+<br>
+
+**Workout Creation Page**
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop Workout Creation Wireframes](docs/readme_images/wireframes/desktop/workout_creation.png)
+</details>
+<details>
+<summary>
+Tablet
+</summary>
+ 
+![Tablet Workout Creation Wireframes](docs/readme_images/wireframes/tablet/workout_creation_tablet.png)
+</details>
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile Workout Creation Wireframes](docs/readme_images/wireframes/mobile/workout_creation_mobile.png)
+</details>
+
+<br>
+
+**Blog / Workout Detail Page**
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop Blog and Workout Detail Page Wireframes](docs/readme_images/wireframes/desktop/blog_workout_details_page.png)
+</details>
+<details>
+<summary>
+Tablet
+</summary>
+ 
+![Tablet Blog and Workout Detail Page Wireframes](docs/readme_images/wireframes/tablet/blog_workout_details_tablet.png)
+</details>
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile Blog and Workout Detail Page Wireframes](docs/readme_images/wireframes/mobile/blog_workout_details_mobile.png)
+</details>
+
+<br>
+
+**Profile Page**
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop Profile Wireframes](docs/readme_images/wireframes/desktop/profile.png)
+</details>
+<details>
+<summary>
+Tablet
+</summary>
+ 
+![Table Profile Wireframes](docs/readme_images/wireframes/tablet/profile_tablet.png)
+</details>
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile Profile Wireframes](docs/readme_images/wireframes/mobile/profile_mobile.png)
+</details>
+
+<br>
+
+**Admin Page**
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop Admin Page Wireframes](docs/readme_images/wireframes/desktop/admin_panel.png)
+</details>
+<details>
+<summary>
+Tablet
+</summary>
+ 
+![Tablet Admin Page Wireframes](docs/readme_images/wireframes/tablet/admin_panel_tablet.png)
+</details>
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile Admin Page Wireframes](docs/readme_images/wireframes/mobile/admin_panel_mobile.png)
+</details>
+
+<br>
+
+**Group Creation Page**
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop Group Creation Wireframes](docs/readme_images/wireframes/desktop/group_creation.png)
+</details>
+<details>
+<summary>
+Tablet
+</summary>
+ 
+![Tablet Group Creation Wireframes](docs/readme_images/wireframes/tablet/group_creation_tablet.png)
+</details>
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile Group Creation Wireframes](docs/readme_images/wireframes/mobile/group_creation_mobile.png)
+</details>
+
+<br>
+
+**Group Detail Page**
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop Group Detail Wireframes](docs/readme_images/wireframes/desktop/group_detail.png)
+</details>
+<details>
+<summary>
+Tablet
+</summary>
+ 
+![Tablet Group Detail Wireframes](docs/readme_images/wireframes/tablet/group_detail_tablet.png)
+</details>
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile Group Detail Wireframes](docs/readme_images/wireframes/mobile/group_detail_mobile.png)
+</details>
+
+<br>
+
+**Event Creation Page**
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop Event Creation Page Wireframes](docs/readme_images/wireframes/desktop/event_creation.png)
+</details>
+<details>
+<summary>
+Tablet
+</summary>
+ 
+![Tablet Event Creation Page Wireframes](docs/readme_images/wireframes/tablet/event_creation_tablet.png)
+</details>
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile Event Creation Page Wireframes](docs/readme_images/wireframes/mobile/event_creation_mobile.png)
+</details>
+
+<br>
+
+**Event Details Page**
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop Event Detail Page Wireframes](docs/readme_images/wireframes/desktop/event_detail.png)
+</details>
+<details>
+<summary>
+Tablet
+</summary>
+ 
+![Tablet Event Detail Page Wireframes](docs/readme_images/wireframes/tablet/event_detail_tablet.png)
+</details>
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile Event Detail Page Wireframes](docs/readme_images/wireframes/mobile/event_detail_mobile.png)
+</details>
+
+<br>
+
+
+
+
+
+
+
 ### The Surface Plane
 
 ---
