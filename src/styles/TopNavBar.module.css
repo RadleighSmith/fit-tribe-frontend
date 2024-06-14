@@ -1,0 +1,35 @@
+.TopNavBar {
+    background-color: #ffffff;
+}
+
+.navlink{
+    font-weight: 500;
+}
+
+.navbutton {
+    background-color: #5ac8fa;
+    font-weight: 500;
+    width: 5rem;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-left: 0.5rem;
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+    transition: background-color 0.3s ease;
+}
+
+.navbutton:hover {
+    background-color: #2992a5;
+}
+
+@media (max-width: 768px) {
+    .navbutton {
+        margin-left: 0rem;
+    }
+    .navlink{
+        margin-left: 0.5rem;
+    }
+}

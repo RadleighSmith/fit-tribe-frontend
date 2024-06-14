@@ -1,20 +1,10 @@
-import logo from './logo.svg';
-import Button from 'react-bootstrap/Button';
-import './App.css';
+import styles from "./App.module.css";
+import TopNavBar from "./components/TopNavBar";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Welcome to FitTribe
-        </p>
-        <p>
-          The Fitness Social Media App
-        </p>
-        <Button variant="primary">Button Test</Button>
-      </header>
+    <div className={styles.App}>
+      <TopNavBar />
     </div>
   );
 }
