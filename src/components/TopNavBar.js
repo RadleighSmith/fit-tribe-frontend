@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 const TopNavBar = () => {
     return (
         <Navbar className={styles.TopNavBar} expand="md" fixed='top'>
-            <Container>
+            <Container fluid >
                 <NavLink to="/">
                     <Navbar.Brand><img src={logo} alt='FitTribe Logo' height='45' /></Navbar.Brand>
                 </NavLink>
