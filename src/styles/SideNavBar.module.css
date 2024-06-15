@@ -1,0 +1,52 @@
+.SideNavBar {
+    position: fixed;
+    top: 73px;
+    left: 0;
+    width: 210px;
+    height: calc(100% - 72px);
+    background-color: #f8f9fa;
+    border-right: 1px solid #dee2e6;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.NavLink {
+    color: #000;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.NavLink i {
+    margin-right: 0.5rem;
+}
+
+.NavLink:hover {
+    color: #000;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.Active {
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.LogoutSection {
+    margin-bottom: 1rem;
+}
+
+.Divider {
+    margin: 1rem 0;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+
+.MyGroupsHeader {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
