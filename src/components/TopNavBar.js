@@ -4,11 +4,20 @@ import logo from '../assets/fittribe_logo_coloured.png';
 import styles from '../styles/TopNavBar.module.css';
 import { NavLink } from 'react-router-dom';
 import { useCurrentUser } from '../contexts/CurrentUserContext';
+import ProfilePicture from './ProfilePicture';
 
 const TopNavBar = () => {
-
     const currentUser = useCurrentUser();
-    const loggedInLinks = <>{currentUser?.username}</>
+    const loggedInLinks = (
+        <>
+            <NavLink
+                to={`/profiles/${currentUser?.profile_id}`}
+                className={styles.NavLink}
+            >
+                <ProfilePicture src={currentUser?.profile_image} text={`${currentUser?.username}'s Profile`} height={40} />
+            </NavLink>
+        </>
+    );
     const loggedOutLinks = (
         <>
             <NavLink
@@ -34,17 +43,17 @@ const TopNavBar = () => {
                 Sign Up
             </NavLink>
         </>
-    )
+    );
     return (
         <Navbar className={styles.TopNavBar} expand="md" fixed='top'>
-            <Container fluid >
+            <Container fluid>
                 <NavLink to="/">
                     <Navbar.Brand><img src={logo} alt='FitTribe Logo' height='45' /></Navbar.Brand>
                 </NavLink>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto text-left">
-                    {currentUser ? loggedInLinks : loggedOutLinks}
+                        {currentUser ? loggedInLinks : loggedOutLinks}
                     </Nav>
                 </Navbar.Collapse>
             </Container>
@@ -53,3 +62,4 @@ const TopNavBar = () => {
 };
 
 export default TopNavBar;
+
