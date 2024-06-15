@@ -7,8 +7,12 @@ import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 import { Form, Button, Image, Col, Row, Container, Alert } from "react-bootstrap";
 import axios from "axios";
+import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 
 const LoginForm = () => {
+    const setCurrentUser = useSetCurrentUser();
+
+
     const [loginData, setLoginData] = useState({
         username: "",
         password: "",
@@ -29,8 +33,9 @@ const LoginForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios.post("/dj-rest-auth/login/", loginData);
-            history.push("/"); // Redirect to home page or dashboard upon successful login
+            const {data} = await axios.post("/dj-rest-auth/login/", loginData);
+            setCurrentUser(data.user)
+            history.push("/");
         } catch (err) {
             setErrors(err.response?.data);
         }
