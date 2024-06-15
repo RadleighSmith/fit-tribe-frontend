@@ -5,15 +5,19 @@ import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContex
 import styles from '../styles/SideNavBar.module.css';
 import btnstyles from '../styles/Button.module.css';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const SideNavBar = () => {
     const currentUser = useCurrentUser();
     const setCurrentUser = useSetCurrentUser();
+    const history = useHistory()
+
 
     const handleLogout = async () => {
         try {
             await axios.post('/dj-rest-auth/logout/');
             setCurrentUser(null);
+            history.push("/signin")
         } catch (err) {
             console.log(err);
         }
