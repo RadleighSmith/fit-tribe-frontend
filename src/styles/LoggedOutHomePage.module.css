@@ -1,0 +1,139 @@
+.HeroSection {
+    position: relative;
+    height: calc(100vh - 71px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.HeroImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.Overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    text-align: center;
+    padding: 0 20px;
+    z-index: 1;
+}
+
+.HeroTitle {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.HeroText {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.FeaturesSection {
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.SectionTitle {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.FeaturesList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.FeatureItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 600px;
+    text-align: center;
+}
+
+.FeatureItem i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    margin-right: 1rem;
+    color: #5ac8fa;
+}
+
+.FeatureTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.FeatureItem p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.Divider {
+    margin: 1rem 0;
+}
+
+@media (min-width: 768px) {
+    .FeatureItem {
+        flex-direction: row;
+        text-align: left;
+    }
+
+    .Item1 {
+        margin-left: 0;
+    }
+
+    .Item2 {
+        margin-left: 10rem;
+    }
+
+    .Item3 {
+        margin-left: 5rem;
+    }
+
+    .Item4 {
+        margin-left: 15rem;
+    }
+
+    .FeatureItem p {
+        margin-left: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .HeroTitle {
+        font-size: 2.5rem;
+    }
+
+    .HeroText {
+        font-size: 1.25rem;
+    }
+
+    .ButtonMargin {
+        margin-bottom: 1rem;
+    }
+
+    .FeaturesSection {
+        padding-bottom: 8rem; /* Adjusted padding to add spacing */
+    }
+}

@@ -12,6 +12,12 @@
     width: 100%;
 }
 
+.ButtonLarge {
+    width: 10rem;
+    height: 3rem;
+    font-size: 1.3rem;
+}
+
 .Button:hover {
     background-color: #2992a5;
     font-weight: 700;
