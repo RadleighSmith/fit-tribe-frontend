@@ -10,43 +10,43 @@ import axios from "axios";
 
 const SignUpForm = () => {
     const [signUpData, setSignUpData] = useState({
-      username: "",
-      email: "",
-      password1: "",
-      password2: "",
+        username: "",
+        email: "",
+        password1: "",
+        password2: "",
     });
     const { username, email, password1, password2 } = signUpData;
-  
+
     const [errors, setErrors] = useState({});
-  
+
     const history = useHistory();
-  
+
     const handleChange = (event) => {
-      setSignUpData({
-        ...signUpData,
-        [event.target.name]: event.target.value,
-      });
+        setSignUpData({
+            ...signUpData,
+            [event.target.name]: event.target.value,
+        });
     };
-  
+
     const handleSubmit = async (event) => {
-      event.preventDefault();
-      try {
-        await axios.post("/dj-rest-auth/registration/", signUpData);
-        history.push("/signin");
-      } catch (err) {
-        setErrors(err.response?.data);
-      }
+        event.preventDefault();
+        try {
+            await axios.post("/dj-rest-auth/registration/", signUpData);
+            history.push("/signin");
+        } catch (err) {
+            setErrors(err.response?.data);
+        }
     };
-  
+
     return (
         <Row className={'no-gutters'}>
-            <Col className={styles.LeftCol} md={6}>
+            <Col className={`${styles.LeftCol} d-none d-lg-flex align-items-center justify-content-center`} lg={6}>
                 <div className={styles.Circle} />
                 <div className={styles.InnerCircle} />
                 <Image className={styles.FormImage} src={signUpImage} />
             </Col>
-            <Col className={`my-auto p-sm-2 p-md-3 p-lg-5 ${styles.RightCol}`} md={6}>
-                <Container className={`${appStyles.Content} p-4`}>
+            <Col className={`d-flex align-items-center justify-content-center ${styles.RightCol}`} xs={12} lg={6}>
+                <Container className={`${appStyles.Content} ${styles.FormContainer} p-4`}>
                     <img src={logo} alt='FitTribe Logo' className={styles.Logo} height='60' />
                     <h1 className={styles.FormTitle}>Sign Up</h1>
                     <Form onSubmit={handleSubmit}>
@@ -110,7 +110,7 @@ const SignUpForm = () => {
                             Already have a FitTribe account? <span>Sign in here</span>
                         </Link>
                         <Button
-                            className={btnStyles.Button}
+                            className={`${btnStyles.Button} ${btnStyles.ButtonWide}`}
                             type="submit"
                         >
                             Submit

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import logo from "../../assets/fittribe_logo_coloured.png";
-import signInImage from "../../assets/sign_in_image.jpeg"; 
+import signInImage from "../../assets/sign_in_image.jpeg";
 import styles from "../../styles/LoginSignUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
@@ -11,7 +11,6 @@ import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 
 const LoginForm = () => {
     const setCurrentUser = useSetCurrentUser();
-
 
     const [loginData, setLoginData] = useState({
         username: "",
@@ -33,8 +32,8 @@ const LoginForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const {data} = await axios.post("/dj-rest-auth/login/", loginData);
-            setCurrentUser(data.user)
+            const { data } = await axios.post("/dj-rest-auth/login/", loginData);
+            setCurrentUser(data.user);
             history.push("/");
         } catch (err) {
             setErrors(err.response?.data);
@@ -43,13 +42,13 @@ const LoginForm = () => {
 
     return (
         <Row className={'no-gutters'}>
-            <Col className={styles.LeftCol} md={6}>
+            <Col className={`${styles.LeftCol} d-none d-lg-flex align-items-center justify-content-center`} lg={6}>
                 <div className={styles.Circle} />
                 <div className={styles.InnerCircle} />
                 <Image className={styles.FormImage} src={signInImage} />
             </Col>
-            <Col className={`my-auto p-sm-2 p-md-3 p-lg-5 ${styles.RightCol}`} md={6}>
-                <Container className={`${appStyles.Content} p-4`}>
+            <Col className={`d-flex align-items-center justify-content-center ${styles.RightCol}`} xs={12} lg={6}>
+                <Container className={`${appStyles.Content} ${styles.FormContainer} p-4`}>
                     <img src={logo} alt='FitTribe Logo' className={styles.Logo} height='60' />
                     <h1 className={styles.FormTitle}>Login</h1>
                     <Form onSubmit={handleSubmit}>
@@ -85,7 +84,7 @@ const LoginForm = () => {
                             Don't have an account? <span>Sign up here</span>
                         </Link>
                         <Button
-                            className={btnStyles.Button}
+                            className={`${btnStyles.Button} ${btnStyles.ButtonWide}`}
                             type="submit"
                         >
                             Sign In
