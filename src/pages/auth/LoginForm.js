@@ -48,7 +48,7 @@ const LoginForm = () => {
                 <Image className={styles.FormImage} src={signInImage} />
             </Col>
             <Col className={`d-flex align-items-center justify-content-center ${styles.RightCol}`} xs={12} lg={6}>
-                <Container className={`${appStyles.Content} ${styles.FormContainer} p-4`}>
+                <Container className={`${appStyles.Content} p-4 m-2 m-sm-5`}>
                     <img src={logo} alt='FitTribe Logo' className={styles.Logo} height='60' />
                     <h1 className={styles.FormTitle}>Login</h1>
                     <Form onSubmit={handleSubmit}>

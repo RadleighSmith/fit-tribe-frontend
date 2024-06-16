@@ -1,13 +1,12 @@
-
 .LeftCol {
     background-color: #ffffff;
-    height: calc(100vh - 95px);
+    height: calc(100vh - 71px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1;
-    overflow: hidden; /* Ensure content doesn't overflow */
+    overflow: hidden;
 }
 
 .FormImage {
@@ -15,11 +14,8 @@
     max-width: 50rem;
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
-    z-index: 2; /* Ensure image is above the circle */
+    z-index: 2;
     position: relative;
-}
-.FormContainer {
-    max-width: 40rem;
 }
 
 .Circle {
@@ -33,6 +29,7 @@
     transform: translateY(-50%);
     z-index: 0;
 }
+
 .InnerCircle {
     border: 1rem solid #fff;
     width: 130%;
@@ -46,7 +43,10 @@
 }
 
 .RightCol {
-    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 71px);
 }
 
 .Logo {
@@ -99,4 +99,3 @@
     color: #2992a5;
     font-weight: 600;
 }
-
