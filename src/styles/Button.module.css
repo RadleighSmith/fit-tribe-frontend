@@ -1,10 +1,15 @@
 .Button {
-    width: 100%;
+    width: 6rem;
+    text-align: center;
     background-color: #5ac8fa;
     border-radius: 5px;
     border: none;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
     color: #000;
+}
+
+.ButtonWide {
+    width: 100%;
 }
 
 .Button:hover {
@@ -13,4 +18,10 @@
     color: #000;
 }
 
-  
+.ButtonActive {
+    color: #000;
+    background-color: #5ac8fa;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}

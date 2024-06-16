@@ -52,9 +52,18 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
 
+.Divider {
+    margin: 1rem;
+}
+
 @media (max-width: 768px) {
-    .NavButton {
-        margin-left: 0;
-        margin-top: 0.2rem
+    .NavLink {
+        display: block;
+        width: 100%;
+        padding: 0.5rem 1rem;
+    }
+    .LogoutButton {
+        margin-top: 1rem;
+        width: 100%;
     }
 }

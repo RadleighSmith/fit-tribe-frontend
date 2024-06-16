@@ -51,7 +51,7 @@ const SideNavBar = () => {
             </Nav>
             <div className={styles.LogoutSection}>
                 <hr className={styles.Divider} />
-                <Button className={btnstyles.Button} onClick={handleLogout}>
+                <Button className={`${btnstyles.Button} ${btnstyles.ButtonWide}`} onClick={handleLogout}>
                     Logout
                 </Button>
             </div>

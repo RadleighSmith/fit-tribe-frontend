@@ -50,3 +50,9 @@
     font-weight: 600;
     margin-bottom: 0.5rem;
 }
+/* Removes sidebar when screen is below 768px */
+@media (max-width: 768px) {
+    .SideNavBar {
+      display: none;
+    }
+  }
