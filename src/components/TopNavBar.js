@@ -19,7 +19,6 @@ const TopNavBar = () => {
         try {
             await axios.post('/dj-rest-auth/logout/');
             setCurrentUser(null);
-            setExpanded(false); // Close the menu after logout
         } catch (err) {
             console.log(err);
         }
@@ -37,7 +36,7 @@ const TopNavBar = () => {
     );
 
     const loggedOutLinks = (
-        <Nav className="ml-auto">
+        <Nav className="ml-auto d-none d-md-flex">
             <NavLink
                 exact
                 to='/'
@@ -58,7 +57,38 @@ const TopNavBar = () => {
                 className={`${styles.NavButton} ${btnstyles.Button}`}
                 activeClassName={btnstyles.ButtonActive}
             >
-                Sign Up
+                SignUp
+            </NavLink>
+        </Nav>
+    );
+
+    const collapsedLoggedOutLinks = (
+        <Nav className="d-md-none">
+            <hr className={styles.Divider} />
+            <NavLink
+                exact
+                to='/'
+                className={styles.NavLink}
+                activeClassName={styles.Active}
+                onClick={() => setExpanded(false)}
+            >
+                Home
+            </NavLink>
+            <NavLink
+                to='/signin'
+                className={styles.NavLink}
+                activeClassName={styles.Active}
+                onClick={() => setExpanded(false)}
+            >
+                Login
+            </NavLink>
+            <NavLink
+                to='/signup'
+                className={`${styles.NavLink} ${btnstyles.Button} mb-2`}
+                activeClassName={btnstyles.ButtonActive}
+                onClick={() => setExpanded(false)}
+            >
+                SignUp
             </NavLink>
         </Nav>
     );
@@ -113,7 +143,10 @@ const TopNavBar = () => {
                             </Nav>
                         </>
                     ) : (
-                        loggedOutLinks
+                        <>
+                            {loggedOutLinks}
+                            {collapsedLoggedOutLinks}
+                        </>
                     )}
                 </Navbar.Collapse>
             </Container>
