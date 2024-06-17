@@ -1,0 +1,17 @@
+.Input {
+    background-color: #f0f0f0;
+    margin-bottom: 1rem;
+}
+.Input:hover {
+    background-color: #fff;
+    font-weight: 600;
+    border: 3px solid #5ac8fa;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+.Input:focus {
+    background-color: #fff;
+    font-weight: 600;
+    border: 3px solid #5ac8fa;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
