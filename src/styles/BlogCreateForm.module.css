@@ -1,0 +1,6 @@
+.ImagePreview {
+    margin-top: 10px;
+    max-height: 200px;
+    object-fit: cover;
+}
+
