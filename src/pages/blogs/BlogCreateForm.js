@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import { Form, Button, Container, Alert, Image } from 'react-bootstrap';
 import axios from 'axios';
 import appStyles from '../../App.module.css';
-import styles from '../../styles/BlogCreateForm.module.css';
 import divider from '../../styles/Divider.module.css';
 import formStyles from '../../styles/Form.module.css';
 import btnStyles from '../../styles/Button.module.css';
