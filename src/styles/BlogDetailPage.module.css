@@ -35,13 +35,23 @@
 }
 
 .Icon:hover {
+    color: #2992a5;
+}
+
+.DisabledIcon {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.Liked {
     color: #5ac8fa;
 }
 
 .IconCounter {
-    margin-left: 8px;
     font-size: 1.2rem;
+    margin-left: 5px;
 }
+
 
 @media (max-width: 768) {
     .BlogImage {

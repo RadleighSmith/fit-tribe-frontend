@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Container, Row, Col, Image, Button } from 'react-bootstrap';
+import { Container, Row, Col, Image, Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import axios from 'axios';
 import appStyles from '../../App.module.css';
 import btnStyles from '../../styles/Button.module.css';
-import profileStyles from '../../styles/ProfilePicture.module.css'
+import profileStyles from '../../styles/ProfilePicture.module.css';
 import divider from '../../styles/Divider.module.css';
 import styles from '../../styles/BlogDetailPage.module.css';
 
@@ -12,6 +12,7 @@ const BlogDetailPage = () => {
     const { id } = useParams();
     const [blog, setBlog] = useState(null);
     const [errors, setErrors] = useState(null);
+    const [isLiking, setIsLiking] = useState(false);
 
     const defaultBlogImage = 'https://res.cloudinary.com/dn6vitvd4/image/upload/v1/fittribe_media/../default_post_eznpr6';
 
@@ -28,9 +29,47 @@ const BlogDetailPage = () => {
         fetchBlog();
     }, [id]);
 
+    const handleLike = async () => {
+        setIsLiking(true);
+        try {
+            const { data } = await axios.post("/blog-likes/", { blog: id });
+            setBlog((prevBlog) => ({
+                ...prevBlog,
+                blog_likes_count: prevBlog.blog_likes_count + 1,
+                blog_like_id: data.id
+            }));
+        } catch (err) {
+            console.log(err);
+        } finally {
+            setIsLiking(false);
+        }
+    };
+
+    const handleUnlike = async () => {
+        setIsLiking(true);
+        try {
+            await axios.delete(`/blog-likes/${blog.blog_like_id}/`);
+            setBlog((prevBlog) => ({
+                ...prevBlog,
+                blog_likes_count: prevBlog.blog_likes_count - 1,
+                blog_like_id: null
+            }));
+        } catch (err) {
+            console.log(err);
+        } finally {
+            setIsLiking(false);
+        }
+    };
+
     if (errors) {
         return <p className="text-danger">{errors.detail}</p>;
     }
+
+    const renderTooltip = (props) => (
+        <Tooltip id="button-tooltip" {...props}>
+            You cannot like your own post.
+        </Tooltip>
+    );
 
     return (
         <Container className={`${appStyles.Content} pb-5 mt-3`}>
@@ -60,7 +99,7 @@ const BlogDetailPage = () => {
                             <h1 className="text-center mt-3">{blog.title}</h1>
                             <div className={divider.BlueDivider} />
                             <p className={styles.Content}>{blog.content}</p>
-
+                            
                             {blog.image && blog.image !== defaultBlogImage && (
                                 <div className="d-flex justify-content-center">
                                     <Image src={blog.image} className={`${styles.BlogImage} mt-3 mb-2`} />
@@ -68,7 +107,21 @@ const BlogDetailPage = () => {
                             )}
                             <div className="d-flex justify-content-between align-items-center mt-3">
                                 <div className="d-flex align-items-center">
-                                    <i className={`fas fa-thumbs-up ${styles.Icon}`}></i>
+                                    {blog.is_owner ? (
+                                        <OverlayTrigger
+                                            placement="top"
+                                            delay={{ show: 250, hide: 400 }}
+                                            overlay={renderTooltip}
+                                        >
+                                            <i className={`fas fa-thumbs-up ${styles.Icon} ${styles.DisabledIcon}`}></i>
+                                        </OverlayTrigger>
+                                    ) : (
+                                        blog.blog_like_id ? (
+                                            <i className={`fas fa-thumbs-up ${styles.Icon} ${styles.Liked}`} onClick={handleUnlike} disabled={isLiking}></i>
+                                        ) : (
+                                            <i className={`fas fa-thumbs-up ${styles.Icon}`} onClick={handleLike} disabled={isLiking}></i>
+                                        )
+                                    )}
                                     <span className={styles.IconCounter}>{blog.blog_likes_count}</span>
                                     <i className={`fas fa-comment ${styles.Icon} ml-3`}></i>
                                     <span className={styles.IconCounter}>{blog.blog_comments_count}</span>
