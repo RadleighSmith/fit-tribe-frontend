@@ -5,3 +5,11 @@
     margin: 0 auto;
     margin-bottom: 1rem;
 }
+
+.OffWhiteDivider {
+    border: 2px solid #f0f0f0;
+    border-radius: 5px;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+}

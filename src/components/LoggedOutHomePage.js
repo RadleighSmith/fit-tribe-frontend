@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Container, Button } from 'react-bootstrap';
 import appStyles from "../App.module.css"
 import styles from '../styles/LoggedOutHomePage.module.css';
+import divider from '../styles/Divider.module.css';
 import btnStyles from '../styles/Button.module.css';
 import heroImage from '../assets/hero_image.jpg';
 
@@ -30,7 +31,7 @@ const LoggedOutHomePage = () => {
             </div>
             <Container className={`${styles.FeaturesSection} ${appStyles.Content} mt-5 mb-5`}>
                 <h2 className={styles.SectionTitle}>Why you'll love FitTribe</h2>
-                <hr className={styles.Divider} />
+                <div className={divider.OffWhiteDivider} />
                 <ul className={styles.FeaturesList}>
                     <li className={`${styles.FeatureItem} ${styles.Item1}`}>
                         <i className="fas fa-dumbbell"></i>
@@ -53,7 +54,7 @@ const LoggedOutHomePage = () => {
                         <p>Like, comment, and follow to stay motivated.</p>
                     </li>
                 </ul>
-                <hr className={styles.Divider} />
+                <div className={divider.OffWhiteDivider} />
                 <div className="text-center">
                     <h2 className={styles.SectionTitle}>Still interested?</h2>
                     <Link to="/signup">
