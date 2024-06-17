@@ -1,0 +1,44 @@
+.BlogCard {
+    width: 100%;
+}
+
+.BlogHeader {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.ProfileImage {
+    width: 50px;
+    height: 50px;
+    margin-right: 1rem;
+}
+
+.BlogInfo {
+    flex: 1;
+}
+
+.Title {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.OwnerAndDate {
+    font-size: 0.875rem;
+    color: #555;
+}
+
+.OwnerName {
+    font-weight: bold;
+}
+
+.DatePosted {
+    margin-left: 1rem;
+    color: #999;
+}
+
+.BlogImage {
+    width: 100%;
+    height: auto;
+    margin-top: 1rem;
+}
