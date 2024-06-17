@@ -18,6 +18,11 @@
     font-size: 1.3rem;
 }
 
+.ButtonSmall {
+    width: 5rem;
+    height: 2.2rem;
+}
+
 .Button:hover {
     background-color: #2992a5;
     font-weight: 700;

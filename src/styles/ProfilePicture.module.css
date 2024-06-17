@@ -3,14 +3,40 @@
     align-items: center;
   }
   
-  .ProfilePictureNavBar {
-    margin-right: 0.5rem; 
-    margin-left: 0.5rem; 
-    border-radius: 50%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);;
-  }
+.ProfilePictureNavBar {
+  margin-right: 0.5rem; 
+  margin-left: 0.5rem; 
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
   
-  .ProfileNavText {
-    display: inline-block;
-    vertical-align: middle;
-  }
+.ProfileNavText {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.ProfileImage {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  margin-right: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+.ProfileLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #000;
+}
+
+.ProfileLink:hover .ProfileImage {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 1);
+}
+
+.ProfileLink:hover .ProfileUsername {
+  font-weight: 600;
+  color: #000;
+  text-decoration: none;
+}
+

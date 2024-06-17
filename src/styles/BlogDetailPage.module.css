@@ -1,0 +1,51 @@
+.BannerImage {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.ProfileImage {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+
+.DatePosted {
+    font-size: 1rem;
+    color: #6c757d;
+}
+
+.BlogImage {
+    max-width: 70%;
+    height: auto;
+    max-height: 20rem;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+.Icon {
+    font-size: 1.5rem;
+    color: #6c757d;
+    cursor: pointer;
+    margin-left: 1.5rem;
+}
+
+.Icon:hover {
+    color: #5ac8fa;
+}
+
+.IconCounter {
+    margin-left: 8px;
+    font-size: 1.2rem;
+}
+
+@media (max-width: 768) {
+    .BlogImage {
+        max-width: 100%;
+    }
+}
+  
