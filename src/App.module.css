@@ -20,7 +20,8 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
-  max-width: 90%;
+  width: 80%;
+  max-width: 100rem;
   padding: 20px;
   margin: 0 auto;
 }
@@ -30,6 +31,19 @@ h1, h2, h3, h4, h5, h6 {
       padding-left: 0;
   }
 }
+
+@media (max-width: 600px) {
+  .Content {
+      width: 90%;
+  }
+}
+
+@media (max-width: 500px) {
+  .Content {
+      width: 100%;
+  }
+}
+
 
 /* scrollbar */
 *::-webkit-scrollbar {
