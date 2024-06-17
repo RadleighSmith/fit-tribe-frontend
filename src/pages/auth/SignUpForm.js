@@ -5,6 +5,7 @@ import signUpImage from "../../assets/sign_up_image.jpg";
 import styles from "../../styles/LoginSignUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
+import formStyles from "../../styles/Form.module.css"
 import { Form, Button, Image, Col, Row, Container, Alert } from "react-bootstrap";
 import axios from "axios";
 
@@ -53,7 +54,7 @@ const SignUpForm = () => {
                         <Form.Group controlId="username">
                             <Form.Label className="d-none">Username</Form.Label>
                             <Form.Control
-                                className={styles.Input}
+                                className={formStyles.Input}
                                 type="text"
                                 placeholder="Enter Username"
                                 name="username"
@@ -67,7 +68,7 @@ const SignUpForm = () => {
                         <Form.Group controlId="email">
                             <Form.Label className="d-none">Email</Form.Label>
                             <Form.Control
-                                className={styles.Input}
+                                className={formStyles.Input}
                                 type="email"
                                 placeholder="Enter Email"
                                 name="email"
@@ -81,7 +82,7 @@ const SignUpForm = () => {
                         <Form.Group controlId="password1">
                             <Form.Label className="d-none">Enter Password</Form.Label>
                             <Form.Control
-                                className={styles.Input}
+                                className={formStyles.Input}
                                 type="password"
                                 placeholder="Enter Password"
                                 name="password1"
@@ -95,7 +96,7 @@ const SignUpForm = () => {
                         <Form.Group controlId="password2">
                             <Form.Label className="d-none">Confirm Password</Form.Label>
                             <Form.Control
-                                className={styles.Input}
+                                className={formStyles.Input}
                                 type="password"
                                 placeholder="Confirm Password"
                                 name="password2"
