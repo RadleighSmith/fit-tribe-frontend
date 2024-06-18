@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Container, Row, Col, Image, Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
+import { Container, Row, Col, Image, Button, Tooltip, OverlayTrigger, Form } from 'react-bootstrap';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { axiosRes } from '../../api/axiosDefaults';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import appStyles from '../../App.module.css';
@@ -8,10 +9,16 @@ import btnStyles from '../../styles/Button.module.css';
 import profileStyles from '../../styles/ProfilePicture.module.css';
 import divider from '../../styles/Divider.module.css';
 import styles from '../../styles/BlogDetailPage.module.css';
+import BlogComment from '../../components/BlogComment';
 
 const BlogDetailPage = () => {
     const { id } = useParams();
     const [blog, setBlog] = useState(null);
+    const [comments, setComments] = useState([]);
+    const [hasMore, setHasMore] = useState(false);
+    const [nextPage, setNextPage] = useState("");
+    const [commentContent, setCommentContent] = useState("");
+    const [commentErrors, setCommentErrors] = useState({});
     const [errors, setErrors] = useState(null);
     const [isLiking, setIsLiking] = useState(false);
 
@@ -31,6 +38,33 @@ const BlogDetailPage = () => {
         };
         fetchBlog();
     }, [id]);
+
+    useEffect(() => {
+        const fetchComments = async () => {
+            try {
+                const { data } = await axiosRes.get(`/blog-comments/?blog=${id}`);
+                setComments(data.results);
+                setNextPage(data.next);
+                setHasMore(!!data.next);
+            } catch (err) {
+                setErrors(err.response?.data);
+            }
+        };
+        fetchComments();
+    }, [id]);
+
+    const fetchMoreComments = async () => {
+        if (nextPage) {
+            try {
+                const { data } = await axiosRes.get(nextPage);
+                setComments((prevComments) => [...prevComments, ...data.results]);
+                setNextPage(data.next);
+                setHasMore(!!data.next);
+            } catch (err) {
+                setErrors(err.response?.data);
+            }
+        }
+    };
 
     const handleLike = async () => {
         setIsLiking(true);
@@ -64,11 +98,27 @@ const BlogDetailPage = () => {
         }
     };
 
+    const handleCommentSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const { data } = await axiosRes.post("/blog-comments/", { blog: id, comment: commentContent });
+            setComments((prevComments) => [data, ...prevComments]);
+            setCommentContent("");
+            setCommentErrors({});
+        } catch (err) {
+            setCommentErrors(err.response?.data);
+        }
+    };
+
     const renderTooltip = (props) => (
         <Tooltip id="button-tooltip" {...props}>
             You cannot like your own post.
         </Tooltip>
     );
+
+    if (errors) {
+        return <p className="text-danger">{errors.detail}</p>;
+    }
 
     return (
         <Container className={`${appStyles.Content} pb-5 mt-3`}>
@@ -126,6 +176,41 @@ const BlogDetailPage = () => {
                                     <i className={`fas fa-comment ${styles.Icon} ml-3`}></i>
                                     <span className={styles.IconCounter}>{blog.blog_comments_count}</span>
                                 </div>
+                            </div>
+                            <hr className={divider.BlueDivider} />
+                            <div className="mt-4">
+                                <h3>Comments</h3>
+                                {currentUser && (
+                                    <Form onSubmit={handleCommentSubmit}>
+                                        <Form.Group>
+                                            <Form.Label>Comment</Form.Label>
+                                            <Form.Control 
+                                                as="textarea" 
+                                                rows={3}
+                                                value={commentContent}
+                                                onChange={(e) => setCommentContent(e.target.value)}
+                                                isInvalid={!!commentErrors.comment}
+                                            />
+                                            <Form.Control.Feedback type="invalid">
+                                                {commentErrors.comment}
+                                            </Form.Control.Feedback>
+                                        </Form.Group>
+                                        <Button type="submit" className={`${btnStyles.Button} ${btnStyles.ButtonWide}`}>
+                                            Post Comment
+                                        </Button>
+                                    </Form>
+                                )}
+                                <InfiniteScroll
+                                    dataLength={comments.length}
+                                    next={fetchMoreComments}
+                                    hasMore={hasMore}
+                                    loader={<h4>Loading...</h4>}
+                                    endMessage={<p>End of comments</p>}
+                                >
+                                    {comments.map((comment) => (
+                                        <BlogComment key={comment.id} {...comment} />
+                                    ))}
+                                </InfiniteScroll>
                             </div>
                         </Col>
                     </Row>
