@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Container, Row, Col, Image, Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
-import axios from 'axios';
+import { axiosRes } from '../../api/axiosDefaults';
+import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import appStyles from '../../App.module.css';
 import btnStyles from '../../styles/Button.module.css';
 import profileStyles from '../../styles/ProfilePicture.module.css';
@@ -14,25 +15,27 @@ const BlogDetailPage = () => {
     const [errors, setErrors] = useState(null);
     const [isLiking, setIsLiking] = useState(false);
 
+    const currentUser = useCurrentUser();
+    const is_owner = currentUser?.username === blog?.owner;
+
     const defaultBlogImage = 'https://res.cloudinary.com/dn6vitvd4/image/upload/v1/fittribe_media/../default_post_eznpr6';
 
     useEffect(() => {
         const fetchBlog = async () => {
             try {
-                const response = await axios.get(`/blogs/${id}/`);
-                setBlog(response.data);
+                const { data } = await axiosRes.get(`/blogs/${id}/`);
+                setBlog(data);
             } catch (err) {
                 setErrors(err.response?.data);
             }
         };
-
         fetchBlog();
     }, [id]);
 
     const handleLike = async () => {
         setIsLiking(true);
         try {
-            const { data } = await axios.post("/blog-likes/", { blog: id });
+            const { data } = await axiosRes.post("/blog-likes/", { blog: id });
             setBlog((prevBlog) => ({
                 ...prevBlog,
                 blog_likes_count: prevBlog.blog_likes_count + 1,
@@ -48,7 +51,7 @@ const BlogDetailPage = () => {
     const handleUnlike = async () => {
         setIsLiking(true);
         try {
-            await axios.delete(`/blog-likes/${blog.blog_like_id}/`);
+            await axiosRes.delete(`/blog-likes/${blog.blog_like_id}/`);
             setBlog((prevBlog) => ({
                 ...prevBlog,
                 blog_likes_count: prevBlog.blog_likes_count - 1,
@@ -61,10 +64,6 @@ const BlogDetailPage = () => {
         }
     };
 
-    if (errors) {
-        return <p className="text-danger">{errors.detail}</p>;
-    }
-
     const renderTooltip = (props) => (
         <Tooltip id="button-tooltip" {...props}>
             You cannot like your own post.
@@ -73,6 +72,7 @@ const BlogDetailPage = () => {
 
     return (
         <Container className={`${appStyles.Content} pb-5 mt-3`}>
+            {errors && <p className="text-danger">{errors.detail}</p>}
             {blog && (
                 <>
                     <Row>
@@ -107,7 +107,7 @@ const BlogDetailPage = () => {
                             )}
                             <div className="d-flex justify-content-between align-items-center mt-3">
                                 <div className="d-flex align-items-center">
-                                    {blog.is_owner ? (
+                                    {is_owner ? (
                                         <OverlayTrigger
                                             placement="top"
                                             delay={{ show: 250, hide: 400 }}
@@ -136,5 +136,3 @@ const BlogDetailPage = () => {
 };
 
 export default BlogDetailPage;
-
-
