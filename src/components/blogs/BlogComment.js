@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Media, Dropdown } from 'react-bootstrap';
+import { Media, Dropdown, Modal, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import { axiosRes } from '../../api/axiosDefaults';
@@ -10,6 +10,7 @@ import styles from '../../styles/Comment.module.css';
 const BlogComment = (props) => {
     const { profile_id, profile_image, owner, updated_at, comment, id, setComments, setBlog } = props;
     const [showEditForm, setShowEditForm] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
 
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner;
@@ -25,6 +26,7 @@ const BlogComment = (props) => {
                 ...prevBlog,
                 blog_comments_count: prevBlog.blog_comments_count - 1,
             }));
+            setShowDeleteModal(false);
         } catch (err) {
             console.log(err);
         }
@@ -40,17 +42,22 @@ const BlogComment = (props) => {
                     setShowEditForm={setShowEditForm}
                 />
             ) : (
-                <Media>
-                    <Link to={`/profiles/${profile_id}`}>
+                <Media className='my-4 m-md-4 p-md-3 border rounded'>
+                    <Link 
+                    to={`/profiles/${profile_id}`}
+                    className='mt-2'
+                    >
                         <ProfilePicture src={profile_image} />
                     </Link>
-                    <Media.Body className="align-self-center ml-2">
-                        <span className={styles.OwnerName}>{owner}</span>
+                    <Media.Body className="align-self-center ml-2 mt-2">
+                        <Link className={styles.Link} to={`/profiles/${profile_id}`}>
+                            <span>{owner}</span>
+                        </Link>
                         <span className={styles.Date}>{updated_at}</span>
                         <p>{comment}</p>
                     </Media.Body>
                     {is_owner && (
-                        <Dropdown alignRight>
+                        <Dropdown alignleft>
                             <Dropdown.Toggle variant="link" className={styles.DropdownToggle}>
                                 <i className="fas fa-ellipsis-h"></i>
                             </Dropdown.Toggle>
@@ -59,7 +66,7 @@ const BlogComment = (props) => {
                                 <Dropdown.Item onClick={() => setShowEditForm(true)}>
                                     Edit
                                 </Dropdown.Item>
-                                <Dropdown.Item onClick={handleDelete}>
+                                <Dropdown.Item onClick={() => setShowDeleteModal(true)}>
                                     Delete
                                 </Dropdown.Item>
                             </Dropdown.Menu>
@@ -67,9 +74,23 @@ const BlogComment = (props) => {
                     )}
                 </Media>
             )}
+
+            <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm Delete</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Are you sure you want to delete this comment?</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={handleDelete}>
+                        Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </>
     );
 };
 
 export default BlogComment;
-
