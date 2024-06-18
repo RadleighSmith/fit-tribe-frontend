@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Form, Button, Container, Alert, Image } from 'react-bootstrap';
+import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
 import appStyles from '../../App.module.css';
 import divider from '../../styles/Divider.module.css';
@@ -29,13 +30,21 @@ const BlogCreateForm = () => {
         });
     };
 
-    const handleImageChange = (event) => {
-        const { name, files } = event.target;
-        const file = files[0];
+    const onDropBanner = (acceptedFiles) => {
+        const file = acceptedFiles[0];
         setBlogData({
             ...blogData,
-            [name]: file,
-            [`${name}Preview`]: URL.createObjectURL(file)
+            banner: file,
+            bannerPreview: URL.createObjectURL(file)
+        });
+    };
+
+    const onDropImage = (acceptedFiles) => {
+        const file = acceptedFiles[0];
+        setBlogData({
+            ...blogData,
+            image: file,
+            imagePreview: URL.createObjectURL(file)
         });
     };
 
@@ -64,6 +73,18 @@ const BlogCreateForm = () => {
         }
     };
 
+    const {
+        getRootProps: getRootPropsBanner,
+        getInputProps: getInputPropsBanner,
+        isDragActive: isDragActiveBanner
+    } = useDropzone({ onDrop: onDropBanner, accept: 'image/*' });
+
+    const {
+        getRootProps: getRootPropsImage,
+        getInputProps: getInputPropsImage,
+        isDragActive: isDragActiveImage
+    } = useDropzone({ onDrop: onDropImage, accept: 'image/*' });
+
     return (
         <Container className={appStyles.Content}>
             <h1 className="text-center">New Blog Entry</h1>
@@ -87,15 +108,29 @@ const BlogCreateForm = () => {
                 <Form.Group controlId="banner">
                     <Form.Label>Cover Image:</Form.Label>
                     {bannerPreview && (
-                        <div className="mb-3">
+                        <div className="mb-3 position-relative">
                             <Image src={bannerPreview} thumbnail />
+                            <Button
+                                variant="danger"
+                                size="sm"
+                                className={`${formStyles.RemoveButton} position-absolute top-0 end-0`}
+                                onClick={() => setBlogData({ ...blogData, banner: null, bannerPreview: '' })}
+                            >
+                                Remove
+                            </Button>
                         </div>
                     )}
-                    <Form.File
-                        name="banner"
-                        onChange={handleImageChange}
-                        isInvalid={!!errors.banner}
-                    />
+                    {!bannerPreview && (
+                        <div {...getRootPropsBanner({ className: formStyles.Dropzone })}>
+                            <input {...getInputPropsBanner()} />
+                            {
+                                isDragActiveBanner ?
+                                    <p>Drop the files here ...</p> :
+                                    <p>Drag 'n' drop a banner image here, or click to select one</p>
+                            }
+                            <i className="fas fa-upload fa-2x"></i>
+                        </div>
+                    )}
                     {errors.banner?.map((message, idx) => (
                         <Alert variant="warning" key={idx}>{message}</Alert>
                     ))}
@@ -120,15 +155,29 @@ const BlogCreateForm = () => {
                 <Form.Group controlId="image">
                     <Form.Label>Image Upload:</Form.Label>
                     {imagePreview && (
-                        <div className="mb-3">
+                        <div className="mb-3 position-relative">
                             <Image src={imagePreview} thumbnail />
+                            <Button
+                                variant="danger"
+                                size="sm"
+                                className={`${formStyles.RemoveButton} position-absolute top-0 end-0`}
+                                onClick={() => setBlogData({ ...blogData, image: null, imagePreview: '' })}
+                            >
+                                Remove
+                            </Button>
                         </div>
                     )}
-                    <Form.File
-                        name="image"
-                        onChange={handleImageChange}
-                        isInvalid={!!errors.image}
-                    />
+                    {!imagePreview && (
+                        <div {...getRootPropsImage({ className: formStyles.Dropzone })}>
+                            <input {...getInputPropsImage()} />
+                            {
+                                isDragActiveImage ?
+                                    <p>Drop the file here ...</p> :
+                                    <p>Drag and drop an image here, or click to select one</p>
+                            }
+                            <i className="fas fa-upload fa-2x"></i>
+                        </div>
+                    )}
                     {errors.image?.map((message, idx) => (
                         <Alert variant="warning" key={idx}>{message}</Alert>
                     ))}
