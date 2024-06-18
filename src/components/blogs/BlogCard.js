@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Image } from 'react-bootstrap';
-import appStyles from '../App.module.css'
-import styles from '../styles/BlogCard.module.css';
+import appStyles from '../../App.module.css'
+import styles from '../../styles/BlogCard.module.css';
 
 const BlogCard = ({ blog }) => {
     const defaultBlogImage = 'https://res.cloudinary.com/dn6vitvd4/image/upload/v1/fittribe_media/../default_post_eznpr6';

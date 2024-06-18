@@ -5,7 +5,7 @@ import axios from 'axios';
 import appStyles from '../../App.module.css';
 import divider from '../../styles/Divider.module.css'
 import styles from '../../styles/BlogsPage.module.css';
-import BlogCard from '../../components/BlogCard';
+import BlogCard from '../../components/blogs/BlogCard';
 import btnStyles from '../../styles/Button.module.css';
 
 const BlogsPage = () => {
