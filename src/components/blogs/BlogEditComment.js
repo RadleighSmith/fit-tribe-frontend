@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { axiosRes } from '../../api/axiosDefaults';
 import styles from '../../styles/Comment.module.css';
+import btnStyles from '../../styles/Button.module.css';
 
 const BlogEditComment = ({ id, comment, setComments, setShowEditForm }) => {
     const [formComment, setFormComment] = useState(comment);
@@ -29,26 +30,26 @@ const BlogEditComment = ({ id, comment, setComments, setShowEditForm }) => {
     };
 
     return (
-        <Form onSubmit={handleSubmit} className={styles.EditForm}>
+        <Form onSubmit={handleSubmit} className='mx-md-4 my-3'>
             <Form.Group>
                 <Form.Label className="d-none">Edit Comment</Form.Label>
                 <Form.Control
                     as="textarea"
                     value={formComment}
                     onChange={handleChange}
-                    rows={2}
+                    rows={5}
                 />
             </Form.Group>
             <div className="text-right">
                 <Button
-                    className={styles.EditButton}
+                    className={`${btnStyles.Button}`}
                     disabled={!formComment.trim()}
                     type="submit"
                 >
                     Save
                 </Button>
                 <Button
-                    className={styles.CancelButton}
+                    className={`${btnStyles.ButtonGrey} ml-2`}
                     onClick={() => setShowEditForm(false)}
                 >
                     Cancel

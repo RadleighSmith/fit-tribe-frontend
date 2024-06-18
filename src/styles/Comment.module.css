@@ -1,69 +1,25 @@
-.CommentInput {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-bottom: 10px;
+.Link {
+    text-decoration: none;
+    color: #000;
 }
 
-.CommentButton {
-    background-color: #5ac8fa;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.EditForm {
-    margin-top: 10px;
-}
-
-.EditButton {
-    background-color: #5ac8fa;
-    border: none;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    margin-right: 10px;
-}
-
-.CancelButton {
-    background-color: #f0f0f0;
-    border: none;
-    color: #333;
-    padding: 5px 10px;
-    border-radius: 4px;
-}
-
-.OwnerName {
-    font-weight: bold;
+.Link:hover {
+    text-decoration: none;
+    color: #000;
+    font-weight: 600;
 }
 
 .Date {
     font-size: 0.8rem;
     color: #888;
-    margin-left: 10px;
-}
-
-.EditIcon {
-    cursor: pointer;
-    margin-right: 10px;
-    color: #5ac8fa;
-}
-
-.DeleteIcon {
-    cursor: pointer;
-    color: #f00;
+    margin-left: 1rem;
 }
 
 .DropdownToggle {
-    color: #333;
-    padding: 0;
-    border: none;
-    background: none;
+    color: #000;
 }
 
 .DropdownToggle:hover {
-    color: #000;
+    color: #a9a9a9;
+    transform: scale(1.5);
 }

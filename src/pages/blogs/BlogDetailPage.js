@@ -116,7 +116,7 @@ const BlogDetailPage = () => {
                                 <Button className={`${btnStyles.Button} ${btnStyles.ButtonSmall} ml-3`}>Follow</Button>
                             </div>
                         </Col>
-                        <Col xs={12} md={4} className="text-md-right">
+                        <Col xs={12} md={4} className="text-md-right mt-4">
                             <span className={styles.DatePosted}>Posted: {new Date(blog.created_at).toLocaleDateString()}</span>
                         </Col>
                     </Row>
@@ -124,7 +124,7 @@ const BlogDetailPage = () => {
                         <Col xs={12}>
                             <h1 className="text-center mt-3">{blog.title}</h1>
                             <div className={divider.BlueDivider} />
-                            <p className={styles.Content}>{blog.content}</p>
+                            <p className={`${styles.Content} p-2 p-md-4`}>{blog.content}</p>
                             
                             {blog.image && blog.image !== defaultBlogImage && (
                                 <div className="d-flex justify-content-center">
@@ -153,6 +153,7 @@ const BlogDetailPage = () => {
                                     <span className={styles.IconCounter}>{blog.blog_comments_count}</span>
                                 </div>
                             </div>
+                            <div className={`${divider.BlueDivider} mt-3`} />
                             <BlogCommentCreateForm blogId={id} setBlog={setBlog} setComments={setComments} />
                             <InfiniteScroll
                                 dataLength={comments.results.length}
