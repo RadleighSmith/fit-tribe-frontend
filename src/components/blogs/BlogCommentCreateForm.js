@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 import { axiosRes } from '../../api/axiosDefaults';
 import styles from '../../styles/Comment.module.css';
+import btnStyles from '../../styles/Button.module.css';
 
 const BlogCommentCreateForm = ({ blogId, setBlog, setComments }) => {
     const [comment, setComment] = useState("");
+    const [error, setError] = useState("");
 
     const handleChange = (event) => {
         setComment(event.target.value);
+        setError("");  // Clear error message when user types
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (!comment.trim()) {
+            setError("Comment cannot be empty.");
+            return;
+        }
         try {
             const { data } = await axiosRes.post('/blog-comments/', {
                 comment,
@@ -33,20 +40,20 @@ const BlogCommentCreateForm = ({ blogId, setBlog, setComments }) => {
 
     return (
         <Form onSubmit={handleSubmit}>
-            <Form.Group>
+            <Form.Group className='m-md-4'>
                 <Form.Label className="d-none">Comment</Form.Label>
                 <Form.Control
                     className={styles.CommentInput}
                     as="textarea"
                     value={comment}
                     onChange={handleChange}
-                    rows={2}
+                    rows={5}
                     placeholder="Add a comment..."
                 />
             </Form.Group>
+            {error && <Alert variant="warning" className="ml-md-4">{error}</Alert>}
             <Button
-                className={styles.CommentButton}
-                disabled={!comment.trim()}
+                className={`${btnStyles.Button} ml-md-4`}
                 type="submit"
             >
                 Post
