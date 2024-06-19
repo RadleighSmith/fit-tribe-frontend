@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Form, Button, Container, Alert, Image } from 'react-bootstrap';
 import { useDropzone } from 'react-dropzone';
-import axios from 'axios';
+import { axiosReq } from '../../api/axiosDefaults';
+import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import appStyles from '../../App.module.css';
 import divider from '../../styles/Divider.module.css';
 import formStyles from '../../styles/Form.module.css';
 import btnStyles from '../../styles/Button.module.css';
 
 const BlogEditForm = () => {
+    const { id } = useParams();
+    const currentUser = useCurrentUser();
     const [blogData, setBlogData] = useState({
         title: '',
         content: '',
@@ -17,16 +20,15 @@ const BlogEditForm = () => {
         bannerPreview: '',
         imagePreview: ''
     });
-
-    const { id } = useParams();
     const { title, content, banner, image, bannerPreview, imagePreview } = blogData;
     const [errors, setErrors] = useState({});
+    const [isOwner, setIsOwner] = useState(false);
     const history = useHistory();
 
     useEffect(() => {
         const fetchBlogData = async () => {
             try {
-                const { data } = await axios.get(`/blogs/${id}/`);
+                const { data } = await axiosReq.get(`/blogs/${id}/`);
                 setBlogData({
                     title: data.title,
                     content: data.content,
@@ -35,12 +37,18 @@ const BlogEditForm = () => {
                     bannerPreview: data.banner,
                     imagePreview: data.image
                 });
+
+                if (currentUser?.username === data.owner) {
+                    setIsOwner(true);
+                } else {
+                    setIsOwner(false);
+                }
             } catch (err) {
                 setErrors(err.response?.data);
             }
         };
         fetchBlogData();
-    }, [id]);
+    }, [id, currentUser]);
 
     const handleChange = (event) => {
         setBlogData({
@@ -73,18 +81,12 @@ const BlogEditForm = () => {
 
         formData.append('title', title);
         formData.append('content', content);
-        if (banner) {
-            formData.append('banner', banner);
-        }
-        if (image) {
-            formData.append('image', image);
-        }
+        if (banner) formData.append('banner', banner);
+        if (image) formData.append('image', image);
 
         try {
-            await axios.put(`/blogs/${id}/`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
+            await axiosReq.put(`/blogs/${id}/`, formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
             });
             history.push('/blogs');
         } catch (err) {
@@ -103,6 +105,10 @@ const BlogEditForm = () => {
         getInputProps: getInputPropsImage,
         isDragActive: isDragActiveImage
     } = useDropzone({ onDrop: onDropImage, accept: 'image/*' });
+
+    if (!isOwner) {
+        return <Alert variant="danger">You are not authorized to edit this blog post.</Alert>;
+    }
 
     return (
         <Container className={appStyles.Content}>
@@ -142,11 +148,11 @@ const BlogEditForm = () => {
                     {!bannerPreview && (
                         <div {...getRootPropsBanner({ className: formStyles.Dropzone })}>
                             <input {...getInputPropsBanner()} />
-                            {
-                                isDragActiveBanner ?
-                                    <p>Drop the files here ...</p> :
-                                    <p>Drag 'n' drop a banner image here, or click to select one</p>
-                            }
+                            {isDragActiveBanner ? (
+                                <p>Drop the files here ...</p>
+                            ) : (
+                                <p>Drag 'n' drop a banner image here, or click to select one</p>
+                            )}
                             <i className="fas fa-upload fa-2x"></i>
                         </div>
                     )}
@@ -189,11 +195,11 @@ const BlogEditForm = () => {
                     {!imagePreview && (
                         <div {...getRootPropsImage({ className: formStyles.Dropzone })}>
                             <input {...getInputPropsImage()} />
-                            {
-                                isDragActiveImage ?
-                                    <p>Drop the file here ...</p> :
-                                    <p>Drag and drop an image here, or click to select one</p>
-                            }
+                            {isDragActiveImage ? (
+                                <p>Drop the file here ...</p>
+                            ) : (
+                                <p>Drag and drop an image here, or click to select one</p>
+                            )}
                             <i className="fas fa-upload fa-2x"></i>
                         </div>
                     )}
