@@ -9,6 +9,7 @@ import HomePage from "./pages/HomePage";
 import SideNavBar from "./components/SideNavBar";
 import BlogsPage from "./pages/blogs/BlogsPage";
 import BlogCreateForm from "./pages/blogs/BlogCreateForm";
+import BlogEditForm from "./pages/blogs/BlogEditForm";
 import BlogDetailPage from "./pages/blogs/BlogDetailPage";
 import { useCurrentUser } from "./contexts/CurrentUserContext";
 
@@ -26,7 +27,8 @@ function App() {
           <Route exact path="/signup" component={SignUpForm} />
           <Route exact path="/blogs" component={BlogsPage} />
           <Route exact path="/blogs/:id" component={BlogDetailPage} />
-          <Route path="/create-blog" component={BlogCreateForm} />
+          <Route exact path="/create-blog" component={BlogCreateForm} />
+          <Route exact path="/blogs/:id/edit" component={BlogEditForm} />
           <Route render={() => <h1 className="text-center">Uh Oh! Page Not Found!</h1>} />
         </Switch>
       </div>
