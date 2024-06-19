@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { Container, Row, Col, Image, Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
+import { useParams, Link, useHistory } from 'react-router-dom';
+import { Container, Row, Col, Image, Button, Dropdown, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { axiosRes } from '../../api/axiosDefaults';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import BlogCommentCreateForm from '../../components/blogs/BlogCommentCreateForm';
@@ -14,6 +14,7 @@ import styles from '../../styles/BlogDetailPage.module.css';
 
 const BlogDetailPage = () => {
     const { id } = useParams();
+    const history = useHistory();
     const [blog, setBlog] = useState(null);
     const [errors, setErrors] = useState(null);
     const [comments, setComments] = useState({ results: [] });
@@ -90,11 +91,14 @@ const BlogDetailPage = () => {
         }
     };
 
-    const renderTooltip = (props) => (
-        <Tooltip id="button-tooltip" {...props}>
-            You cannot like your own post.
-        </Tooltip>
-    );
+    const handleDelete = async () => {
+        try {
+            await axiosRes.delete(`/blogs/${id}/`);
+            history.push('/blogs');
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     return (
         <Container className={`${appStyles.Content} pb-5 mt-3`}>
@@ -116,15 +120,31 @@ const BlogDetailPage = () => {
                                 <Button className={`${btnStyles.Button} ${btnStyles.ButtonSmall} ml-3`}>Follow</Button>
                             </div>
                         </Col>
-                        <Col xs={12} md={4} className="text-md-right mt-4">
+                        <Col xs={12} md={4} className="text-md-right">
                             <span className={styles.DatePosted}>Posted: {new Date(blog.created_at).toLocaleDateString()}</span>
+                            {is_owner && (
+                                <Dropdown alignRight className="d-inline ml-3">
+                                    <Dropdown.Toggle variant="link" className={styles.DropdownToggle}>
+                                        <i className="fas fa-ellipsis-h"></i>
+                                    </Dropdown.Toggle>
+
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item as={Link} to={`/blogs/${id}/edit`}>
+                                            Edit
+                                        </Dropdown.Item>
+                                        <Dropdown.Item onClick={handleDelete}>
+                                            Delete
+                                        </Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            )}
                         </Col>
                     </Row>
                     <Row>
                         <Col xs={12}>
                             <h1 className="text-center mt-3">{blog.title}</h1>
                             <div className={divider.BlueDivider} />
-                            <p className={`${styles.Content} p-2 p-md-4`}>{blog.content}</p>
+                            <p className={styles.Content}>{blog.content}</p>
                             
                             {blog.image && blog.image !== defaultBlogImage && (
                                 <div className="d-flex justify-content-center">
@@ -137,7 +157,7 @@ const BlogDetailPage = () => {
                                         <OverlayTrigger
                                             placement="top"
                                             delay={{ show: 250, hide: 400 }}
-                                            overlay={renderTooltip}
+                                            overlay={<Tooltip id="button-tooltip">You cannot like your own post.</Tooltip>}
                                         >
                                             <i className={`fas fa-thumbs-up ${styles.Icon} ${styles.DisabledIcon}`}></i>
                                         </OverlayTrigger>
@@ -153,8 +173,7 @@ const BlogDetailPage = () => {
                                     <span className={styles.IconCounter}>{blog.blog_comments_count}</span>
                                 </div>
                             </div>
-                            <div className={`${divider.BlueDivider} mt-3`} />
-                            <BlogCommentCreateForm blogId={id} setBlog={setBlog} setComments={setComments} />
+                            <BlogCommentCreateForm blogId={id} setComments={setComments} setBlog={setBlog} />
                             <InfiniteScroll
                                 dataLength={comments.results.length}
                                 next={fetchMoreComments}
@@ -162,7 +181,7 @@ const BlogDetailPage = () => {
                                 loader={<div className="loader" key={0}>Loading ...</div>}
                             >
                                 {comments.results.map((comment) => (
-                                    <BlogComment key={comment.id} {...comment} setBlog={setBlog} setComments={setComments} />
+                                    <BlogComment key={comment.id} {...comment} setComments={setComments} setBlog={setBlog} />
                                 ))}
                             </InfiniteScroll>
                         </Col>
