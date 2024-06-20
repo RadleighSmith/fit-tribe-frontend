@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Row, Col, Button} from 'react-bootstrap';
-import axios from 'axios';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import { axiosRes } from '../../api/axiosDefaults';
 import appStyles from '../../App.module.css';
-import divider from '../../styles/Divider.module.css'
+import divider from '../../styles/Divider.module.css';
 import styles from '../../styles/BlogsPage.module.css';
 import BlogCard from '../../components/blogs/BlogCard';
 import btnStyles from '../../styles/Button.module.css';
@@ -15,8 +15,8 @@ const BlogsPage = () => {
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
-                const response = await axios.get('/blogs/');
-                setBlogs(Array.isArray(response.data.results) ? response.data.results : response.data);
+                const response = await axiosRes.get('/blogs/');
+                setBlogs(response.data.results);
             } catch (err) {
                 setErrors(err.response?.data);
             }
@@ -49,4 +49,3 @@ const BlogsPage = () => {
 };
 
 export default BlogsPage;
-
