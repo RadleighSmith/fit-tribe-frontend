@@ -6,6 +6,7 @@ import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import BlogCommentCreateForm from '../../components/blogs/BlogCommentCreateForm';
 import BlogComment from '../../components/blogs/BlogComment';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import DOMPurify from 'dompurify';
 import appStyles from '../../App.module.css';
 import btnStyles from '../../styles/Button.module.css';
 import profileStyles from '../../styles/ProfilePicture.module.css';
@@ -55,7 +56,7 @@ const BlogDetailPage = () => {
             try {
                 const { data } = await axiosRes.get(comments.next);
                 setComments((prevComments) => ({
-                    ...data,
+                    ...prevComments,
                     results: [...prevComments.results, ...data.results]
                 }));
                 setHasMore(!!data.next);
@@ -120,7 +121,7 @@ const BlogDetailPage = () => {
                                 <Button className={`${btnStyles.Button} ${btnStyles.ButtonSmall} ml-3`}>Follow</Button>
                             </div>
                         </Col>
-                        <Col xs={12} md={4} className="text-md-right">
+                        <Col xs={12} md={4} className="text-md-right pt-2">
                             <span className={styles.DatePosted}>Posted: {new Date(blog.created_at).toLocaleDateString()}</span>
                             {is_owner && (
                                 <Dropdown alignRight className="d-inline ml-3">
@@ -144,15 +145,19 @@ const BlogDetailPage = () => {
                         <Col xs={12}>
                             <h1 className="text-center mt-3">{blog.title}</h1>
                             <div className={divider.BlueDivider} />
-                            <p className={styles.Content}>{blog.content}</p>
-                            
+                            <div
+                                className={`${styles.Content} m-md-4 p-3  border rounded`}
+                                dangerouslySetInnerHTML={{
+                                    __html: DOMPurify.sanitize(blog.content),
+                                }}
+                            />
                             {blog.image && blog.image !== defaultBlogImage && (
                                 <div className="d-flex justify-content-center">
                                     <Image src={blog.image} className={`${styles.BlogImage} mt-3 mb-2`} />
                                 </div>
                             )}
                             <div className="d-flex justify-content-between align-items-center mt-3">
-                                <div className="d-flex align-items-center">
+                                <div className="d-flex align-items-center mb-4">
                                     {is_owner ? (
                                         <OverlayTrigger
                                             placement="top"
