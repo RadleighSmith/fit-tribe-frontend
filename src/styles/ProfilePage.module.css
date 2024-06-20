@@ -1,6 +1,6 @@
 .ProfileHeader {
     position: relative;
-    margin-bottom: 100px; /* Increase margin to make space for the profile image */
+    margin-bottom: 100px;
 }
 
 .CoverImageContainer {
@@ -27,7 +27,7 @@
 .ProfileImage {
     width: 100%;
     height: 100%;
-    border: 5px solid white;
+    border: 5px solid #fff;
     border-radius: 50%;
 }
 
