@@ -8,12 +8,6 @@
     margin-bottom: 1rem;
 }
 
-.ProfileImage {
-    width: 50px;
-    height: 50px;
-    margin-right: 1rem;
-}
-
 .BlogInfo {
     flex: 1;
 }
@@ -42,3 +36,37 @@
     height: auto;
     margin-top: 1rem;
 }
+
+.Icon {
+    font-size: 1.5rem;
+    color: #6c757d;
+    cursor: pointer;
+    margin-left: 1.5rem;
+}
+
+.Icon:hover {
+    color: #2992a5;
+}
+
+.DisabledIcon {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.Liked {
+    color: #5ac8fa;
+}
+
+.IconCounter {
+    font-size: 1.2rem;
+    margin-left: 5px;
+}
+
+@media (max-width: 476px) {
+    .Title {
+        font-size: 1rem;
+    }
+    .DatePosted {
+        font-size: 0.8rem;
+    }
+  }
