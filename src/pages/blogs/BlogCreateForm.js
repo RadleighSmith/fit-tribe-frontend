@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Form, Button, Container, Alert, Image } from 'react-bootstrap';
+import { Form, Button, Container, Alert, Image, Spinner } from 'react-bootstrap';
 import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
 import ReactQuill from 'react-quill';
@@ -23,6 +23,7 @@ const BlogCreateForm = () => {
 
     const { title, content, banner, image, bannerPreview, imagePreview } = blogData;
     const [errors, setErrors] = useState({});
+    const [loading, setLoading] = useState(false);
     const history = useHistory();
 
     const handleChange = (event) => {
@@ -73,6 +74,7 @@ const BlogCreateForm = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setLoading(true);
         const formData = new FormData();
         formData.append('title', title);
         formData.append('content', content);
@@ -89,9 +91,11 @@ const BlogCreateForm = () => {
                     'Content-Type': 'multipart/form-data'
                 }
             });
+            setLoading(false);
             history.push('/blogs');
         } catch (err) {
             setErrors(err.response?.data);
+            setLoading(false);
         }
     };
 
@@ -192,8 +196,15 @@ const BlogCreateForm = () => {
                     <Alert key={idx} variant="warning">{message}</Alert>
                 ))}
                 
-                <Button type="submit" className={`${btnStyles.Button} ${btnStyles.ButtonWide}`}>
-                    Publish Now
+                <Button type="submit" className={`${btnStyles.Button} ${btnStyles.ButtonWide}`} disabled={loading}>
+                    {loading ? (
+                        <>
+                            <Spinner animation="border" size="sm" role="status" className="mr-2" />
+                            Submitting...
+                        </>
+                    ) : (
+                        "Publish Now"
+                    )}
                 </Button>
             </Form>
         </Container>

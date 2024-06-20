@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { Form, Button, Container, Alert, Image } from 'react-bootstrap';
+import { Form, Button, Container, Alert, Image, Spinner } from 'react-bootstrap';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useDropzone } from 'react-dropzone';
@@ -26,6 +26,7 @@ const BlogEditForm = () => {
     const { title, content, banner, image, bannerPreview, imagePreview } = blogData;
     const [errors, setErrors] = useState({});
     const [alert, setAlert] = useState("");
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         let isMounted = true;
@@ -101,6 +102,7 @@ const BlogEditForm = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setLoading(true);
         const formData = new FormData();
         formData.append('title', title);
         formData.append('content', content);
@@ -111,9 +113,11 @@ const BlogEditForm = () => {
             await axiosReq.put(`/blogs/${id}/`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
+            setLoading(false);
             history.push('/blogs');
         } catch (err) {
             setErrors(err.response?.data);
+            setLoading(false);
         }
     };
 
@@ -217,8 +221,15 @@ const BlogEditForm = () => {
                     <Alert key={idx} variant="warning">{message}</Alert>
                 ))}
 
-                <Button type="submit" className={`${btnStyles.Button} ${btnStyles.ButtonWide}`}>
-                    Update
+                <Button type="submit" className={`${btnStyles.Button} ${btnStyles.ButtonWide}`} disabled={loading}>
+                    {loading ? (
+                        <>
+                            <Spinner animation="border" size="sm" role="status" className="mr-2" />
+                            Submitting...
+                        </>
+                    ) : (
+                        "Update"
+                    )}
                 </Button>
             </Form>
         </Container>
