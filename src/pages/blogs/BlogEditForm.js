@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Form, Button, Container, Alert, Image } from 'react-bootstrap';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import { useDropzone } from 'react-dropzone';
 import { axiosReq } from '../../api/axiosDefaults';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
@@ -11,6 +13,7 @@ import btnStyles from '../../styles/Button.module.css';
 
 const BlogEditForm = () => {
     const { id } = useParams();
+    const history = useHistory();
     const currentUser = useCurrentUser();
     const [blogData, setBlogData] = useState({
         title: '',
@@ -22,33 +25,41 @@ const BlogEditForm = () => {
     });
     const { title, content, banner, image, bannerPreview, imagePreview } = blogData;
     const [errors, setErrors] = useState({});
-    const [isOwner, setIsOwner] = useState(false);
-    const history = useHistory();
+    const [alert, setAlert] = useState("");
 
     useEffect(() => {
+        let isMounted = true;
         const fetchBlogData = async () => {
             try {
                 const { data } = await axiosReq.get(`/blogs/${id}/`);
-                setBlogData({
-                    title: data.title,
-                    content: data.content,
-                    banner: null,
-                    image: null,
-                    bannerPreview: data.banner,
-                    imagePreview: data.image
-                });
-
-                if (currentUser?.username === data.owner) {
-                    setIsOwner(true);
+                if (currentUser?.username !== data.owner) {
+                    if (isMounted) {
+                        setAlert("You are not authorized to edit this blog post.");
+                        setTimeout(() => {
+                            history.push('/blogs');
+                        }, 3000);
+                    }
                 } else {
-                    setIsOwner(false);
+                    setBlogData({
+                        title: data.title,
+                        content: data.content,
+                        banner: null,
+                        image: null,
+                        bannerPreview: data.banner,
+                        imagePreview: data.image
+                    });
                 }
             } catch (err) {
-                setErrors(err.response?.data);
+                if (isMounted) {
+                    setErrors(err.response?.data);
+                }
             }
         };
         fetchBlogData();
-    }, [id, currentUser]);
+        return () => {
+            isMounted = false;
+        };
+    }, [id, currentUser, history]);
 
     const handleChange = (event) => {
         setBlogData({
@@ -57,28 +68,40 @@ const BlogEditForm = () => {
         });
     };
 
-    const onDropBanner = (acceptedFiles) => {
-        const file = acceptedFiles[0];
+    const handleContentChange = (value) => {
         setBlogData({
             ...blogData,
-            banner: file,
-            bannerPreview: URL.createObjectURL(file)
+            content: value
         });
     };
 
-    const onDropImage = (acceptedFiles) => {
-        const file = acceptedFiles[0];
-        setBlogData({
-            ...blogData,
-            image: file,
-            imagePreview: URL.createObjectURL(file)
-        });
-    };
+    const bannerDropzone = useDropzone({
+        onDrop: acceptedFiles => {
+            const file = acceptedFiles[0];
+            setBlogData(prev => ({
+                ...prev,
+                banner: file,
+                bannerPreview: URL.createObjectURL(file)
+            }));
+        },
+        accept: 'image/*'
+    });
+
+    const imageDropzone = useDropzone({
+        onDrop: acceptedFiles => {
+            const file = acceptedFiles[0];
+            setBlogData(prev => ({
+                ...prev,
+                image: file,
+                imagePreview: URL.createObjectURL(file)
+            }));
+        },
+        accept: 'image/*'
+    });
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData();
-
         formData.append('title', title);
         formData.append('content', content);
         if (banner) formData.append('banner', banner);
@@ -94,20 +117,18 @@ const BlogEditForm = () => {
         }
     };
 
-    const {
-        getRootProps: getRootPropsBanner,
-        getInputProps: getInputPropsBanner,
-        isDragActive: isDragActiveBanner
-    } = useDropzone({ onDrop: onDropBanner, accept: 'image/*' });
-
-    const {
-        getRootProps: getRootPropsImage,
-        getInputProps: getInputPropsImage,
-        isDragActive: isDragActiveImage
-    } = useDropzone({ onDrop: onDropImage, accept: 'image/*' });
-
-    if (!isOwner) {
-        return <Alert variant="danger">You are not authorized to edit this blog post.</Alert>;
+    if (alert) {
+        return (
+            <Container className={appStyles.Content}>
+                <Alert variant="danger">{alert}</Alert>
+                <Button
+                    className={`${btnStyles.Button} ${btnStyles.ButtonWide}`}
+                    onClick={() => history.push('/blogs')}
+                >
+                    Go Back
+                </Button>
+            </Container>
+        );
     }
 
     return (
@@ -145,17 +166,11 @@ const BlogEditForm = () => {
                             </Button>
                         </div>
                     )}
-                    {!bannerPreview && (
-                        <div {...getRootPropsBanner({ className: formStyles.Dropzone })}>
-                            <input {...getInputPropsBanner()} />
-                            {isDragActiveBanner ? (
-                                <p>Drop the files here ...</p>
-                            ) : (
-                                <p>Drag 'n' drop a banner image here, or click to select one</p>
-                            )}
-                            <i className="fas fa-upload fa-2x"></i>
-                        </div>
-                    )}
+                    <div {...bannerDropzone.getRootProps({ className: formStyles.Dropzone })}>
+                        <input {...bannerDropzone.getInputProps()} />
+                        <p>Drag 'n' drop a banner image here, or click to select one</p>
+                        <i className="fas fa-upload fa-2x"></i>
+                    </div>
                     {errors.banner?.map((message, idx) => (
                         <Alert variant="warning" key={idx}>{message}</Alert>
                     ))}
@@ -163,14 +178,10 @@ const BlogEditForm = () => {
 
                 <Form.Group controlId="content">
                     <Form.Label>Description:</Form.Label>
-                    <Form.Control
+                    <ReactQuill
                         className={formStyles.Input}
-                        as="textarea"
-                        rows={6}
-                        name="content"
                         value={content}
-                        onChange={handleChange}
-                        isInvalid={!!errors.content}
+                        onChange={handleContentChange}
                     />
                     {errors.content?.map((message, idx) => (
                         <Alert variant="warning" key={idx}>{message}</Alert>
@@ -192,26 +203,18 @@ const BlogEditForm = () => {
                             </Button>
                         </div>
                     )}
-                    {!imagePreview && (
-                        <div {...getRootPropsImage({ className: formStyles.Dropzone })}>
-                            <input {...getInputPropsImage()} />
-                            {isDragActiveImage ? (
-                                <p>Drop the file here ...</p>
-                            ) : (
-                                <p>Drag and drop an image here, or click to select one</p>
-                            )}
-                            <i className="fas fa-upload fa-2x"></i>
-                        </div>
-                    )}
+                    <div {...imageDropzone.getRootProps({ className: formStyles.Dropzone })}>
+                        <input {...imageDropzone.getInputProps()} />
+                        <p>Drag and drop an image here, or click to select one</p>
+                        <i className="fas fa-upload fa-2x"></i>
+                    </div>
                     {errors.image?.map((message, idx) => (
                         <Alert variant="warning" key={idx}>{message}</Alert>
                     ))}
                 </Form.Group>
 
                 {errors.non_field_errors?.map((message, idx) => (
-                    <Alert key={idx} variant="warning">
-                        {message}
-                    </Alert>
+                    <Alert key={idx} variant="warning">{message}</Alert>
                 ))}
 
                 <Button type="submit" className={`${btnStyles.Button} ${btnStyles.ButtonWide}`}>
