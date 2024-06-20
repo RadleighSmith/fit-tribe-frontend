@@ -12,6 +12,8 @@ import BlogCreateForm from "./pages/blogs/BlogCreateForm";
 import BlogEditForm from "./pages/blogs/BlogEditForm";
 import BlogDetailPage from "./pages/blogs/BlogDetailPage";
 import { useCurrentUser } from "./contexts/CurrentUserContext";
+import ProfilePage from "./pages/profiles/ProfilePage";
+import EditProfilePage from "./pages/profiles/EditProfilePage";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -29,6 +31,8 @@ function App() {
           <Route exact path="/blogs/:id" component={BlogDetailPage} />
           <Route exact path="/create-blog" component={BlogCreateForm} />
           <Route exact path="/blogs/:id/edit" component={BlogEditForm} />
+          <Route exact path="/profiles/:id" component={ProfilePage} />
+          <Route exact path="/profiles/:id/edit" component={EditProfilePage} />
           <Route render={() => <h1 className="text-center">Uh Oh! Page Not Found!</h1>} />
         </Switch>
       </div>
