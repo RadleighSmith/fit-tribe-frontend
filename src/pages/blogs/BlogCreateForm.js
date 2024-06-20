@@ -3,6 +3,9 @@ import { useHistory } from 'react-router-dom';
 import { Form, Button, Container, Alert, Image } from 'react-bootstrap';
 import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+
 import appStyles from '../../App.module.css';
 import divider from '../../styles/Divider.module.css';
 import formStyles from '../../styles/Form.module.css';
@@ -19,7 +22,6 @@ const BlogCreateForm = () => {
     });
 
     const { title, content, banner, image, bannerPreview, imagePreview } = blogData;
-
     const [errors, setErrors] = useState({});
     const history = useHistory();
 
@@ -30,28 +32,48 @@ const BlogCreateForm = () => {
         });
     };
 
-    const onDropBanner = (acceptedFiles) => {
-        const file = acceptedFiles[0];
+    const handleContentChange = (content) => {
         setBlogData({
             ...blogData,
-            banner: file,
-            bannerPreview: URL.createObjectURL(file)
+            content: content
         });
     };
 
-    const onDropImage = (acceptedFiles) => {
-        const file = acceptedFiles[0];
-        setBlogData({
-            ...blogData,
-            image: file,
-            imagePreview: URL.createObjectURL(file)
-        });
-    };
+    const {
+        getRootProps: getRootPropsBanner,
+        getInputProps: getInputPropsBanner,
+        isDragActive: isDragActiveBanner
+    } = useDropzone({
+        onDrop: (acceptedFiles) => {
+            const file = acceptedFiles[0];
+            setBlogData({
+                ...blogData,
+                banner: file,
+                bannerPreview: URL.createObjectURL(file)
+            });
+        },
+        accept: 'image/*'
+    });
+
+    const {
+        getRootProps: getRootPropsImage,
+        getInputProps: getInputPropsImage,
+        isDragActive: isDragActiveImage
+    } = useDropzone({
+        onDrop: (acceptedFiles) => {
+            const file = acceptedFiles[0];
+            setBlogData({
+                ...blogData,
+                image: file,
+                imagePreview: URL.createObjectURL(file)
+            });
+        },
+        accept: 'image/*'
+    });
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData();
-
         formData.append('title', title);
         formData.append('content', content);
         if (banner) {
@@ -72,18 +94,6 @@ const BlogCreateForm = () => {
             setErrors(err.response?.data);
         }
     };
-
-    const {
-        getRootProps: getRootPropsBanner,
-        getInputProps: getInputPropsBanner,
-        isDragActive: isDragActiveBanner
-    } = useDropzone({ onDrop: onDropBanner, accept: 'image/*' });
-
-    const {
-        getRootProps: getRootPropsImage,
-        getInputProps: getInputPropsImage,
-        isDragActive: isDragActiveImage
-    } = useDropzone({ onDrop: onDropImage, accept: 'image/*' });
 
     return (
         <Container className={appStyles.Content}>
@@ -138,14 +148,9 @@ const BlogCreateForm = () => {
 
                 <Form.Group controlId="content">
                     <Form.Label>Description:</Form.Label>
-                    <Form.Control
-                        className={formStyles.Input}
-                        as="textarea"
-                        rows={6}
-                        name="content"
+                    <ReactQuill
                         value={content}
-                        onChange={handleChange}
-                        isInvalid={!!errors.content}
+                        onChange={handleContentChange}
                     />
                     {errors.content?.map((message, idx) => (
                         <Alert variant="warning" key={idx}>{message}</Alert>
@@ -184,11 +189,9 @@ const BlogCreateForm = () => {
                 </Form.Group>
 
                 {errors.non_field_errors?.map((message, idx) => (
-                    <Alert key={idx} variant="warning">
-                        {message}
-                    </Alert>
+                    <Alert key={idx} variant="warning">{message}</Alert>
                 ))}
-
+                
                 <Button type="submit" className={`${btnStyles.Button} ${btnStyles.ButtonWide}`}>
                     Publish Now
                 </Button>
