@@ -30,6 +30,11 @@
   color: #000;
 }
 
+.ProfileLink:hover {
+  color: #2992a5;
+  text-decoration: none;
+}
+
 .ProfileLink:hover .ProfileImage {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 1);
 }

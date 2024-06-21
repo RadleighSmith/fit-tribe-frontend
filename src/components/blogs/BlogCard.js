@@ -5,7 +5,7 @@ import DOMPurify from 'dompurify';
 import { axiosRes } from '../../api/axiosDefaults';
 import appStyles from '../../App.module.css';
 import styles from '../../styles/BlogCard.module.css';
-import profileImageStyles from '../../styles/ProfilePicture.module.css'
+import profileStyles from '../../styles/ProfilePicture.module.css'
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
 const BlogCard = ({ blog, setBlogs }) => {
@@ -49,11 +49,15 @@ const BlogCard = ({ blog, setBlogs }) => {
         <Card className={appStyles.Content}>
             <Card.Body>
                 <div className={styles.BlogHeader}>
-                    <Image src={blog.profile_image} roundedCircle className={profileImageStyles.ProfileImage} />
+                    <Link to={`/profiles/${blog.profile_id}`}>
+                        <Image src={blog.profile_image} roundedCircle className={profileStyles.ProfileImage} />
+                    </Link>
                     <div className={styles.BlogInfo}>
                         <Card.Title className={styles.Title}>{blog.title}</Card.Title>
                         <div className={styles.OwnerAndDate}>
-                            <span className={styles.OwnerName}>{blog.owner}</span>
+                            <Link to={`/profiles/${blog.profile_id}`} className={profileStyles.ProfileLink}>
+                                <span className={styles.OwnerName}>{blog.owner}</span>
+                            </Link>
                             <span className={styles.DatePosted}>{blog.created_at}</span>
                         </div>
                     </div>
