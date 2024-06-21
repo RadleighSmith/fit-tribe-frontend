@@ -5,12 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { CurrentUserProvider } from './contexts/CurrentUserContext';
+import { ProfileProvider } from './contexts/ProfileContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <CurrentUserProvider>
-        <App />
+        <ProfileProvider>
+          <App />
+        </ProfileProvider>
       </CurrentUserProvider>
     </Router>
   </React.StrictMode >,
