@@ -14,7 +14,7 @@ const ProfilePage = () => {
     const history = useHistory();
     const currentUser = useCurrentUser();
     const profileData = useProfile();
-    const { fetchProfileData, loading, errors } = useSetProfile();
+    const { fetchProfileData, handleFollow, handleUnfollow, loading, errors } = useSetProfile();
 
     useEffect(() => {
         fetchProfileData(id);
@@ -44,7 +44,7 @@ const ProfilePage = () => {
 
     if (!profileData) return null;
 
-    const { name, bio, profile_image, cover_image, owner, created_at, followers_count, following_count } = profileData;
+    const { name, bio, profile_image, cover_image, owner, created_at, followers_count, following_count, following_id } = profileData;
 
     return (
         <Container className={appStyles.Content}>
@@ -63,13 +63,29 @@ const ProfilePage = () => {
                         <p>Joined on {new Date(created_at).toLocaleDateString()}</p>
                     </div>
                 </Col>
-                {currentUser?.username === owner && (
-                    <Col md="auto" className='mr-md-5 mb-md-5 m-3'>
+                {currentUser?.username === owner ? (
+                    <Col md="auto" className="mr-md-5 mb-md-5 m-3">
                         <Button
                             onClick={handleEditClick}
                             className={`${btnStyles.Button} ${btnStyles.ButtonWide}`}>
                             Edit Profile
                         </Button>
+                    </Col>
+                ) : (
+                    <Col md="auto" className="mr-md-5 mb-md-5 m-3">
+                        {following_id ? (
+                            <Button
+                                onClick={() => handleUnfollow(profileData)}
+                                className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}>
+                                Unfollow
+                            </Button>
+                        ) : (
+                            <Button
+                                onClick={() => handleFollow(profileData)}
+                                className={`${btnStyles.Button} ${btnStyles.Black}`}>
+                                Follow
+                            </Button>
+                        )}
                     </Col>
                 )}
             </Row>
@@ -81,7 +97,7 @@ const ProfilePage = () => {
                     <p className={profileStyles.BubbleText}>Following: {following_count}</p>
                 </Col>
             </Row>
-            <Row className='mt-4'>
+            <Row className="mt-4">
                 <div className={divider.BlueDivider} />
             </Row>
             <Row className={`${appStyles.Content} border justify-content-around mt-3`}>
