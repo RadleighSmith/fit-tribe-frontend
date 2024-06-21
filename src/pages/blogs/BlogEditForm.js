@@ -29,6 +29,7 @@ const BlogEditForm = () => {
     const [errors, setErrors] = useState({});
     const [alert, setAlert] = useState("");
     const [loading, setLoading] = useState(false);
+    const [notFound, setNotFound] = useState(false);
 
     useEffect(() => {
         let isMounted = true;
@@ -54,7 +55,11 @@ const BlogEditForm = () => {
                 }
             } catch (err) {
                 if (isMounted) {
-                    setErrors(err.response?.data);
+                    if (err.response?.status === 404) {
+                        setNotFound(true);
+                    } else {
+                        setErrors(err.response?.data);
+                    }
                 }
             }
         };
@@ -132,6 +137,20 @@ const BlogEditForm = () => {
                     onClick={() => history.push('/blogs')}
                 >
                     Go Back
+                </Button>
+            </Container>
+        );
+    }
+
+    if (notFound) {
+        return (
+            <Container className={appStyles.Content}>
+                <Alert variant="danger"capture className='text-center' >Blog not found.</Alert>
+                <Button
+                    className={`${btnStyles.Button} ${btnStyles.ButtonWide}`}
+                    onClick={() => history.push('/blogs')}
+                >
+                    Go Back to Blogs
                 </Button>
             </Container>
         );
