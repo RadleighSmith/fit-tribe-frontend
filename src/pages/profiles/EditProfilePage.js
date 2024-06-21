@@ -30,6 +30,7 @@ const EditProfilePage = () => {
     const [alert, setAlert] = useState("");
     const [loading, setLoading] = useState(true);
     const [submitting, setSubmitting] = useState(false);
+    const [notFound, setNotFound] = useState(false);
 
     useEffect(() => {
         let isMounted = true;
@@ -57,7 +58,11 @@ const EditProfilePage = () => {
                 }
             } catch (err) {
                 if (isMounted) {
-                    setErrors(err.response?.data);
+                    if (err.response?.status === 404) {
+                        setNotFound(true);
+                    } else {
+                        setErrors(err.response?.data);
+                    }
                 }
             } finally {
                 if (isMounted) {
@@ -150,6 +155,20 @@ const EditProfilePage = () => {
         );
     }
 
+    if (notFound) {
+        return (
+            <Container className={appStyles.Content}>
+                <Alert variant="danger" className='text-center' >Profile not found.</Alert>
+                <Button
+                    className={`${btnStyles.Button} ${btnStyles.ButtonWide}`}
+                    onClick={() => history.push(`/profiles/${currentUser?.profile_id}`)}
+                >
+                    Go Back to Profiles
+                </Button>
+            </Container>
+        );
+    }
+
     if (loading) {
         return (
             <div className={profileStyles.LoaderContainer}>
@@ -182,10 +201,10 @@ const EditProfilePage = () => {
                 </Col>
             </Row>
             {errors.profile_image?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>{message}</Alert>
+                <Alert variant="warning" key={idx}>Profile Image: {message}</Alert>
             ))}
             {errors.cover_image?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>{message}</Alert>
+                <Alert variant="warning" key={idx}>Cover Image: {message}</Alert>
             ))}
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="name">
