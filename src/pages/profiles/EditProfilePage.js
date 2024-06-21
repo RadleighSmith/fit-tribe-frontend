@@ -8,11 +8,10 @@ import appStyles from '../../App.module.css';
 import profileStyles from '../../styles/ProfilePage.module.css';
 import formStyles from '../../styles/Form.module.css';
 import btnStyles from '../../styles/Button.module.css';
-import loaderStyles from '../../styles/Loader.module.css';
 import { useRedirect } from '../../hooks/useRedirect';
 
 const EditProfilePage = () => {
-    useRedirect('loggedOut')
+    useRedirect('loggedOut');
     const { id } = useParams();
     const history = useHistory();
     const currentUser = useCurrentUser();
@@ -23,12 +22,14 @@ const EditProfilePage = () => {
         profile_image: null,
         cover_image: null,
         profileImagePreview: '',
-        coverImagePreview: ''
+        coverImagePreview: '',
+        display_name: false
     });
-    const { name, email, bio, profile_image, cover_image, profileImagePreview, coverImagePreview } = profileData;
+    const { name, email, bio, profile_image, cover_image, profileImagePreview, coverImagePreview, display_name } = profileData;
     const [errors, setErrors] = useState({});
     const [alert, setAlert] = useState("");
     const [loading, setLoading] = useState(true);
+    const [submitting, setSubmitting] = useState(false);
 
     useEffect(() => {
         let isMounted = true;
@@ -50,7 +51,8 @@ const EditProfilePage = () => {
                         profile_image: null,
                         cover_image: null,
                         profileImagePreview: data.profile_image,
-                        coverImagePreview: data.cover_image
+                        coverImagePreview: data.cover_image,
+                        display_name: data.display_name
                     });
                 }
             } catch (err) {
@@ -70,10 +72,11 @@ const EditProfilePage = () => {
     }, [id, currentUser, history]);
 
     const handleChange = (event) => {
-        setProfileData({
-            ...profileData,
-            [event.target.name]: event.target.value
-        });
+        const { name, value, type, checked } = event.target;
+        setProfileData(prevData => ({
+            ...prevData,
+            [name]: type === 'checkbox' ? checked : value
+        }));
     };
 
     const profileImageDropzone = useDropzone({
@@ -112,11 +115,12 @@ const EditProfilePage = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        setLoading(true);
+        setSubmitting(true);
         const formData = new FormData();
         formData.append('name', name);
         formData.append('email', email);
         formData.append('bio', bio);
+        formData.append('display_name', display_name);
         if (profile_image) formData.append('profile_image', profile_image);
         if (cover_image) formData.append('cover_image', cover_image);
 
@@ -124,11 +128,11 @@ const EditProfilePage = () => {
             await axiosReq.put(`/profiles/${id}/`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
-            setLoading(false);
             history.push(`/profiles/${id}`);
         } catch (err) {
-            setErrors(err.response?.data);
-            setLoading(false);
+            setErrors(err.response?.data || {});
+        } finally {
+            setSubmitting(false);
         }
     };
 
@@ -148,8 +152,8 @@ const EditProfilePage = () => {
 
     if (loading) {
         return (
-            <div className={loaderStyles.LoaderContainer}>
-                <Spinner animation="border" role="status" className={loaderStyles.Spinner}>
+            <div className={profileStyles.LoaderContainer}>
+                <Spinner animation="border" role="status" className={profileStyles.Spinner}>
                     <span className="sr-only">Loading...</span>
                 </Spinner>
             </div>
@@ -177,6 +181,12 @@ const EditProfilePage = () => {
                     <h2>{name}</h2>
                 </Col>
             </Row>
+            {errors.profile_image?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>{message}</Alert>
+            ))}
+            {errors.cover_image?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>{message}</Alert>
+            ))}
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="name">
                     <Form.Label>Name</Form.Label>
@@ -224,12 +234,22 @@ const EditProfilePage = () => {
                     ))}
                 </Form.Group>
 
+                <Form.Group controlId="display_name">
+                    <Form.Check 
+                        type="checkbox"
+                        name="display_name"
+                        label="Display Real Name on Profile"
+                        checked={display_name}
+                        onChange={handleChange}
+                    />
+                </Form.Group>
+
                 {errors.non_field_errors?.map((message, idx) => (
                     <Alert key={idx} variant="warning">{message}</Alert>
                 ))}
 
-                <Button type="submit" className={`${btnStyles.Button} ${btnStyles.ButtonWide}`} disabled={loading}>
-                    {loading ? (
+                <Button type="submit" className={`${btnStyles.Button} ${btnStyles.ButtonWide}`} disabled={submitting}>
+                    {submitting ? (
                         <>
                             <Spinner animation="border" size="sm" role="status" className="mr-2" />
                             Submitting...
