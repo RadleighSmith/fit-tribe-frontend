@@ -11,7 +11,7 @@ import divider from '../../styles/Divider.module.css';
 import { useRedirect } from '../../hooks/useRedirect';
 
 const ProfilePage = () => {
-    useRedirect('loggedOut')
+    useRedirect('loggedOut');
     const { id } = useParams();
     const history = useHistory();
     const currentUser = useCurrentUser();
@@ -46,7 +46,7 @@ const ProfilePage = () => {
 
     if (!profileData) return null;
 
-    const { name, bio, profile_image, cover_image, owner, created_at, followers_count, following_count, following_id } = profileData;
+    const { owner, name, bio, profile_image, cover_image, created_at, followers_count, following_count, following_id, display_name } = profileData;
 
     return (
         <Container className={appStyles.Content}>
@@ -61,7 +61,7 @@ const ProfilePage = () => {
             <Row className="justify-content-between align-items-end ml-md-5">
                 <Col md="auto" className="d-flex align-items-end">
                     <div>
-                        <h2>{name}</h2>
+                        <h2>{display_name ? `${name} (${owner})` : owner}</h2>
                         <p>Joined on {new Date(created_at).toLocaleDateString()}</p>
                     </div>
                 </Col>
