@@ -8,8 +8,10 @@ import profileStyles from '../../styles/ProfilePage.module.css';
 import btnStyles from '../../styles/Button.module.css';
 import loaderStyles from '../../styles/Loader.module.css';
 import divider from '../../styles/Divider.module.css';
+import { useRedirect } from '../../hooks/useRedirect';
 
 const ProfilePage = () => {
+    useRedirect('loggedOut')
     const { id } = useParams();
     const history = useHistory();
     const currentUser = useCurrentUser();

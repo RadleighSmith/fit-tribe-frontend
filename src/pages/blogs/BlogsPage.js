@@ -7,8 +7,10 @@ import divider from '../../styles/Divider.module.css';
 import styles from '../../styles/BlogsPage.module.css';
 import BlogCard from '../../components/blogs/BlogCard';
 import btnStyles from '../../styles/Button.module.css';
+import { useRedirect } from '../../hooks/useRedirect';
 
 const BlogsPage = () => {
+    useRedirect('loggedOut')
     const [blogs, setBlogs] = useState([]);
     const [errors, setErrors] = useState(null);
 

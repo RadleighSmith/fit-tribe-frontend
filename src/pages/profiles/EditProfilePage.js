@@ -9,8 +9,10 @@ import profileStyles from '../../styles/ProfilePage.module.css';
 import formStyles from '../../styles/Form.module.css';
 import btnStyles from '../../styles/Button.module.css';
 import loaderStyles from '../../styles/Loader.module.css';
+import { useRedirect } from '../../hooks/useRedirect';
 
 const EditProfilePage = () => {
+    useRedirect('loggedOut')
     const { id } = useParams();
     const history = useHistory();
     const currentUser = useCurrentUser();

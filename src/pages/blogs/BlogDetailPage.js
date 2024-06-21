@@ -12,8 +12,10 @@ import btnStyles from '../../styles/Button.module.css';
 import profileStyles from '../../styles/ProfilePicture.module.css';
 import divider from '../../styles/Divider.module.css';
 import styles from '../../styles/BlogDetailPage.module.css';
+import { useRedirect } from '../../hooks/useRedirect';
 
 const BlogDetailPage = () => {
+    useRedirect('loggedOut')
     const { id } = useParams();
     const history = useHistory();
     const [blog, setBlog] = useState(null);

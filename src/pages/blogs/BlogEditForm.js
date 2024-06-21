@@ -10,8 +10,10 @@ import appStyles from '../../App.module.css';
 import divider from '../../styles/Divider.module.css';
 import formStyles from '../../styles/Form.module.css';
 import btnStyles from '../../styles/Button.module.css';
+import { useRedirect } from '../../hooks/useRedirect';
 
 const BlogEditForm = () => {
+    useRedirect('loggedOut')
     const { id } = useParams();
     const history = useHistory();
     const currentUser = useCurrentUser();
