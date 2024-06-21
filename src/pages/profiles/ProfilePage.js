@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { Container, Row, Col, Image, Alert, Spinner, Button } from 'react-bootstrap';
-import { axiosReq } from '../../api/axiosDefaults';
+import { useProfile, useSetProfile } from '../../contexts/ProfileContext';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import appStyles from '../../App.module.css';
 import profileStyles from '../../styles/ProfilePage.module.css';
@@ -13,55 +13,12 @@ const ProfilePage = () => {
     const { id } = useParams();
     const history = useHistory();
     const currentUser = useCurrentUser();
-    const [profileData, setProfileData] = useState({
-        name: '',
-        bio: '',
-        profile_image: '',
-        cover_image: '',
-        owner: '',
-        created_at: '',
-        followers_count: 0,
-        following_count: 0,
-    });
-    const { name, bio, profile_image, cover_image, owner, created_at, followers_count, following_count } = profileData;
-    const [errors, setErrors] = useState({});
-    const [loading, setLoading] = useState(true);
+    const profileData = useProfile();
+    const { fetchProfileData, loading, errors } = useSetProfile();
 
     useEffect(() => {
-        let isMounted = true;
-
-        const fetchProfileData = async () => {
-            try {
-                const { data } = await axiosReq.get(`/profiles/${id}/`);
-                if (isMounted) {
-                    setProfileData({
-                        name: data.name,
-                        bio: data.bio,
-                        profile_image: data.profile_image,
-                        cover_image: data.cover_image,
-                        owner: data.owner,
-                        created_at: data.created_at,
-                        followers_count: data.followers_count,
-                        following_count: data.following_count,
-                    });
-                }
-            } catch (err) {
-                if (isMounted) {
-                    setErrors(err.response?.data || {});
-                }
-            } finally {
-                if (isMounted) {
-                    setLoading(false);
-                }
-            }
-        };
-
-        fetchProfileData();
-
-        return () => {
-            isMounted = false;
-        };
-    }, [id]);
+        fetchProfileData(id);
+    }, [id, fetchProfileData]);
 
     const handleEditClick = () => {
         history.push(`/profiles/${id}/edit`);
@@ -76,6 +33,18 @@ const ProfilePage = () => {
             </div>
         );
     }
+
+    if (errors.message) {
+        return (
+            <Container className={appStyles.Content}>
+                <Alert variant="danger">{errors.message}</Alert>
+            </Container>
+        );
+    }
+
+    if (!profileData) return null;
+
+    const { name, bio, profile_image, cover_image, owner, created_at, followers_count, following_count } = profileData;
 
     return (
         <Container className={appStyles.Content}>
@@ -126,4 +95,3 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
-
