@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
-import { Container, Row, Col, Image, Button, Dropdown, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Container, Row, Col, Image, Button, Dropdown, OverlayTrigger, Tooltip, Alert } from 'react-bootstrap';
 import { axiosRes } from '../../api/axiosDefaults';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import BlogCommentCreateForm from '../../components/blogs/BlogCommentCreateForm';
@@ -15,11 +15,12 @@ import styles from '../../styles/BlogDetailPage.module.css';
 import { useRedirect } from '../../hooks/useRedirect';
 
 const BlogDetailPage = () => {
-    useRedirect('loggedOut')
+    useRedirect('loggedOut');
     const { id } = useParams();
     const history = useHistory();
     const [blog, setBlog] = useState(null);
-    const [errors, setErrors] = useState(null);
+    const [blogErrors, setBlogErrors] = useState(null);
+    const [commentsErrors, setCommentsErrors] = useState(null);
     const [comments, setComments] = useState({ results: [] });
     const [hasMore, setHasMore] = useState(false);
 
@@ -34,7 +35,7 @@ const BlogDetailPage = () => {
                 const { data } = await axiosRes.get(`/blogs/${id}/`);
                 setBlog(data);
             } catch (err) {
-                setErrors(err.response?.data);
+                setBlogErrors(err.response?.data);
             }
         };
         fetchBlog();
@@ -47,7 +48,7 @@ const BlogDetailPage = () => {
                 setComments(data);
                 setHasMore(!!data.next);
             } catch (err) {
-                setErrors(err.response?.data);
+                setCommentsErrors(err.response?.data);
             }
         };
         fetchComments();
@@ -63,7 +64,7 @@ const BlogDetailPage = () => {
                 }));
                 setHasMore(!!data.next);
             } catch (err) {
-                setErrors(err.response?.data);
+                setCommentsErrors(err.response?.data);
             }
         }
     };
@@ -103,9 +104,24 @@ const BlogDetailPage = () => {
         }
     };
 
+    if (blogErrors && blogErrors.detail) {
+        return (
+            <Container className={`${appStyles.Content} mt-3`}>
+                <Alert variant="danger" className='mt-3'>
+                    <p className='text-center'>{blogErrors.detail}</p>
+                    <Button
+                        className={`${btnStyles.Button} ${btnStyles.ButtonWide}`}
+                        onClick={() => history.push('/blogs')}
+                    >
+                        Go Back to Blogs
+                    </Button>
+                </Alert>
+            </Container>
+        );
+    }
+
     return (
         <Container className={`${appStyles.Content} pb-5 mt-3`}>
-            {errors && <p className="text-danger">{errors.detail}</p>}
             {blog && (
                 <>
                     <Row>
@@ -181,16 +197,22 @@ const BlogDetailPage = () => {
                                 </div>
                             </div>
                             <BlogCommentCreateForm blogId={id} setComments={setComments} setBlog={setBlog} />
-                            <InfiniteScroll
-                                dataLength={comments.results.length}
-                                next={fetchMoreComments}
-                                hasMore={hasMore}
-                                loader={<div className="loader" key={0}>Loading ...</div>}
-                            >
-                                {comments.results.map((comment) => (
-                                    <BlogComment key={comment.id} {...comment} setComments={setComments} setBlog={setBlog} />
-                                ))}
-                            </InfiniteScroll>
+                            {commentsErrors && commentsErrors.detail ? (
+                                <Alert variant="danger">
+                                    <p>{commentsErrors.detail}</p>
+                                </Alert>
+                            ) : (
+                                <InfiniteScroll
+                                    dataLength={comments.results.length}
+                                    next={fetchMoreComments}
+                                    hasMore={hasMore}
+                                    loader={<div className="loader" key={0}>Loading ...</div>}
+                                >
+                                    {comments.results.map((comment) => (
+                                        <BlogComment key={comment.id} {...comment} setComments={setComments} setBlog={setBlog} />
+                                    ))}
+                                </InfiniteScroll>
+                            )}
                         </Col>
                     </Row>
                 </>
