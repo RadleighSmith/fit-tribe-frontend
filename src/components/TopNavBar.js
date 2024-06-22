@@ -102,9 +102,6 @@ const TopNavBar = () => {
             <NavLink to="/blogs" className={styles.NavLink} activeClassName={styles.Active} onClick={() => setExpanded(false)}>
                 <i className="fas fa-blog"></i> Blogs
             </NavLink>
-            <NavLink to="/workouts" className={styles.NavLink} activeClassName={styles.Active} onClick={() => setExpanded(false)}>
-                <i className="fas fa-dumbbell"></i> Workouts
-            </NavLink>
             <NavLink to="/following" className={styles.NavLink} activeClassName={styles.Active} onClick={() => setExpanded(false)}>
                 <i className="fas fa-user-friends"></i> Following
             </NavLink>
