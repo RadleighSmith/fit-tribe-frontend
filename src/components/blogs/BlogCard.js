@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Image, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Card, Image, Overlay, Tooltip } from 'react-bootstrap';
 import DOMPurify from 'dompurify';
 import { axiosRes } from '../../api/axiosDefaults';
 import appStyles from '../../App.module.css';
@@ -12,6 +12,8 @@ const BlogCard = ({ blog, setBlogs }) => {
     const currentUser = useCurrentUser();
     const isOwner = currentUser?.username === blog.owner;
     const defaultBlogImage = 'https://res.cloudinary.com/dn6vitvd4/image/upload/v1/fittribe_media/../default_post_eznpr6';
+    const [showTooltip, setShowTooltip] = useState(false);
+    const target = useRef(null);
 
     const sanitizedContent = DOMPurify.sanitize(blog.content);
 
@@ -62,7 +64,7 @@ const BlogCard = ({ blog, setBlogs }) => {
                         </div>
                     </div>
                 </div>
-                <Card.Text>
+                <Card.Text as="div">
                     <div dangerouslySetInnerHTML={{ __html: sanitizedContent.slice(0, 400) + '...' }}></div>
                     <Link to={`/blogs/${blog.id}`}>Read More</Link>
                 </Card.Text>
@@ -72,13 +74,16 @@ const BlogCard = ({ blog, setBlogs }) => {
                 <div className="d-flex justify-content-between align-items-center mt-3">
                     <div className="d-flex align-items-center">
                         {isOwner ? (
-                            <OverlayTrigger
-                                placement="top"
-                                delay={{ show: 250, hide: 400 }}
-                                overlay={<Tooltip id="button-tooltip">You cannot like your own post.</Tooltip>}
-                            >
+                            <div ref={target} onMouseEnter={() => setShowTooltip(true)} onMouseLeave={() => setShowTooltip(false)}>
                                 <i className={`fas fa-thumbs-up ${styles.Icon} ${styles.DisabledIcon}`}></i>
-                            </OverlayTrigger>
+                                <Overlay target={target.current} show={showTooltip} placement="top">
+                                    {(props) => (
+                                        <Tooltip id="overlay-tooltip" {...props}>
+                                            You cannot like your own post.
+                                        </Tooltip>
+                                    )}
+                                </Overlay>
+                            </div>
                         ) : (
                             blog.blog_like_id ? (
                                 <i className={`fas fa-thumbs-up ${styles.Icon} ${styles.Liked}`} onClick={handleUnlike}></i>
