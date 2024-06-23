@@ -11,6 +11,7 @@ export const ProfileProvider = ({ children }) => {
     const [profileData, setProfileData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [errors, setErrors] = useState({});
+    const [notFound, setNotFound] = useState(false);
 
     const handleFollow = async (clickedProfile) => {
         try {
@@ -42,13 +43,18 @@ export const ProfileProvider = ({ children }) => {
 
     const fetchProfileData = useCallback(async (id) => {
         setLoading(true);
+        setNotFound(false);
         try {
             const { data } = await axiosReq.get(`/profiles/${id}/`);
             setProfileData(data);
             setErrors({});
         } catch (err) {
-            console.error('Error fetching profile data:', err.response || err.message);
-            setErrors(err.response?.data || { message: 'Something went wrong. Please try again later.' });
+            if (err.response?.status === 404) {
+                setNotFound(true);
+            } else {
+                console.error('Error fetching profile data:', err.response || err.message);
+                setErrors(err.response?.data || { message: 'Something went wrong. Please try again later.' });
+            }
         } finally {
             setLoading(false);
         }
@@ -56,10 +62,9 @@ export const ProfileProvider = ({ children }) => {
 
     return (
         <ProfileContext.Provider value={profileData}>
-            <SetProfileContext.Provider value={{ fetchProfileData, handleFollow, handleUnfollow, loading, errors }}>
+            <SetProfileContext.Provider value={{ fetchProfileData, handleFollow, handleUnfollow, loading, errors, notFound }}>
                 {children}
             </SetProfileContext.Provider>
         </ProfileContext.Provider>
     );
 };
-

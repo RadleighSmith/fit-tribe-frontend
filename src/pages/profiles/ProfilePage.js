@@ -16,7 +16,7 @@ const ProfilePage = () => {
     const history = useHistory();
     const currentUser = useCurrentUser();
     const profileData = useProfile();
-    const { fetchProfileData, handleFollow, handleUnfollow, loading, errors } = useSetProfile();
+    const { fetchProfileData, handleFollow, handleUnfollow, loading, errors, notFound } = useSetProfile();
 
     useEffect(() => {
         fetchProfileData(id);
@@ -33,6 +33,20 @@ const ProfilePage = () => {
                     <span className="sr-only">Loading...</span>
                 </Spinner>
             </div>
+        );
+    }
+
+    if (notFound) {
+        return (
+            <Container className={appStyles.Content}>
+                <Alert variant="danger" className='text-center'>Profile not found.</Alert>
+                <Button
+                    className={`${btnStyles.Button} ${btnStyles.ButtonWide}`}
+                    onClick={() => history.push(`/profiles/${currentUser?.profile_id}`)}
+                >
+                    Go Back to your Profile
+                </Button>
+            </Container>
         );
     }
 
