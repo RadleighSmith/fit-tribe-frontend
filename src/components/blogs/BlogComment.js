@@ -57,7 +57,7 @@ const BlogComment = (props) => {
                         <p>{comment}</p>
                     </Media.Body>
                     {is_owner && (
-                        <Dropdown alignleft>
+                        <Dropdown align="right">
                             <Dropdown.Toggle variant="link" className={styles.DropdownToggle}>
                                 <i className="fas fa-ellipsis-h"></i>
                             </Dropdown.Toggle>
