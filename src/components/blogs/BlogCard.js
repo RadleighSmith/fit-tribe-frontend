@@ -62,10 +62,10 @@ const BlogCard = ({ blog, setBlogs }) => {
                         </div>
                     </div>
                 </div>
-                <Card.Text>
+                <div className={styles.ContentPreview}>
                     <div dangerouslySetInnerHTML={{ __html: sanitizedContent.slice(0, 400) + '...' }}></div>
                     <Link to={`/blogs/${blog.id}`}>Read More</Link>
-                </Card.Text>
+                </div>
                 {blog.image && blog.image !== defaultBlogImage && (
                     <Card.Img variant="bottom" src={blog.image} className={styles.BlogImage} />
                 )}
