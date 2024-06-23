@@ -5,7 +5,7 @@ import DOMPurify from 'dompurify';
 import { axiosRes } from '../../api/axiosDefaults';
 import appStyles from '../../App.module.css';
 import styles from '../../styles/BlogCard.module.css';
-import profileStyles from '../../styles/ProfilePicture.module.css'
+import profileStyles from '../../styles/ProfilePicture.module.css';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
 const BlogCard = ({ blog, setBlogs }) => {
@@ -21,7 +21,7 @@ const BlogCard = ({ blog, setBlogs }) => {
             setBlogs((prevBlogs) =>
                 prevBlogs.map((prevBlog) =>
                     prevBlog.id === blog.id
-                        ? { ...prevBlog, blog_likes_count: prevBlog.blog_likes_count + 1, blog_like_id: data.id }
+                        ? { ...prevBlog, blog_likes_count: (prevBlog.blog_likes_count || 0) + 1, blog_like_id: data.id }
                         : prevBlog
                 )
             );
@@ -36,7 +36,7 @@ const BlogCard = ({ blog, setBlogs }) => {
             setBlogs((prevBlogs) =>
                 prevBlogs.map((prevBlog) =>
                     prevBlog.id === blog.id
-                        ? { ...prevBlog, blog_likes_count: prevBlog.blog_likes_count - 1, blog_like_id: null }
+                        ? { ...prevBlog, blog_likes_count: (prevBlog.blog_likes_count || 0) - 1, blog_like_id: null }
                         : prevBlog
                 )
             );
@@ -62,10 +62,10 @@ const BlogCard = ({ blog, setBlogs }) => {
                         </div>
                     </div>
                 </div>
-                <div className={styles.ContentPreview}>
+                <Card.Text>
                     <div dangerouslySetInnerHTML={{ __html: sanitizedContent.slice(0, 400) + '...' }}></div>
                     <Link to={`/blogs/${blog.id}`}>Read More</Link>
-                </div>
+                </Card.Text>
                 {blog.image && blog.image !== defaultBlogImage && (
                     <Card.Img variant="bottom" src={blog.image} className={styles.BlogImage} />
                 )}
@@ -86,9 +86,9 @@ const BlogCard = ({ blog, setBlogs }) => {
                                 <i className={`fas fa-thumbs-up ${styles.Icon}`} onClick={handleLike}></i>
                             )
                         )}
-                        <span className={styles.IconCounter}>{blog.blog_likes_count}</span>
+                        <span className={styles.IconCounter}>{blog.blog_likes_count || 0}</span>
                         <i className={`fas fa-comment ${styles.Icon} ml-3`}></i>
-                        <span className={styles.IconCounter}>{blog.blog_comments_count}</span>
+                        <span className={styles.IconCounter}>{blog.blog_comments_count || 0}</span>
                     </div>
                 </div>
             </Card.Body>
