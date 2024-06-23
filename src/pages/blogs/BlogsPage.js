@@ -28,8 +28,8 @@ const BlogsPage = () => {
     }, []);
 
     return (
-        <Container>
-            <Row className={appStyles.Content}>
+        <Container className={appStyles.Content}>
+            <Row>
                 <Col className="text-center p-3">
                     <h1 className={styles.Title}>Blogs</h1>
                     {errors && <p className="text-danger">{errors.detail}</p>}
