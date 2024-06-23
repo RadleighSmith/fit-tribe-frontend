@@ -14,6 +14,7 @@ import BlogDetailPage from "./pages/blogs/BlogDetailPage";
 import { useCurrentUser } from "./contexts/CurrentUserContext";
 import ProfilePage from "./pages/profiles/ProfilePage";
 import EditProfilePage from "./pages/profiles/EditProfilePage";
+import FollowingPage from "./pages/FollowingPage";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -33,6 +34,7 @@ function App() {
           <Route exact path="/blogs/:id/edit" component={BlogEditForm} />
           <Route exact path="/profiles/:id" component={ProfilePage} />
           <Route exact path="/profiles/:id/edit" component={EditProfilePage} />
+          <Route exact path="/following" component={FollowingPage} />
           <Route render={() => <h1 className="text-center">Uh Oh! Page Not Found!</h1>} />
         </Switch>
       </div>
