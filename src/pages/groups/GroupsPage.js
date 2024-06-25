@@ -1,40 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container, ListGroup, Image } from 'react-bootstrap';
-import { axiosReq } from '../../api/axiosDefaults';
-import styles from '../../styles/GroupsPage.module.css';
+import {
+  Container,
+  Row,
+  Col,
+  Image,
+  Button,
+  Spinner,
+  Alert,
+} from 'react-bootstrap';
+import axios from 'axios';
+import { useCurrentUser } from '../../contexts/CurrentUserContext';
+import appStyles from '../../App.module.css';
 
 const GroupsPage = () => {
   const [groups, setGroups] = useState([]);
-  const [memberships, setMemberships] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const currentUser = useCurrentUser();
 
   useEffect(() => {
     const fetchGroups = async () => {
       try {
-        const { data } = await axiosReq.get('/groups/');
+        const { data } = await axios.get('/groups/');
         setGroups(data.results);
       } catch (err) {
-        console.log(err);
-      }
-    };
-
-    const fetchMemberships = async () => {
-      try {
-        const { data } = await axiosReq.get('/memberships/');
-        setMemberships(data.results);
-      } catch (err) {
-        console.log(err);
+        setError(true);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchGroups();
-    fetchMemberships();
   }, []);
 
   const handleJoinGroup = async (groupId) => {
     try {
-      await axiosReq.post(`/groups/${groupId}/join/`);
-      setMemberships([...memberships, { group: groupId }]);
+      await axios.post(`/groups/${groupId}/join/`);
+      setGroups((prevGroups) =>
+        prevGroups.map((group) =>
+          group.id === groupId ? { ...group, is_member: true } : group
+        )
+      );
     } catch (err) {
       console.log(err);
     }
@@ -42,49 +49,64 @@ const GroupsPage = () => {
 
   const handleLeaveGroup = async (groupId) => {
     try {
-      await axiosReq.post(`/groups/${groupId}/leave/`);
-      setMemberships(memberships.filter((membership) => membership.group !== groupId));
+      await axios.post(`/groups/${groupId}/leave/`);
+      setGroups((prevGroups) =>
+        prevGroups.map((group) =>
+          group.id === groupId ? { ...group, is_member: false } : group
+        )
+      );
     } catch (err) {
       console.log(err);
     }
   };
 
-  const isMember = (groupId) => {
-    return memberships.some((membership) => membership.group === groupId);
-  };
+  if (loading) return <Spinner animation="border" />;
+  if (error) return <Alert variant="danger">Failed to load groups</Alert>;
 
   return (
-    <Container>
-      <h1 className="my-4">Groups</h1>
-      <ListGroup>
-        {groups.map((group) => (
-          <ListGroup.Item key={group.id} className={styles.GroupItem}>
-            <div className={styles.GroupInfo}>
-              <Image src={group.group_logo} roundedCircle className={styles.GroupLogo} />
-              <Link to={`/groups/${group.id}`} className={styles.GroupName}>
-                {group.name}
-              </Link>
-            </div>
-            {isMember(group.id) ? (
-              <Button
-                variant="danger"
-                onClick={() => handleLeaveGroup(group.id)}
-                className={styles.GroupButton}
-              >
-                Leave Group
-              </Button>
-            ) : (
-              <Button
-                variant="primary"
-                onClick={() => handleJoinGroup(group.id)}
-                className={styles.GroupButton}
-              >
-                Join Group
-              </Button>
-            )}
-          </ListGroup.Item>
-        ))}
-      </ListGroup>
+    <Container className={appStyles.Content}>
+      <Row>
+        <Col>
+          <h1>Groups</h1>
+          {groups.length ? (
+            groups.map((group) => (
+              <Row key={group.id} className="my-3 align-items-center">
+                <Col xs={2}>
+                  <Image src={group.group_logo} thumbnail />
+                </Col>
+                <Col xs={6}>
+                  <Link to={`/groups/${group.id}`}>
+                    <h4>{group.name}</h4>
+                  </Link>
+                </Col>
+                <Col xs={4} className="text-right">
+                  {currentUser && (
+                    <>
+                      {group.is_member ? (
+                        <Button
+                          variant="danger"
+                          onClick={() => handleLeaveGroup(group.id)}
+                        >
+                          Leave Group
+                        </Button>
+                      ) : (
+                        <Button
+                          variant="primary"
+                          onClick={() => handleJoinGroup(group.id)}
+                        >
+                          Join Group
+                        </Button>
+                      )}
+                    </>
+                  )}
+                </Col>
+              </Row>
+            ))
+          ) : (
+            <p>No groups available.</p>
+          )}
+        </Col>
+      </Row>
     </Container>
   );
 };
