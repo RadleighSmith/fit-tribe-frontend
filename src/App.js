@@ -17,6 +17,8 @@ import EditProfilePage from "./pages/profiles/EditProfilePage";
 import FollowingPage from "./pages/FollowingPage";
 import GroupCreateForm from "./pages/groups/GroupCreateForm";
 import GroupsPage from "./pages/groups/GroupsPage";
+import GroupDetailsPage from "./pages/groups/GroupDetailsPage";
+import GroupEditPage from "./pages/groups/GroupEditPage";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -35,7 +37,9 @@ function App() {
           <Route exact path="/create-blog" component={BlogCreateForm} />
           <Route exact path="/blogs/:id/edit" component={BlogEditForm} />
           <Route exact path="/groups/" component={GroupsPage} />
+          <Route exact path="/groups/:id" component={GroupDetailsPage} />
           <Route exact path="/create-group/" component={GroupCreateForm} />
+          <Route exact path="/groups/:id/edit" component={GroupEditPage} />
           <Route exact path="/profiles/:id" component={ProfilePage} />
           <Route exact path="/profiles/:id/edit" component={EditProfilePage} />
           <Route exact path="/following" component={FollowingPage} />
