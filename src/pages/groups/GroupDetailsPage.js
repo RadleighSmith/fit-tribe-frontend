@@ -7,8 +7,10 @@ import appStyles from '../../App.module.css';
 import btnStyles from '../../styles/Button.module.css';
 import divider from '../../styles/Divider.module.css';
 import styles from '../../styles/GroupDetailsPage.module.css';
+import { useRedirect } from '../../hooks/useRedirect';
 
 const GroupDetailsPage = () => {
+  useRedirect('loggedOut');
   const { id } = useParams();
   const history = useHistory();
   const [group, setGroup] = useState(null);
