@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Form, Button, Container, Alert, Image, Spinner } from 'react-bootstrap';
 import { useDropzone } from 'react-dropzone';
-import { axiosReq } from '../../api/axiosDefaults';
+import axios from 'axios';
+
 import appStyles from '../../App.module.css';
 import divider from '../../styles/Divider.module.css';
 import formStyles from '../../styles/Form.module.css';
@@ -10,20 +11,20 @@ import btnStyles from '../../styles/Button.module.css';
 import { useRedirect } from '../../hooks/useRedirect';
 
 const GroupCreateForm = () => {
-    useRedirect('loggedOut');
+    useRedirect('loggedOut')
     const [groupData, setGroupData] = useState({
         name: '',
         description: '',
         banner: null,
-        groupLogo: null,
+        group_logo: null,
         bannerPreview: '',
         groupLogoPreview: ''
     });
+
+    const { name, description, banner, group_logo, bannerPreview, groupLogoPreview } = groupData;
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
     const history = useHistory();
-
-    const { name, description, banner, groupLogo, bannerPreview, groupLogoPreview } = groupData;
 
     const handleChange = (event) => {
         setGroupData({
@@ -32,22 +33,20 @@ const GroupCreateForm = () => {
         });
     };
 
-    const handleDrop = (acceptedFiles, type) => {
-        const file = acceptedFiles[0];
-        setGroupData((prevData) => ({
-            ...prevData,
-            [type]: file,
-            [`${type}Preview`]: URL.createObjectURL(file)
-        }));
-    };
-
     const {
         getRootProps: getRootPropsBanner,
         getInputProps: getInputPropsBanner,
         isDragActive: isDragActiveBanner
     } = useDropzone({
-        onDrop: (acceptedFiles) => handleDrop(acceptedFiles, 'banner'),
-        accept: 'image/*',
+        onDrop: (acceptedFiles) => {
+            const file = acceptedFiles[0];
+            setGroupData({
+                ...groupData,
+                banner: file,
+                bannerPreview: URL.createObjectURL(file)
+            });
+        },
+        accept: 'image/*'
     });
 
     const {
@@ -55,8 +54,15 @@ const GroupCreateForm = () => {
         getInputProps: getInputPropsGroupLogo,
         isDragActive: isDragActiveGroupLogo
     } = useDropzone({
-        onDrop: (acceptedFiles) => handleDrop(acceptedFiles, 'groupLogo'),
-        accept: 'image/*',
+        onDrop: (acceptedFiles) => {
+            const file = acceptedFiles[0];
+            setGroupData({
+                ...groupData,
+                group_logo: file,
+                groupLogoPreview: URL.createObjectURL(file)
+            });
+        },
+        accept: 'image/*'
     });
 
     const handleSubmit = async (event) => {
@@ -68,12 +74,12 @@ const GroupCreateForm = () => {
         if (banner) {
             formData.append('banner', banner);
         }
-        if (groupLogo) {
-            formData.append('group_logo', groupLogo);
+        if (group_logo) {
+            formData.append('group_logo', group_logo);
         }
 
         try {
-            await axiosReq.post('/groups/', formData, {
+            await axios.post('/groups/', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -81,11 +87,7 @@ const GroupCreateForm = () => {
             setLoading(false);
             history.push('/groups');
         } catch (err) {
-            if (err.response?.status === 403) {
-                setErrors({ non_field_errors: ['You do not have permission to create a group.'] });
-            } else {
-                setErrors(err.response?.data || {});
-            }
+            setErrors(err.response?.data);
             setLoading(false);
         }
     };
@@ -96,7 +98,7 @@ const GroupCreateForm = () => {
             <div className={divider.BlueDivider} />
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="name">
-                    <Form.Label>Name</Form.Label>
+                    <Form.Label>Group Name</Form.Label>
                     <Form.Control
                         className={formStyles.Input}
                         type="text"
@@ -110,8 +112,23 @@ const GroupCreateForm = () => {
                     ))}
                 </Form.Group>
 
+                <Form.Group controlId="description">
+                    <Form.Label>Group Description</Form.Label>
+                    <Form.Control
+                        as="textarea"
+                        rows={3}
+                        name="description"
+                        value={description}
+                        onChange={handleChange}
+                        isInvalid={!!errors.description}
+                    />
+                    {errors.description?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>{message}</Alert>
+                    ))}
+                </Form.Group>
+
                 <Form.Group controlId="banner">
-                    <Form.Label>Banner Image:</Form.Label>
+                    <Form.Label>Banner:</Form.Label>
                     {bannerPreview && (
                         <div className="mb-3 position-relative">
                             <Image src={bannerPreview} thumbnail />
@@ -141,23 +158,7 @@ const GroupCreateForm = () => {
                     ))}
                 </Form.Group>
 
-                <Form.Group controlId="description">
-                    <Form.Label>Description</Form.Label>
-                    <Form.Control
-                        as="textarea"
-                        rows={3}
-                        className={formStyles.Input}
-                        name="description"
-                        value={description}
-                        onChange={handleChange}
-                        isInvalid={!!errors.description}
-                    />
-                    {errors.description?.map((message, idx) => (
-                        <Alert variant="warning" key={idx}>{message}</Alert>
-                    ))}
-                </Form.Group>
-
-                <Form.Group controlId="groupLogo">
+                <Form.Group controlId="group_logo">
                     <Form.Label>Group Logo:</Form.Label>
                     {groupLogoPreview && (
                         <div className="mb-3 position-relative">
@@ -166,7 +167,7 @@ const GroupCreateForm = () => {
                                 variant="danger"
                                 size="sm"
                                 className={`${formStyles.RemoveButton} position-absolute top-0 end-0`}
-                                onClick={() => setGroupData({ ...groupData, groupLogo: null, groupLogoPreview: '' })}
+                                onClick={() => setGroupData({ ...groupData, group_logo: null, groupLogoPreview: '' })}
                             >
                                 Remove
                             </Button>
@@ -178,7 +179,7 @@ const GroupCreateForm = () => {
                             {
                                 isDragActiveGroupLogo ?
                                     <p>Drop the file here ...</p> :
-                                    <p>Drag and drop a group logo here, or click to select one</p>
+                                    <p>Drag and drop a group logo image here, or click to select one</p>
                             }
                             <i className="fas fa-upload fa-2x"></i>
                         </div>
