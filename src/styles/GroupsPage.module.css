@@ -1,36 +1,12 @@
-.GroupItem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
-    border-radius: 5px;
-  }
-  
-  .GroupInfo {
-    display: flex;
-    align-items: center;
-  }
-  
-  .GroupLogo {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-  }
-  
-  .GroupName {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  .GroupName:hover {
-    text-decoration: underline;
-  }
-  
-  .GroupButton {
-    min-width: 100px;
-  }
-  
+.GroupLogo {
+  max-width: 100px;
+}
+
+.GroupLink {
+  text-decoration: none;
+  color: #000;
+}
+
+.GroupLink:hover {
+  text-decoration: underline;
+}
