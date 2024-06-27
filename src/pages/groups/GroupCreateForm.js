@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Form, Button, Container, Alert, Image, Spinner } from 'react-bootstrap';
 import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
+import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
 import appStyles from '../../App.module.css';
 import divider from '../../styles/Divider.module.css';
@@ -11,7 +12,9 @@ import btnStyles from '../../styles/Button.module.css';
 import { useRedirect } from '../../hooks/useRedirect';
 
 const GroupCreateForm = () => {
-    useRedirect('loggedOut')
+    useRedirect('loggedOut');
+    const currentUser = useCurrentUser();
+    const history = useHistory();
     const [groupData, setGroupData] = useState({
         name: '',
         description: '',
@@ -24,7 +27,12 @@ const GroupCreateForm = () => {
     const { name, description, banner, group_logo, bannerPreview, groupLogoPreview } = groupData;
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
-    const history = useHistory();
+
+    useEffect(() => {
+        if (!currentUser?.is_superuser && !currentUser?.is_staff) {
+            setErrors({ permission: 'You do not have permission to create a group.' });
+        }
+    }, [currentUser]);
 
     const handleChange = (event) => {
         setGroupData({
@@ -91,6 +99,24 @@ const GroupCreateForm = () => {
             setLoading(false);
         }
     };
+
+    if (errors.permission) {
+        return (
+            <Container className={appStyles.Content}>
+                <Alert variant="danger" className="text-center">
+                    {errors.permission}
+                </Alert>
+                <div className="text-center">
+                    <Button
+                        className={`${btnStyles.Button} ${btnStyles.ButtonWide}`}
+                        onClick={() => history.push('/groups')}
+                    >
+                        Return to Groups
+                    </Button>
+                </div>
+            </Container>
+        );
+    }
 
     return (
         <Container className={appStyles.Content}>
