@@ -18,6 +18,16 @@
     color: #000;
 }
 
+.ButtonRed {
+    width: 6rem;
+    text-align: center;
+    background-color: #ff000087;
+    border-radius: 5px;
+    border: 1px solid #ff0000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    color: #000;
+}
+
 .ButtonWide {
     width: 100%;
 }
@@ -25,7 +35,6 @@
 .ButtonLarge {
     width: 10rem;
     height: 3rem;
-    font-size: 1.3rem;
 }
 
 .ButtonSmall {
