@@ -46,7 +46,7 @@ const GroupEditPage = () => {
                     if (isMounted) {
                         setErrors({ permission: 'You do not have permission to edit this group.' });
                         setTimeout(() => {
-                            history.push('/');
+                            history.push('/groups');
                         }, 3000);
                     }
                 }
