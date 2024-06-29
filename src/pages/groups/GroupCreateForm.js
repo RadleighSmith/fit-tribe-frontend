@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Form, Button, Container, Alert, Image, Spinner } from 'react-bootstrap';
 import { useDropzone } from 'react-dropzone';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
+import DOMPurify from 'dompurify';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
 import appStyles from '../../App.module.css';
@@ -38,6 +41,13 @@ const GroupCreateForm = () => {
         setGroupData({
             ...groupData,
             [event.target.name]: event.target.value
+        });
+    };
+
+    const handleDescriptionChange = (value) => {
+        setGroupData({
+            ...groupData,
+            description: DOMPurify.sanitize(value)
         });
     };
 
@@ -146,13 +156,10 @@ const GroupCreateForm = () => {
 
                 <Form.Group controlId="description">
                     <Form.Label>Group Description</Form.Label>
-                    <Form.Control
-                        as="textarea"
-                        rows={3}
-                        name="description"
+                    <ReactQuill
+                        className={formStyles.Input}
                         value={description}
-                        onChange={handleChange}
-                        isInvalid={!!errors.description}
+                        onChange={handleDescriptionChange}
                     />
                     {errors.description?.map((message, idx) => (
                         <Alert variant="warning" key={idx}>{message}</Alert>

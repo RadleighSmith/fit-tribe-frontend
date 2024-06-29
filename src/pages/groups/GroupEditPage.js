@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Form, Button, Container, Alert, Spinner, Image } from 'react-bootstrap';
 import { useDropzone } from 'react-dropzone';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import DOMPurify from 'dompurify';
 import { axiosReq } from '../../api/axiosDefaults';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import appStyles from '../../App.module.css';
@@ -76,6 +79,13 @@ const GroupEditPage = () => {
             ...prevData,
             [name]: value,
         }));
+    };
+
+    const handleDescriptionChange = (value) => {
+        setGroupData({
+            ...groupData,
+            description: DOMPurify.sanitize(value)
+        });
     };
 
     const onDropBanner = (acceptedFiles) => {
@@ -193,14 +203,10 @@ const GroupEditPage = () => {
 
                 <Form.Group controlId="description">
                     <Form.Label>Description</Form.Label>
-                    <Form.Control
+                    <ReactQuill
                         className={formStyles.Input}
-                        as="textarea"
-                        rows={6}
-                        name="description"
                         value={description}
-                        onChange={handleChange}
-                        isInvalid={!!errors.description}
+                        onChange={handleDescriptionChange}
                     />
                     {errors.description?.map((message, idx) => (
                         <Alert variant="warning" key={idx}>{message}</Alert>
