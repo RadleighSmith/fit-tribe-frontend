@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
-import { Container, Row, Col, Image, Button, Dropdown, OverlayTrigger, Tooltip, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Image, Button, Dropdown, Overlay, Tooltip, Alert } from 'react-bootstrap';
 import { axiosRes } from '../../api/axiosDefaults';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import BlogCommentCreateForm from '../../components/blogs/BlogCommentCreateForm';
@@ -104,6 +104,9 @@ const BlogDetailPage = () => {
         }
     };
 
+    const [showTooltip, setShowTooltip] = useState(false);
+    const likeButtonRef = useRef(null);
+
     if (blogErrors && blogErrors.detail) {
         return (
             <Container className={`${appStyles.Content} mt-3`}>
@@ -176,18 +179,32 @@ const BlogDetailPage = () => {
                             <div className="d-flex justify-content-between align-items-center mt-3">
                                 <div className="d-flex align-items-center mb-4">
                                     {is_owner ? (
-                                        <OverlayTrigger
-                                            placement="top"
-                                            delay={{ show: 250, hide: 400 }}
-                                            overlay={<Tooltip id="button-tooltip">You cannot like your own post.</Tooltip>}
-                                        >
-                                            <i className={`fas fa-thumbs-up ${styles.Icon} ${styles.DisabledIcon}`}></i>
-                                        </OverlayTrigger>
+                                        <>
+                                            <i
+                                                ref={likeButtonRef}
+                                                className={`fas fa-thumbs-up ${styles.Icon} ${styles.DisabledIcon}`}
+                                                onMouseEnter={() => setShowTooltip(true)}
+                                                onMouseLeave={() => setShowTooltip(false)}
+                                            ></i>
+                                            <Overlay target={likeButtonRef.current} show={showTooltip} placement="top">
+                                                {(props) => (
+                                                    <Tooltip id="button-tooltip" {...props}>
+                                                        You cannot like your own post.
+                                                    </Tooltip>
+                                                )}
+                                            </Overlay>
+                                        </>
                                     ) : (
                                         blog.blog_like_id ? (
-                                            <i className={`fas fa-thumbs-up ${styles.Icon} ${styles.Liked}`} onClick={handleUnlike}></i>
+                                            <i
+                                                className={`fas fa-thumbs-up ${styles.Icon} ${styles.Liked}`}
+                                                onClick={handleUnlike}
+                                            ></i>
                                         ) : (
-                                            <i className={`fas fa-thumbs-up ${styles.Icon}`} onClick={handleLike}></i>
+                                            <i
+                                                className={`fas fa-thumbs-up ${styles.Icon}`}
+                                                onClick={handleLike}
+                                            ></i>
                                         )
                                     )}
                                     <span className={styles.IconCounter}>{blog.blog_likes_count}</span>
