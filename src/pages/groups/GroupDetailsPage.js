@@ -3,6 +3,7 @@ import { useParams, Link, useHistory } from 'react-router-dom';
 import { Container, Row, Col, Image, Button, Spinner, Alert, Dropdown, Card, Badge } from 'react-bootstrap';
 import axios from 'axios';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
+import DOMPurify from 'dompurify';
 import appStyles from '../../App.module.css';
 import btnStyles from '../../styles/Button.module.css';
 import divider from '../../styles/Divider.module.css';
@@ -103,14 +104,14 @@ const GroupDetailsPage = () => {
             </Col>
           </Row>
           <Row className="m-3 align-items-center">
-            <Col xs={12} lg={8} className="d-flex align-items-center">
-              <Image src={group.group_logo} className={styles.GroupLogo} />
-              <h1 className='m-2'>{group.name}</h1>
+            <Col xs={12} lg={8} className="d-flex align-items-center flex-column flex-lg-row">
+              <Image src={group.group_logo} className={`${styles.GroupLogo} mb-3 mb-lg-0`} />
+              <h1 className='m-2 text-center text-lg-left'>{group.name}</h1>
             </Col>
-            <Col xs={12} lg={4} className="text-lg-right pt-2">
+            <Col xs={12} lg={4} className="text-lg-right pt-2 text-center text-lg-right">
               <span className={styles.DatePosted}>Created: {new Date(group.created_at).toLocaleDateString()}</span>
               {currentUser && currentUser.is_staff && (
-                <Dropdown alignRight className="d-inline">
+                <Dropdown alignRight className="d-inline ml-2">
                   <Dropdown.Toggle variant="link" className={styles.DropdownToggle}>
                     <i className="fas fa-ellipsis-h"></i>
                   </Dropdown.Toggle>
@@ -142,21 +143,23 @@ const GroupDetailsPage = () => {
             <Col xs={12}>
               <div className={divider.BlueDivider} />
               <div className={`${styles.Content} m-md-4 p-3 border rounded`}>
-                <p>{group.description}</p>
+                <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(group.description) }} />
               </div>
             </Col>
           </Row>
           <Row className="mt-5">
-            <Col>
+            <Col xs={12} className="text-center text-lg-left">
               <h2 className='mx-5'>Upcoming Events</h2>
               {currentUser && (currentUser.is_superuser || currentUser.is_staff) && (
-                <Link
-                  to={`/groups/${id}/create-event`}
-                >
+                <Link to={`/groups/${id}/create-event`}>
                   <Button className={`${btnStyles.Button} ${btnStyles.ButtonWide} my-4`}>Create a New Event</Button>
                 </Link>
               )}
-              <div className={divider.BlueDivider} />
+            </Col>
+          </Row>
+          <div className={divider.BlueDivider} />
+          <Row>
+            <Col>
               {events.length ? (
                 events.map(event => (
                   <Card
@@ -173,7 +176,6 @@ const GroupDetailsPage = () => {
                           <h4>
                             {event.name} {event.is_joined && <Badge variant="success">Joined</Badge>}
                           </h4>
-                          <p>{event.description}</p>
                           <p><strong>Location:</strong> {event.location}</p>
                           <p><strong>Start Time:</strong> {formatDateTime(event.start_date, event.start_time)}</p>
                           <p><strong>End Time:</strong> {formatDateTime(event.end_date, event.end_time)}</p>

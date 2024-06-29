@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { Container, Row, Col, Image, Button, Spinner, Alert, Card } from 'react-bootstrap';
 import axios from 'axios';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
+import DOMPurify from 'dompurify';
 import appStyles from '../../App.module.css';
 import btnStyles from '../../styles/Button.module.css';
 import groupStyles from '../../styles/GroupsPage.module.css';
@@ -62,6 +63,11 @@ const GroupsPage = () => {
     history.push(`/groups/${groupId}`);
   };
 
+  const truncateDescription = (description) => {
+    const cleanDescription = DOMPurify.sanitize(description);
+    return cleanDescription.length > 100 ? cleanDescription.slice(0, 100) + '...' : cleanDescription;
+  };
+
   if (loading) return <Spinner animation="border" />;
   if (error) return <Alert variant="danger">Failed to load groups</Alert>;
 
@@ -95,7 +101,7 @@ const GroupsPage = () => {
                     </Col>
                     <Col xs={12} sm={6}>
                       <h4 className={groupStyles.GroupLink}>{group.name}</h4>
-                      <p>{group.description}</p>
+                      <p dangerouslySetInnerHTML={{ __html: truncateDescription(group.description) }} />
                     </Col>
                     <Col xs={12} sm={4} className="d-flex justify-content-center justify-content-sm-end mt-2 mt-sm-0">
                       {currentUser && (
