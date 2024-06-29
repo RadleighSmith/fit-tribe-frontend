@@ -42,7 +42,7 @@ const BlogsPage = () => {
             <Row>
                 {Array.isArray(blogs) && blogs.map((blog) => (
                     <Col key={blog.id} xs={12} className="mt-4">
-                        <BlogCard blog={blog} />
+                        <BlogCard blog={blog} setBlogs={setBlogs} />
                     </Col>
                 ))}
             </Row>
