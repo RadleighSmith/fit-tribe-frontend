@@ -1,10 +1,26 @@
+.GroupCard {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.GroupCard:hover {
+  background-color: #f8f9fa;
+}
+
 .GroupLogo {
+  width: 100%;
+  height: auto;
   max-width: 100px;
+  max-height: 100px;
 }
 
 .GroupLink {
   text-decoration: none;
-  color: #000;
+  color: inherit;
 }
 
 .GroupLink:hover {
