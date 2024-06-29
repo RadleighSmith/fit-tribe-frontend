@@ -23,6 +23,7 @@ import GroupEditPage from "./pages/groups/GroupEditPage";
 import EventCreateForm from "./pages/group_events/EventCreateForm";
 import EventDetailPage from "./pages/group_events/EventDetailPage";
 import EventEditPage from "./pages/group_events/EventEditPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 import { useCurrentUser } from "./contexts/CurrentUserContext";
 
@@ -52,7 +53,7 @@ function App() {
           <Route exact path="/profiles/:id" component={ProfilePage} />
           <Route exact path="/profiles/:id/edit" component={EditProfilePage} />
           <Route exact path="/following" component={FollowingPage} />
-          <Route render={() => <h1 className="text-center">Uh Oh! Page Not Found!</h1>} />
+          <Route component={NotFoundPage} />
         </Switch>
       </div>
     </div>
