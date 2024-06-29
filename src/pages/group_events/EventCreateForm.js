@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import { Form, Button, Container, Alert, Image } from 'react-bootstrap';
+import { useDropzone } from 'react-dropzone';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
 
 import appStyles from '../../App.module.css';
@@ -20,7 +23,7 @@ const EventCreateForm = () => {
         start_time: '',
         end_date: '',
         end_time: '',
-        banner: '',
+        banner: null,
         bannerPreview: '',
         group: id
     });
@@ -28,40 +31,6 @@ const EventCreateForm = () => {
     const { name, description, location, start_date, start_time, end_date, end_time, banner, bannerPreview, group } = eventData;
     const [errors, setErrors] = useState({});
     const [submitting, setSubmitting] = useState(false);
-
-    useEffect(() => {
-        let isMounted = true;
-
-        const fetchEvent = async () => {
-            try {
-                const { data } = await axios.get(`/group-events/${id}/`);
-                if (isMounted) {
-                    setEventData({
-                        name: data.name,
-                        description: data.description,
-                        location: data.location,
-                        start_date: data.start_date,
-                        start_time: data.start_time,
-                        end_date: data.end_date,
-                        end_time: data.end_time,
-                        banner: data.banner,
-                        bannerPreview: data.banner,
-                        group: data.group
-                    });
-                }
-            } catch (err) {
-                if (isMounted) {
-                    setErrors(err.response?.data);
-                }
-            }
-        };
-
-        fetchEvent();
-
-        return () => {
-            isMounted = false;
-        };
-    }, [id]);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -71,16 +40,29 @@ const EventCreateForm = () => {
         }));
     };
 
-    const handleImageChange = (event) => {
-        if (event.target.files.length) {
-            const file = event.target.files[0];
-            setEventData((prevData) => ({
-                ...prevData,
-                banner: file,
-                bannerPreview: URL.createObjectURL(file)
-            }));
-        }
+    const handleDescriptionChange = (value) => {
+        setEventData((prevData) => ({
+            ...prevData,
+            description: value
+        }));
     };
+
+    const onDrop = (acceptedFiles) => {
+        const file = acceptedFiles[0];
+        setEventData((prevData) => ({
+            ...prevData,
+            banner: file,
+            bannerPreview: URL.createObjectURL(file)
+        }));
+    };
+
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+        onDrop,
+        accept: {
+            'image/jpeg': [],
+            'image/png': []
+        }
+    });
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -101,7 +83,7 @@ const EventCreateForm = () => {
             await axios.post('/group-events/', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
-            history.push(`/groups/${id}`);
+            history.push(`/groups/${group}`);
         } catch (err) {
             setErrors(err.response?.data);
             console.error('Error response:', err.response?.data);
@@ -131,13 +113,9 @@ const EventCreateForm = () => {
 
                 <Form.Group controlId="description">
                     <Form.Label>Event Description</Form.Label>
-                    <Form.Control
-                        as="textarea"
-                        rows={3}
-                        name="description"
+                    <ReactQuill
                         value={description}
-                        onChange={handleChange}
-                        isInvalid={!!errors.description}
+                        onChange={handleDescriptionChange}
                     />
                     {errors.description?.map((message, idx) => (
                         <Alert variant="warning" key={idx}>{message}</Alert>
@@ -226,12 +204,15 @@ const EventCreateForm = () => {
                             <Image src={bannerPreview} rounded fluid />
                         </div>
                     )}
-                    <Form.File
-                        className={formStyles.Input}
-                        name="banner"
-                        onChange={handleImageChange}
-                        accept="image/*"
-                    />
+                    <div {...getRootProps({ className: formStyles.Dropzone })}>
+                        <input {...getInputProps()} />
+                        {isDragActive ? (
+                            <p>Drop the files here ...</p>
+                        ) : (
+                            <p>Drag 'n' drop a banner image here, or click to select one</p>
+                        )}
+                        <i className="fas fa-upload fa-2x"></i>
+                    </div>
                     {errors.banner?.map((message, idx) => (
                         <Alert variant="warning" key={idx}>{message}</Alert>
                     ))}
