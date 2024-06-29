@@ -19,11 +19,11 @@
 }
 
 .JoinedEventCard {
-  background-color: #e0ffe0; /* Light green background for joined events */
-  border: 1px solid #28a745; /* Green border for joined events */
+  background-color: #e0ffe0;
+  border: 1px solid #28a745;
 }
 
 .EventCard:hover {
-  background-color: #f8f9fa; /* Light grey background on hover */
+  background-color: #f8f9fa;
   cursor: pointer;
 }
