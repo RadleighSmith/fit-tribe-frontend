@@ -40,11 +40,6 @@ const SideNavBar = () => {
                 <NavLink to="/groups" className={styles.NavLink} activeClassName={styles.Active}>
                     <i className="fas fa-users"></i> Groups
                 </NavLink>
-                <hr className={styles.Divider} />
-                <div>
-                    <div className={styles.MyGroupsHeader}>My Groups</div>
-                    {/* Add a list of user's groups here later */}
-                </div>
             </Nav>
             <div className={styles.LogoutSection}>
                 <hr className={styles.Divider} />
