@@ -136,7 +136,6 @@ const BlogDetailPage = () => {
                                     <Image src={blog.profile_image} roundedCircle className={profileStyles.ProfileImage} />
                                     <span className={profileStyles.ProfileUsername}>{blog.owner}</span>
                                 </Link>
-                                <Button className={`${btnStyles.Button} ${btnStyles.ButtonSmall} ml-3`}>Follow</Button>
                             </div>
                         </Col>
                         <Col xs={12} md={4} className="text-md-right pt-2">
