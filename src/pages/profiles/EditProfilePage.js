@@ -93,7 +93,10 @@ const EditProfilePage = () => {
                 profileImagePreview: URL.createObjectURL(file)
             }));
         },
-        accept: 'image/*',
+        accept: {
+            'image/jpeg': [],
+            'image/png': []
+        },
         noClick: true
     });
 
@@ -106,7 +109,10 @@ const EditProfilePage = () => {
                 coverImagePreview: URL.createObjectURL(file)
             }));
         },
-        accept: 'image/*',
+        accept: {
+            'image/jpeg': [],
+            'image/png': []
+        },
         noClick: true
     });
 

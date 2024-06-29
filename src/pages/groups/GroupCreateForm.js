@@ -54,7 +54,10 @@ const GroupCreateForm = () => {
                 bannerPreview: URL.createObjectURL(file)
             });
         },
-        accept: 'image/*'
+        accept: {
+            'image/jpeg': [],
+            'image/png': []
+        }
     });
 
     const {
@@ -70,7 +73,10 @@ const GroupCreateForm = () => {
                 groupLogoPreview: URL.createObjectURL(file)
             });
         },
-        accept: 'image/*'
+        accept: {
+            'image/jpeg': [],
+            'image/png': []
+        }
     });
 
     const handleSubmit = async (event) => {

@@ -92,7 +92,10 @@ const BlogEditForm = () => {
                 bannerPreview: URL.createObjectURL(file)
             }));
         },
-        accept: 'image/*'
+        accept: {
+            'image/jpeg': [],
+            'image/png': []
+        }
     });
 
     const imageDropzone = useDropzone({
@@ -104,7 +107,10 @@ const BlogEditForm = () => {
                 imagePreview: URL.createObjectURL(file)
             }));
         },
-        accept: 'image/*'
+        accept: {
+            'image/jpeg': [],
+            'image/png': []
+        }
     });
 
     const handleSubmit = async (event) => {
@@ -145,7 +151,7 @@ const BlogEditForm = () => {
     if (notFound) {
         return (
             <Container className={appStyles.Content}>
-                <Alert variant="danger"capture className='text-center' >Blog not found.</Alert>
+                <Alert variant="danger" className='text-center' >Blog not found.</Alert>
                 <Button
                     className={`${btnStyles.Button} ${btnStyles.ButtonWide}`}
                     onClick={() => history.push('/blogs')}
@@ -180,15 +186,7 @@ const BlogEditForm = () => {
                     <Form.Label>Cover Image:</Form.Label>
                     {bannerPreview && (
                         <div className="mb-3 position-relative">
-                            <Image src={bannerPreview} thumbnail />
-                            <Button
-                                variant="danger"
-                                size="sm"
-                                className={`${formStyles.RemoveButton} position-absolute top-0 end-0`}
-                                onClick={() => setBlogData({ ...blogData, banner: null, bannerPreview: '' })}
-                            >
-                                Remove
-                            </Button>
+                            <Image src={bannerPreview} fluid />
                         </div>
                     )}
                     <div {...bannerDropzone.getRootProps({ className: formStyles.Dropzone })}>
@@ -217,15 +215,7 @@ const BlogEditForm = () => {
                     <Form.Label>Image Upload:</Form.Label>
                     {imagePreview && (
                         <div className="mb-3 position-relative">
-                            <Image src={imagePreview} thumbnail />
-                            <Button
-                                variant="danger"
-                                size="sm"
-                                className={`${formStyles.RemoveButton} position-absolute top-0 end-0`}
-                                onClick={() => setBlogData({ ...blogData, image: null, imagePreview: '' })}
-                            >
-                                Remove
-                            </Button>
+                            <Image src={imagePreview} fluid />
                         </div>
                     )}
                     <div {...imageDropzone.getRootProps({ className: formStyles.Dropzone })}>

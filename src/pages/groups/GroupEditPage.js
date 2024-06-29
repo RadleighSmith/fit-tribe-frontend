@@ -98,12 +98,18 @@ const GroupEditPage = () => {
 
     const { getRootProps: getRootPropsBanner, getInputProps: getInputPropsBanner } = useDropzone({
         onDrop: onDropBanner,
-        accept: 'image/*',
+        accept: {
+            'image/jpeg': [],
+            'image/png': []
+        },
     });
 
     const { getRootProps: getRootPropsLogo, getInputProps: getInputPropsLogo } = useDropzone({
         onDrop: onDropLogo,
-        accept: 'image/*',
+        accept: {
+            'image/jpeg': [],
+            'image/png': []
+        },
     });
 
     const handleSubmit = async (event) => {
@@ -206,14 +212,6 @@ const GroupEditPage = () => {
                     {bannerPreview && (
                         <div className="mb-3 position-relative">
                             <Image src={bannerPreview} fluid />
-                            <Button
-                                variant="danger"
-                                size="sm"
-                                className={`${formStyles.RemoveButton} position-absolute top-0 end-0`}
-                                onClick={() => setGroupData({ ...groupData, banner: null, bannerPreview: '' })}
-                            >
-                                Remove
-                            </Button>
                         </div>
                     )}
                     <div {...getRootPropsBanner({ className: formStyles.Dropzone })}>
@@ -231,14 +229,6 @@ const GroupEditPage = () => {
                     {logoPreview && (
                         <div className="mb-3 position-relative">
                             <Image src={logoPreview} fluid />
-                            <Button
-                                variant="danger"
-                                size="sm"
-                                className={`${formStyles.RemoveButton} position-absolute top-0 end-0`}
-                                onClick={() => setGroupData({ ...groupData, group_logo: null, logoPreview: '' })}
-                            >
-                                Remove
-                            </Button>
                         </div>
                     )}
                     <div {...getRootPropsLogo({ className: formStyles.Dropzone })}>
