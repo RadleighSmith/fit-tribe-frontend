@@ -52,7 +52,7 @@
 }
 
 
-@media (max-width: 768) {
+@media (max-width: 768px) {
     .BlogImage {
         max-width: 100%;
     }
