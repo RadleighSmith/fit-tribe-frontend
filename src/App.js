@@ -1,31 +1,31 @@
-import styles from "./App.module.css";
-import background from "./styles/Background.module.css"
+import styles from './App.module.css';
+import background from './styles/Background.module.css';
 
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch } from 'react-router-dom';
 import './api/axiosDefaults';
 
-import TopNavBar from "./components/TopNavBar";
-import SideNavBar from "./components/SideNavBar";
-import SignUpForm from "./pages/auth/SignUpForm";
-import LoginForm from "./pages/auth/LoginForm";
-import HomePage from "./pages/HomePage";
-import BlogsPage from "./pages/blogs/BlogsPage";
-import BlogCreateForm from "./pages/blogs/BlogCreateForm";
-import BlogEditForm from "./pages/blogs/BlogEditForm";
-import BlogDetailPage from "./pages/blogs/BlogDetailPage";
-import ProfilePage from "./pages/profiles/ProfilePage";
-import EditProfilePage from "./pages/profiles/EditProfilePage";
-import FollowingPage from "./pages/FollowingPage";
-import GroupCreateForm from "./pages/groups/GroupCreateForm";
-import GroupsPage from "./pages/groups/GroupsPage";
-import GroupDetailsPage from "./pages/groups/GroupDetailsPage";
-import GroupEditPage from "./pages/groups/GroupEditPage";
-import EventCreateForm from "./pages/group_events/EventCreateForm";
-import EventDetailPage from "./pages/group_events/EventDetailPage";
-import EventEditPage from "./pages/group_events/EventEditPage";
-import NotFoundPage from "./pages/NotFoundPage";
+import TopNavBar from './components/TopNavBar';
+import SideNavBar from './components/SideNavBar';
+import SignUpForm from './pages/auth/SignUpForm';
+import LoginForm from './pages/auth/LoginForm';
+import HomePage from './pages/HomePage';
+import BlogsPage from './pages/blogs/BlogsPage';
+import BlogCreateForm from './pages/blogs/BlogCreateForm';
+import BlogEditForm from './pages/blogs/BlogEditForm';
+import BlogDetailPage from './pages/blogs/BlogDetailPage';
+import ProfilePage from './pages/profiles/ProfilePage';
+import EditProfilePage from './pages/profiles/EditProfilePage';
+import FollowingPage from './pages/FollowingPage';
+import GroupCreateForm from './pages/groups/GroupCreateForm';
+import GroupsPage from './pages/groups/GroupsPage';
+import GroupDetailsPage from './pages/groups/GroupDetailsPage';
+import GroupEditPage from './pages/groups/GroupEditPage';
+import EventCreateForm from './pages/group_events/EventCreateForm';
+import EventDetailPage from './pages/group_events/EventDetailPage';
+import EventEditPage from './pages/group_events/EventEditPage';
+import NotFoundPage from './pages/NotFoundPage';
 
-import { useCurrentUser } from "./contexts/CurrentUserContext";
+import { useCurrentUser } from './contexts/CurrentUserContext';
 
 function App() {
   const currentUser = useCurrentUser();

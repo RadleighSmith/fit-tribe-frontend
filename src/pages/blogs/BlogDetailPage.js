@@ -72,7 +72,7 @@ const BlogDetailPage = () => {
 
     const handleLike = async () => {
         try {
-            const { data } = await axiosRes.post("/blog-likes/", { blog: id });
+            const { data } = await axiosRes.post('/blog-likes/', { blog: id });
             setBlog((prevBlog) => ({
                 ...prevBlog,
                 blog_likes_count: prevBlog.blog_likes_count + 1,

@@ -13,7 +13,7 @@ import btnStyles from '../../styles/Button.module.css';
 import { useRedirect } from '../../hooks/useRedirect';
 
 const BlogEditForm = () => {
-    useRedirect('loggedOut')
+    useRedirect('loggedOut');
     const { id } = useParams();
     const history = useHistory();
     const currentUser = useCurrentUser();
@@ -27,7 +27,7 @@ const BlogEditForm = () => {
     });
     const { title, content, banner, image, bannerPreview, imagePreview } = blogData;
     const [errors, setErrors] = useState({});
-    const [alert, setAlert] = useState("");
+    const [alert, setAlert] = useState('');
     const [loading, setLoading] = useState(false);
     const [notFound, setNotFound] = useState(false);
 
@@ -38,7 +38,7 @@ const BlogEditForm = () => {
                 const { data } = await axiosReq.get(`/blogs/${id}/`);
                 if (currentUser?.username !== data.owner) {
                     if (isMounted) {
-                        setAlert("You are not authorized to edit this blog post.");
+                        setAlert('You are not authorized to edit this blog post.');
                         setTimeout(() => {
                             history.push('/blogs');
                         }, 3000);
@@ -191,7 +191,7 @@ const BlogEditForm = () => {
                     )}
                     <div {...bannerDropzone.getRootProps({ className: formStyles.Dropzone })}>
                         <input {...bannerDropzone.getInputProps()} />
-                        <p>Drag 'n' drop a banner image here, or click to select one</p>
+                        <p>Drag and drop a banner image here, or click to select one</p>
                         <i className="fas fa-upload fa-2x"></i>
                     </div>
                     {errors.banner?.map((message, idx) => (
@@ -239,7 +239,7 @@ const BlogEditForm = () => {
                             Submitting...
                         </>
                     ) : (
-                        "Update"
+                        'Update'
                     )}
                 </Button>
             </Form>

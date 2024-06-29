@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 import { axiosReq } from '../api/axiosDefaults';
 import BlogCard from './blogs/BlogCard';
 import appStyles from '../App.module.css';
-import divider from  '../styles/Divider.module.css'
+import divider from  '../styles/Divider.module.css';
 
 const LoggedInHomePage = () => {
     const [blogs, setBlogs] = useState([]);
@@ -38,7 +38,7 @@ const LoggedInHomePage = () => {
                 ))
             ) : (
                 <div className="text-center">
-                    <p>No blog posts from your followed users yet, or you aren't following anyone yet.</p>
+                    <p>No blog posts from your followed users yet, or you aren&apos;t following anyone yet.</p>
                 </div>
             )}
         </Container>

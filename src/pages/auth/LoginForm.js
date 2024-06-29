@@ -1,23 +1,23 @@
-import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import logo from "../../assets/fittribe_logo_coloured.png";
-import signInImage from "../../assets/sign_in_image.jpeg";
-import styles from "../../styles/LoginSignUpForm.module.css";
-import btnStyles from "../../styles/Button.module.css";
-import appStyles from "../../App.module.css";
-import formStyles from "../../styles/Form.module.css"
-import { Form, Button, Image, Col, Row, Container, Alert } from "react-bootstrap";
-import axios from "axios";
-import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
-import { useRedirect } from "../../hooks/useRedirect";
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import logo from '../../assets/fittribe_logo_coloured.png';
+import signInImage from '../../assets/sign_in_image.jpeg';
+import styles from '../../styles/LoginSignUpForm.module.css';
+import btnStyles from '../../styles/Button.module.css';
+import appStyles from '../../App.module.css';
+import formStyles from '../../styles/Form.module.css';
+import { Form, Button, Image, Col, Row, Container, Alert } from 'react-bootstrap';
+import axios from 'axios';
+import { useSetCurrentUser } from '../../contexts/CurrentUserContext';
+import { useRedirect } from '../../hooks/useRedirect';
 
 const LoginForm = () => {
     const setCurrentUser = useSetCurrentUser();
-    useRedirect('loggedIn')
+    useRedirect('loggedIn');
 
     const [loginData, setLoginData] = useState({
-        username: "",
-        password: "",
+        username: '',
+        password: '',
     });
     const { username, password } = loginData;
 
@@ -35,7 +35,7 @@ const LoginForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const { data } = await axios.post("/dj-rest-auth/login/", loginData);
+            const { data } = await axios.post('/dj-rest-auth/login/', loginData);
             setCurrentUser(data.user);
             history.goBack();
         } catch (err) {
@@ -84,7 +84,7 @@ const LoginForm = () => {
                             ))}
                         </Form.Group>
                         <Link className={styles.Link} to="/signup">
-                            Don't have an account? <span>Sign up here</span>
+                            Don&apos;t have an account? <span>Sign up here</span>
                         </Link>
                         <Button
                             className={`${btnStyles.Button} ${btnStyles.ButtonWide}`}

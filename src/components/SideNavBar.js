@@ -10,14 +10,14 @@ import { useHistory } from 'react-router-dom';
 const SideNavBar = () => {
     const currentUser = useCurrentUser();
     const setCurrentUser = useSetCurrentUser();
-    const history = useHistory()
+    const history = useHistory();
 
 
     const handleLogout = async () => {
         try {
             await axios.post('/dj-rest-auth/logout/');
             setCurrentUser(null);
-            history.push("/signin")
+            history.push('/signin');
         } catch (err) {
             console.log(err);
         }

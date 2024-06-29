@@ -5,18 +5,18 @@ import styles from '../../styles/Comment.module.css';
 import btnStyles from '../../styles/Button.module.css';
 
 const BlogCommentCreateForm = ({ blogId, setBlog, setComments }) => {
-    const [comment, setComment] = useState("");
-    const [error, setError] = useState("");
+    const [comment, setComment] = useState('');
+    const [error, setError] = useState('');
 
     const handleChange = (event) => {
         setComment(event.target.value);
-        setError("");  // Clear error message when user types
+        setError('');  // Clear error message when user types
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (!comment.trim()) {
-            setError("Comment cannot be empty.");
+            setError('Comment cannot be empty.');
             return;
         }
         try {
@@ -32,7 +32,7 @@ const BlogCommentCreateForm = ({ blogId, setBlog, setComments }) => {
                 ...prevBlog,
                 blog_comments_count: prevBlog.blog_comments_count + 1,
             }));
-            setComment("");
+            setComment('');
         } catch (err) {
             console.log(err);
         }

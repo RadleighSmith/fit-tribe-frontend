@@ -209,7 +209,7 @@ const EventCreateForm = () => {
                         {isDragActive ? (
                             <p>Drop the files here ...</p>
                         ) : (
-                            <p>Drag 'n' drop a banner image here, or click to select one</p>
+                            <p>Drag and drop a banner image here, or click to select one</p>
                         )}
                         <i className="fas fa-upload fa-2x"></i>
                     </div>

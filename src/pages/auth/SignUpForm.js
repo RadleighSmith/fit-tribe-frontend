@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import logo from "../../assets/fittribe_logo_coloured.png";
-import signUpImage from "../../assets/sign_up_image.jpg";
-import styles from "../../styles/LoginSignUpForm.module.css";
-import btnStyles from "../../styles/Button.module.css";
-import appStyles from "../../App.module.css";
-import formStyles from "../../styles/Form.module.css"
-import { Form, Button, Image, Col, Row, Container, Alert } from "react-bootstrap";
-import axios from "axios";
-import { useRedirect } from "../../hooks/useRedirect";
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import logo from '../../assets/fittribe_logo_coloured.png';
+import signUpImage from '../../assets/sign_up_image.jpg';
+import styles from '../../styles/LoginSignUpForm.module.css';
+import btnStyles from '../../styles/Button.module.css';
+import appStyles from '../../App.module.css';
+import formStyles from '../../styles/Form.module.css';
+import { Form, Button, Image, Col, Row, Container, Alert } from 'react-bootstrap';
+import axios from 'axios';
+import { useRedirect } from '../../hooks/useRedirect';
 
 const SignUpForm = () => {
-    useRedirect('loggedIn')
+    useRedirect('loggedIn');
     const [signUpData, setSignUpData] = useState({
-        username: "",
-        email: "",
-        password1: "",
-        password2: "",
+        username: '',
+        email: '',
+        password1: '',
+        password2: '',
     });
     const { username, email, password1, password2 } = signUpData;
 
@@ -34,8 +34,8 @@ const SignUpForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios.post("/dj-rest-auth/registration/", signUpData);
-            history.push("/signin");
+            await axios.post('/dj-rest-auth/registration/', signUpData);
+            history.push('/signin');
         } catch (err) {
             setErrors(err.response?.data);
         }

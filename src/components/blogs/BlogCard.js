@@ -19,7 +19,7 @@ const BlogCard = ({ blog, setBlogs }) => {
 
     const handleLike = async () => {
         try {
-            const { data } = await axiosRes.post("/blog-likes/", { blog: blog.id });
+            const { data } = await axiosRes.post('/blog-likes/', { blog: blog.id });
             setBlogs((prevBlogs) =>
                 prevBlogs.map((prevBlog) =>
                     prevBlog.id === blog.id

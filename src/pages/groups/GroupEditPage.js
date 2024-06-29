@@ -222,7 +222,7 @@ const GroupEditPage = () => {
                     )}
                     <div {...getRootPropsBanner({ className: formStyles.Dropzone })}>
                         <input {...getInputPropsBanner()} />
-                        <p>Drag 'n' drop a banner image here, or click to select one</p>
+                        <p>Drag and drop a banner image here, or click to select one</p>
                         <i className="fas fa-upload fa-2x"></i>
                     </div>
                     {errors.banner?.map((message, idx) => (
@@ -239,7 +239,7 @@ const GroupEditPage = () => {
                     )}
                     <div {...getRootPropsLogo({ className: formStyles.Dropzone })}>
                         <input {...getInputPropsLogo()} />
-                        <p>Drag 'n' drop a group logo image here, or click to select one</p>
+                        <p>Drag and drop a group logo image here, or click to select one</p>
                         <i className="fas fa-upload fa-2x"></i>
                     </div>
                     {errors.group_logo?.map((message, idx) => (
@@ -258,7 +258,7 @@ const GroupEditPage = () => {
                             Submitting...
                         </>
                     ) : (
-                        "Update"
+                        'Update'
                     )}
                 </Button>
             </Form>

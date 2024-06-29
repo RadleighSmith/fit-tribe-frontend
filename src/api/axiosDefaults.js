@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 axios.defaults.baseURL = 'https://fit-tribe-api-97fb1c20a2ee.herokuapp.com';
 axios.defaults.headers.post['Content-Type'] = 'application/json';

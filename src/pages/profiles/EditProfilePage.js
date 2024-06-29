@@ -27,7 +27,7 @@ const EditProfilePage = () => {
     });
     const { name, email, bio, profile_image, cover_image, profileImagePreview, coverImagePreview, display_name } = profileData;
     const [errors, setErrors] = useState({});
-    const [alert, setAlert] = useState("");
+    const [alert, setAlert] = useState('');
     const [loading, setLoading] = useState(true);
     const [submitting, setSubmitting] = useState(false);
     const [notFound, setNotFound] = useState(false);
@@ -39,7 +39,7 @@ const EditProfilePage = () => {
                 const { data } = await axiosReq.get(`/profiles/${id}/`);
                 if (currentUser?.username !== data.owner) {
                     if (isMounted) {
-                        setAlert("You do not have permission to edit this profile.");
+                        setAlert('You do not have permission to edit this profile.');
                         setTimeout(() => {
                             history.push(`/profiles/${currentUser?.profile_id}`);
                         }, 3000);
@@ -280,7 +280,7 @@ const EditProfilePage = () => {
                             Submitting...
                         </>
                     ) : (
-                        "Update"
+                        'Update'
                     )}
                 </Button>
             </Form>

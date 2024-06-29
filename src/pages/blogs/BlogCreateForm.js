@@ -148,7 +148,7 @@ const BlogCreateForm = () => {
                             {
                                 isDragActiveBanner ?
                                     <p>Drop the files here ...</p> :
-                                    <p>Drag 'n' drop a banner image here, or click to select one</p>
+                                    <p>Drag and drop a banner image here, or click to select one</p>
                             }
                             <i className="fas fa-upload fa-2x"></i>
                         </div>
@@ -211,7 +211,7 @@ const BlogCreateForm = () => {
                             Submitting...
                         </>
                     ) : (
-                        "Publish Now"
+                        'Publish Now'
                     )}
                 </Button>
             </Form>

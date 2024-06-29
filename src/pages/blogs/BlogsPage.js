@@ -10,7 +10,7 @@ import btnStyles from '../../styles/Button.module.css';
 import { useRedirect } from '../../hooks/useRedirect';
 
 const BlogsPage = () => {
-    useRedirect('loggedOut')
+    useRedirect('loggedOut');
     const [blogs, setBlogs] = useState([]);
     const [errors, setErrors] = useState(null);
 

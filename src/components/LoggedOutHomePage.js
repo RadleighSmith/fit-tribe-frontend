@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Button } from 'react-bootstrap';
-import appStyles from "../App.module.css"
+import appStyles from '../App.module.css';
 import styles from '../styles/LoggedOutHomePage.module.css';
 import divider from '../styles/Divider.module.css';
 import btnStyles from '../styles/Button.module.css';
@@ -30,7 +30,7 @@ const LoggedOutHomePage = () => {
                 </div>
             </div>
             <Container className={`${styles.FeaturesSection} ${appStyles.Content} mt-5 mb-5`}>
-                <h2 className={styles.SectionTitle}>Why you'll love FitTribe</h2>
+                <h2 className={styles.SectionTitle}>Why you&apos;ll love FitTribe</h2>
                 <div className={divider.OffWhiteDivider} />
                 <ul className={styles.FeaturesList}>
                     <li className={`${styles.FeatureItem} ${styles.Item1}`}>
