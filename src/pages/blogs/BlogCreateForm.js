@@ -13,7 +13,7 @@ import btnStyles from '../../styles/Button.module.css';
 import { useRedirect } from '../../hooks/useRedirect';
 
 const BlogCreateForm = () => {
-    useRedirect('loggedOut')
+    useRedirect('loggedOut');
     const [blogData, setBlogData] = useState({
         title: '',
         content: '',
@@ -55,7 +55,10 @@ const BlogCreateForm = () => {
                 bannerPreview: URL.createObjectURL(file)
             });
         },
-        accept: 'image/*'
+        accept: {
+            'image/jpeg': [],
+            'image/png': []
+        }
     });
 
     const {
@@ -71,7 +74,10 @@ const BlogCreateForm = () => {
                 imagePreview: URL.createObjectURL(file)
             });
         },
-        accept: 'image/*'
+        accept: {
+            'image/jpeg': [],
+            'image/png': []
+        }
     });
 
     const handleSubmit = async (event) => {
