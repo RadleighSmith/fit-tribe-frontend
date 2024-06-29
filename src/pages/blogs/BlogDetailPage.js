@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
-import { Container, Row, Col, Image, Button, Dropdown, Overlay, Tooltip, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Image, Button, Dropdown, Overlay, Tooltip, Alert, Modal } from 'react-bootstrap';
 import { axiosRes } from '../../api/axiosDefaults';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import BlogCommentCreateForm from '../../components/blogs/BlogCommentCreateForm';
@@ -23,6 +23,7 @@ const BlogDetailPage = () => {
     const [commentsErrors, setCommentsErrors] = useState(null);
     const [comments, setComments] = useState({ results: [] });
     const [hasMore, setHasMore] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
 
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === blog?.owner;
@@ -153,7 +154,7 @@ const BlogDetailPage = () => {
                                         <Dropdown.Item as={Link} to={`/blogs/${id}/edit`}>
                                             Edit
                                         </Dropdown.Item>
-                                        <Dropdown.Item onClick={handleDelete}>
+                                        <Dropdown.Item onClick={() => setShowDeleteModal(true)}>
                                             Delete
                                         </Dropdown.Item>
                                     </Dropdown.Menu>
@@ -233,6 +234,20 @@ const BlogDetailPage = () => {
                     </Row>
                 </>
             )}
+            <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm Delete</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Are you sure you want to delete this blog post?</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={handleDelete}>
+                        Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </Container>
     );
 };

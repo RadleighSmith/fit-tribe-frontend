@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
-import { Container, Row, Col, Image, Button, Spinner, Alert, Dropdown, Card, Badge } from 'react-bootstrap';
+import { Container, Row, Col, Image, Button, Spinner, Alert, Dropdown, Card, Badge, Modal } from 'react-bootstrap';
 import axios from 'axios';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import DOMPurify from 'dompurify';
@@ -18,6 +18,7 @@ const GroupDetailsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [events, setEvents] = useState([]);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const currentUser = useCurrentUser();
 
   useEffect(() => {
@@ -120,7 +121,7 @@ const GroupDetailsPage = () => {
                     <Dropdown.Item as={Link} to={`/groups/${id}/edit`}>
                       Edit Group
                     </Dropdown.Item>
-                    <Dropdown.Item onClick={handleDeleteGroup}>
+                    <Dropdown.Item onClick={() => setShowDeleteModal(true)}>
                       Delete Group
                     </Dropdown.Item>
                   </Dropdown.Menu>
@@ -191,6 +192,20 @@ const GroupDetailsPage = () => {
           </Row>
         </>
       )}
+      <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Delete</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to delete this group?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleDeleteGroup}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };

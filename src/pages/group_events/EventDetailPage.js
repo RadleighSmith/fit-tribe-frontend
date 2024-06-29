@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
-import { Container, Row, Col, Image, Button, Spinner, Alert, Dropdown } from 'react-bootstrap';
+import { Container, Row, Col, Image, Button, Spinner, Alert, Dropdown, Modal } from 'react-bootstrap';
 import axios from 'axios';
 import DOMPurify from 'dompurify';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
@@ -15,6 +15,7 @@ const EventDetailPage = () => {
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const currentUser = useCurrentUser();
 
   useEffect(() => {
@@ -109,7 +110,7 @@ const EventDetailPage = () => {
                       <Dropdown.Item as={Link} to={`/groups/${groupId}/events/${eventId}/edit`}>
                         Edit Event
                       </Dropdown.Item>
-                      <Dropdown.Item onClick={handleDeleteEvent}>
+                      <Dropdown.Item onClick={() => setShowDeleteModal(true)}>
                         Delete Event
                       </Dropdown.Item>
                     </Dropdown.Menu>
@@ -143,6 +144,20 @@ const EventDetailPage = () => {
           </Row>
         </>
       )}
+      <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Delete</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to delete this event?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleDeleteEvent}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };
