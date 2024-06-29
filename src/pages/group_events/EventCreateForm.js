@@ -1,88 +1,118 @@
-import React, { useState } from 'react';
-import { useParams, useHistory } from 'react-router-dom'; // import useParams to fetch the groupId from URL
-import { Form, Button, Container, Alert, Image, Spinner } from 'react-bootstrap';
-import { useDropzone } from 'react-dropzone';
+import React, { useState, useEffect } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
+import { Form, Button, Container, Alert, Image } from 'react-bootstrap';
 import axios from 'axios';
 
 import appStyles from '../../App.module.css';
-import divider from '../../styles/Divider.module.css';
 import formStyles from '../../styles/Form.module.css';
 import btnStyles from '../../styles/Button.module.css';
 import { useRedirect } from '../../hooks/useRedirect';
 
 const EventCreateForm = () => {
     useRedirect('loggedOut');
-    const { id: groupId } = useParams(); // fetch groupId from URL parameters
+    const { id } = useParams();
+    const history = useHistory();
     const [eventData, setEventData] = useState({
         name: '',
         description: '',
         location: '',
+        start_date: '',
         start_time: '',
+        end_date: '',
         end_time: '',
-        banner: null,
+        banner: '',
         bannerPreview: '',
+        group: id
     });
 
-    const { name, description, location, start_time, end_time, banner, bannerPreview } = eventData;
+    const { name, description, location, start_date, start_time, end_date, end_time, banner, bannerPreview, group } = eventData;
     const [errors, setErrors] = useState({});
-    const [loading, setLoading] = useState(false);
-    const history = useHistory();
+    const [submitting, setSubmitting] = useState(false);
+
+    useEffect(() => {
+        let isMounted = true;
+
+        const fetchEvent = async () => {
+            try {
+                const { data } = await axios.get(`/group-events/${id}/`);
+                if (isMounted) {
+                    setEventData({
+                        name: data.name,
+                        description: data.description,
+                        location: data.location,
+                        start_date: data.start_date,
+                        start_time: data.start_time,
+                        end_date: data.end_date,
+                        end_time: data.end_time,
+                        banner: data.banner,
+                        bannerPreview: data.banner,
+                        group: data.group
+                    });
+                }
+            } catch (err) {
+                if (isMounted) {
+                    setErrors(err.response?.data);
+                }
+            }
+        };
+
+        fetchEvent();
+
+        return () => {
+            isMounted = false;
+        };
+    }, [id]);
 
     const handleChange = (event) => {
-        setEventData({
-            ...eventData,
-            [event.target.name]: event.target.value
-        });
+        const { name, value } = event.target;
+        setEventData((prevData) => ({
+            ...prevData,
+            [name]: value
+        }));
     };
 
-    const {
-        getRootProps: getRootPropsBanner,
-        getInputProps: getInputPropsBanner,
-        isDragActive: isDragActiveBanner
-    } = useDropzone({
-        onDrop: (acceptedFiles) => {
-            const file = acceptedFiles[0];
-            setEventData({
-                ...eventData,
+    const handleImageChange = (event) => {
+        if (event.target.files.length) {
+            const file = event.target.files[0];
+            setEventData((prevData) => ({
+                ...prevData,
                 banner: file,
                 bannerPreview: URL.createObjectURL(file)
-            });
-        },
-        accept: 'image/*'
-    });
+            }));
+        }
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        setLoading(true);
+        setSubmitting(true);
+
         const formData = new FormData();
         formData.append('name', name);
         formData.append('description', description);
         formData.append('location', location);
+        formData.append('start_date', start_date);
         formData.append('start_time', start_time);
+        formData.append('end_date', end_date);
         formData.append('end_time', end_time);
-        formData.append('group', groupId); // append groupId to formData
-        if (banner) {
-            formData.append('banner', banner);
-        }
+        formData.append('group', group);
+        if (banner) formData.append('banner', banner);
 
         try {
             await axios.post('/group-events/', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
+                headers: { 'Content-Type': 'multipart/form-data' }
             });
-            setLoading(false);
-            history.push(`/groups/${groupId}`);
+            history.push(`/groups/${id}`);
         } catch (err) {
             setErrors(err.response?.data);
-            setLoading(false);
+            console.error('Error response:', err.response?.data);
+        } finally {
+            setSubmitting(false);
         }
     };
 
     return (
         <Container className={appStyles.Content}>
-            <h1 className="text-center">Create New Event</h1>
-            <div className={divider.BlueDivider} />
+            <h1 className="text-center">Create Event</h1>
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="name">
                     <Form.Label>Event Name</Form.Label>
@@ -129,11 +159,26 @@ const EventCreateForm = () => {
                     ))}
                 </Form.Group>
 
+                <Form.Group controlId="start_date">
+                    <Form.Label>Start Date</Form.Label>
+                    <Form.Control
+                        className={formStyles.Input}
+                        type="date"
+                        name="start_date"
+                        value={start_date}
+                        onChange={handleChange}
+                        isInvalid={!!errors.start_date}
+                    />
+                    {errors.start_date?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>{message}</Alert>
+                    ))}
+                </Form.Group>
+
                 <Form.Group controlId="start_time">
                     <Form.Label>Start Time</Form.Label>
                     <Form.Control
                         className={formStyles.Input}
-                        type="datetime-local"
+                        type="time"
                         name="start_time"
                         value={start_time}
                         onChange={handleChange}
@@ -144,11 +189,26 @@ const EventCreateForm = () => {
                     ))}
                 </Form.Group>
 
+                <Form.Group controlId="end_date">
+                    <Form.Label>End Date</Form.Label>
+                    <Form.Control
+                        className={formStyles.Input}
+                        type="date"
+                        name="end_date"
+                        value={end_date}
+                        onChange={handleChange}
+                        isInvalid={!!errors.end_date}
+                    />
+                    {errors.end_date?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>{message}</Alert>
+                    ))}
+                </Form.Group>
+
                 <Form.Group controlId="end_time">
                     <Form.Label>End Time</Form.Label>
                     <Form.Control
                         className={formStyles.Input}
-                        type="datetime-local"
+                        type="time"
                         name="end_time"
                         value={end_time}
                         onChange={handleChange}
@@ -160,49 +220,29 @@ const EventCreateForm = () => {
                 </Form.Group>
 
                 <Form.Group controlId="banner">
-                    <Form.Label>Banner:</Form.Label>
+                    <Form.Label>Banner</Form.Label>
                     {bannerPreview && (
-                        <div className="mb-3 position-relative">
-                            <Image src={bannerPreview} thumbnail />
-                            <Button
-                                variant="danger"
-                                size="sm"
-                                className={`${formStyles.RemoveButton} position-absolute top-0 end-0`}
-                                onClick={() => setEventData({ ...eventData, banner: null, bannerPreview: '' })}
-                            >
-                                Remove
-                            </Button>
+                        <div className="mb-3 text-center">
+                            <Image src={bannerPreview} rounded fluid />
                         </div>
                     )}
-                    {!bannerPreview && (
-                        <div {...getRootPropsBanner({ className: formStyles.Dropzone })}>
-                            <input {...getInputPropsBanner()} />
-                            {
-                                isDragActiveBanner ?
-                                    <p>Drop the files here ...</p> :
-                                    <p>Drag 'n' drop a banner image here, or click to select one</p>
-                            }
-                            <i className="fas fa-upload fa-2x"></i>
-                        </div>
-                    )}
+                    <Form.File
+                        className={formStyles.Input}
+                        name="banner"
+                        onChange={handleImageChange}
+                        accept="image/*"
+                    />
                     {errors.banner?.map((message, idx) => (
                         <Alert variant="warning" key={idx}>{message}</Alert>
                     ))}
                 </Form.Group>
 
-                {errors.non_field_errors?.map((message, idx) => (
-                    <Alert key={idx} variant="warning">{message}</Alert>
-                ))}
-
-                <Button type="submit" className={`${btnStyles.Button} ${btnStyles.ButtonWide}`} disabled={loading}>
-                    {loading ? (
-                        <>
-                            <Spinner animation="border" size="sm" role="status" className="mr-2" />
-                            Submitting...
-                        </>
-                    ) : (
-                        "Create Event"
-                    )}
+                <Button
+                    className={`${btnStyles.Button} ${btnStyles.ButtonWide} mt-3`}
+                    type="submit"
+                    disabled={submitting}
+                >
+                    {submitting ? 'Submitting...' : 'Create Event'}
                 </Button>
             </Form>
         </Container>
