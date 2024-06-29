@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import { Container, Row, Col, Image, Button, Spinner, Alert, Dropdown } from 'react-bootstrap';
 import axios from 'axios';
+import DOMPurify from 'dompurify';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import appStyles from '../../App.module.css';
 import btnStyles from '../../styles/Button.module.css';
@@ -127,7 +128,7 @@ const EventDetailPage = () => {
             <Col xs={12}>
               <div className={divider.OffWhiteDivider} />
               <div className={`${styles.Content} m-md-4 p-3 border rounded`}>
-                <p>{event.description}</p>
+                <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(event.description) }} />
               </div>
             </Col>
           </Row>
