@@ -82,38 +82,40 @@ const EventDetailPage = () => {
         <>
           <Row>
             <Col xs={12}>
-              <Image src={event.banner} className={styles.BannerImage} fluid />
+              <Image src={event.banner} className={`${styles.BannerImage} img-fluid`} />
             </Col>
           </Row>
           <Row className="m-3 align-items-center">
-            <Col xs={8}>
-              <h1 className='m-2'>{event.name}</h1>
+            <Col xs={12} lg={8} className="text-center text-lg-left">
+              <h1 className={`m-2 ${styles.EventTitle}`}>{event.name}</h1>
             </Col>
-            <Col xs={4} className="text-right pt-2">
-              {event.is_joined ? (
-                <Button variant="danger" onClick={handleLeaveEvent} className={`${btnStyles.ButtonRed} ${btnStyles.ButtonLarge} mx-2`}>
-                  Leave Event
-                </Button>
-              ) : (
-                <Button variant="primary" onClick={handleJoinEvent} className={`${btnStyles.Button} ${btnStyles.ButtonLarge} mx-2`}>
-                  Join Event
-                </Button>
-              )}
-              {currentUser && currentUser.is_staff && (
-                <Dropdown alignRight className="d-inline ml-3">
-                  <Dropdown.Toggle variant="link" className={styles.DropdownToggle}>
-                    <i className="fas fa-ellipsis-h"></i>
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item as={Link} to={`/groups/${groupId}/events/${eventId}/edit`}>
-                      Edit Event
-                    </Dropdown.Item>
-                    <Dropdown.Item onClick={handleDeleteEvent}>
-                      Delete Event
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-              )}
+            <Col xs={12} lg={4} className="text-center text-lg-right pt-2">
+              <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-end">
+                {event.is_joined ? (
+                  <Button variant="danger" onClick={handleLeaveEvent} className={`${btnStyles.ButtonRed} ${btnStyles.ButtonLarge} mx-2 my-2 my-lg-0`}>
+                    Leave Event
+                  </Button>
+                ) : (
+                  <Button variant="primary" onClick={handleJoinEvent} className={`${btnStyles.Button} ${btnStyles.ButtonLarge} mx-2 my-2 my-lg-0`}>
+                    Join Event
+                  </Button>
+                )}
+                {currentUser && currentUser.is_staff && (
+                  <Dropdown alignRight className="d-inline mx-2 my-2 my-lg-0">
+                    <Dropdown.Toggle variant="link" className={styles.DropdownToggle}>
+                      <i className="fas fa-ellipsis-h"></i>
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      <Dropdown.Item as={Link} to={`/groups/${groupId}/events/${eventId}/edit`}>
+                        Edit Event
+                      </Dropdown.Item>
+                      <Dropdown.Item onClick={handleDeleteEvent}>
+                        Delete Event
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                )}
+              </div>
             </Col>
           </Row>
           <div className={divider.BlueDivider} />
@@ -127,7 +129,7 @@ const EventDetailPage = () => {
           <Row className="mt-3">
             <Col xs={12}>
               <div className={divider.OffWhiteDivider} />
-              <div className={`${styles.Content} m-md-4 p-3 border rounded`}>
+              <div className={`${styles.Content} m-lg-4 p-3 border rounded`}>
                 <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(event.description) }} />
               </div>
             </Col>
