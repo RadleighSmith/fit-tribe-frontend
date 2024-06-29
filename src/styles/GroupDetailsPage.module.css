@@ -1,55 +1,52 @@
 .BannerImage {
   width: 100%;
-  height: auto;
+  max-height: 400px;
+  object-fit: cover;
+  margin-bottom: 20px;
 }
 
 .GroupLogo {
   width: 100px;
   height: 100px;
   object-fit: cover;
-  margin: 10px;
-}
-
-.Content {
-  font-size: 1rem;
+  border-radius: 50%;
+  margin-right: 20px;
 }
 
 .DatePosted {
-  display: block;
-  font-size: 0.9rem;
-  color: gray;
+  font-size: 0.9em;
+  color: grey;
 }
 
 .DropdownToggle {
+  border: none;
+  background: none;
   padding: 0;
+  color: grey;
 }
 
-@media (max-width: 767px) {
-  .DatePosted {
-    margin-top: 10px;
-  }
-
-  .GroupLogo {
-    width: 80px;
-    height: 80px;
-  }
-
-  .DropdownToggle {
-    margin-top: 10px;
-  }
-
-  .Button {
-    width: 100%;
-  }
+.EventCard {
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-@media (min-width: 768px) {
-  .DatePosted {
-    margin-top: 10px;
-  }
+.EventCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-  .GroupLogo {
-    width: 100px;
-    height: 100px;
-  }
+.Content {
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.EventLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.EventLink:hover {
+  text-decoration: none;
+  color: inherit;
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
-import { Container, Row, Col, Image, Button, Spinner, Alert, Dropdown } from 'react-bootstrap';
+import { Container, Row, Col, Image, Button, Spinner, Alert, Dropdown, Card, Badge } from 'react-bootstrap';
 import axios from 'axios';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import appStyles from '../../App.module.css';
@@ -16,6 +16,7 @@ const GroupDetailsPage = () => {
   const [group, setGroup] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [events, setEvents] = useState([]);
   const currentUser = useCurrentUser();
 
   useEffect(() => {
@@ -30,7 +31,17 @@ const GroupDetailsPage = () => {
       }
     };
 
+    const fetchEvents = async () => {
+      try {
+        const { data } = await axios.get(`/group-events/?group=${id}`);
+        setEvents(data.results);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
     fetchGroup();
+    fetchEvents();
   }, [id]);
 
   const handleJoinGroup = async () => {
@@ -66,8 +77,21 @@ const GroupDetailsPage = () => {
     }
   };
 
+  const formatDateTime = (date, time) => {
+    const dateTime = `${date}T${time}`;
+    const options = { 
+      year: 'numeric', month: 'long', day: 'numeric', 
+      hour: '2-digit', minute: '2-digit', hour12: true 
+    };
+    return new Date(dateTime).toLocaleString('en-US', options);
+  };
+
   if (loading) return <Spinner animation="border" />;
   if (error) return <Alert variant="danger">Failed to load group details</Alert>;
+
+  const handleCardClick = (eventId) => {
+    history.push(`/groups/${id}/events/${eventId}`);
+  };
 
   return (
     <Container className={`${appStyles.Content} pb-5 mt-3`}>
@@ -124,8 +148,43 @@ const GroupDetailsPage = () => {
           </Row>
           <Row className="mt-5">
             <Col>
-              <h2>Upcoming Events</h2>
-              <p>Event list goes here...</p>
+              <h2 className='mx-5'>Upcoming Events</h2>
+              {currentUser && (currentUser.is_superuser || currentUser.is_staff) && (
+                <Link
+                  to={`/groups/${id}/create-event`}
+                >
+                  <Button className={`${btnStyles.Button} ${btnStyles.ButtonWide} my-4`}>Create a New Event</Button>
+                </Link>
+              )}
+              <div className={divider.BlueDivider} />
+              {events.length ? (
+                events.map(event => (
+                  <Card
+                    key={event.id}
+                    className={`${styles.EventCard} my-3 ${event.is_joined ? styles.JoinedEventCard : ''}`}
+                    onClick={() => handleCardClick(event.id)}
+                  >
+                    <Card.Body>
+                      <Row className="align-items-center">
+                        <Col xs={3} md={2} className="d-flex justify-content-center">
+                          <i className="fa-regular fa-calendar fa-2x"></i>
+                        </Col>
+                        <Col xs={9} md={10}>
+                          <h4>
+                            {event.name} {event.is_joined && <Badge variant="success">Joined</Badge>}
+                          </h4>
+                          <p>{event.description}</p>
+                          <p><strong>Location:</strong> {event.location}</p>
+                          <p><strong>Start Time:</strong> {formatDateTime(event.start_date, event.start_time)}</p>
+                          <p><strong>End Time:</strong> {formatDateTime(event.end_date, event.end_time)}</p>
+                        </Col>
+                      </Row>
+                    </Card.Body>
+                  </Card>
+                ))
+              ) : (
+                <p>There are currently no upcoming events.</p>
+              )}
             </Col>
           </Row>
         </>
