@@ -581,6 +581,1171 @@ By combining Monserrat and Roboto Mono, we've created a balanced typographic sys
 
 ### Current Features
 
+#### Logged Out Homepage
+
+The **Logged Out HomePage** serves as the primary landing page for users who are not logged in. This page is designed to inform and attract new users by showcasing the key features and benefits of joining the FitTribe community. 
+
+**Key Features:**
+
+1. **Hero Section**:
+   - **Hero Image**: A prominent and visually appealing image that represents the FitTribe community.
+   - **Overlay Text**: A call-to-action overlay that includes:
+     - A headline encouraging users to join the community.
+     - A brief description highlighting the benefits of the community.
+     - **Sign Up and Login Buttons**: Clear calls-to-action for new users to sign up or log in.
+
+2. **Features Section**:
+   - **Section Introduction**: A title introducing the main features of FitTribe.
+   - **List of Features**:
+     - **Workout Sharing**: Users can post their workouts and receive community feedback.
+     - **Fitness Blogs**: A platform for writing and reading fitness stories and tips.
+     - **Community Groups**: Users can join groups that align with their fitness interests.
+     - **Interactive Engagement**: Features for liking, commenting, and following other users to maintain motivation.
+   - **Additional Call to Action**: Another invitation for users to join the community with a prominent button.
+
+This page effectively uses visuals and concise, engaging text to communicate the value of the FitTribe community, providing a strong incentive for visitors to sign up or log in.
+
+Screenshots:
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop Homepage Logged Out](docs/readme_images/screenshots_desktop/homepage_logged_out_desktop.png)
+</details>
+
+<br>
+
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile Homepage Logged Out](docs/readme_images/screenshots_mobile/homepage_logged_out_mobile.png)
+</details>
+
+<br>
+
+---
+
+#### Sign Up Page
+
+The **Sign Up Page** is designed to facilitate new users in creating their accounts on the FitTribe platform. This page is structured to ensure a smooth and intuitive sign-up process, providing users with clear instructions and feedback.
+
+**Key Features:**
+
+1. **Hero Section**:
+   - **Hero Image**: A motivational image related to fitness displayed prominently to inspire new users.
+   - **Overlay Elements**: 
+     - **Logo**: The FitTribe logo displayed at the top for brand recognition.
+     - **Sign Up Form**: Centrally placed form for user registration.
+
+2. **Sign Up Form**:
+   - **Username Field**: 
+     - Input for entering a unique username.
+     - Error handling to display warnings if the username is invalid or already taken.
+   - **Email Field**: 
+     - Input for entering the user's email address.
+     - Error handling to display warnings if the email format is incorrect or already in use.
+   - **Password Fields**:
+     - **Password1**: Input for entering the password.
+     - **Password2**: Input for confirming the password.
+     - Error handling for mismatched passwords or not meeting security requirements.
+   - **Error Alerts**:
+     - Display of specific error messages related to each field for better user guidance.
+     - Non-field errors for general sign-up issues.
+   - **Sign Up and Login Links**:
+     - A link directing users to the login page if they already have an account.
+   - **Submit Button**: 
+     - A prominent button to submit the form and create the account.
+
+3. **Responsive Design**:
+   - The layout adjusts seamlessly for different screen sizes, ensuring usability on both desktop and mobile devices.
+   - Divisions for the form and image to maintain visual appeal and functionality across various devices.
+
+This page ensures that users have a clear and easy path to join the FitTribe community, with sufficient error handling to guide them through any issues during the registration process.
+
+
+Screenshots:
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop](docs/readme_images/screenshots_desktop/signup_desktop.png)
+</details>
+
+<br>
+
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile](docs/readme_images/screenshots_mobile/signup_mobile.png)
+</details>
+
+<br>
+
+---
+
+#### Login Page
+
+The **Login Page** is designed to authenticate existing users on the FitTribe platform. This page is structured to provide a seamless and secure login experience with clear instructions and feedback.
+
+**Key Features:**
+
+1. **Hero Section**:
+   - **Hero Image**: An engaging fitness-related image displayed prominently to welcome users.
+   - **Overlay Elements**:
+     - **Logo**: The FitTribe logo displayed at the top for brand recognition.
+     - **Login Form**: Centrally placed form for user authentication.
+
+2. **Login Form**:
+   - **Username Field**:
+     - Input for entering the username.
+     - Error handling to display warnings if the username is incorrect or not found.
+   - **Password Field**:
+     - Input for entering the password.
+     - Error handling to display warnings if the password is incorrect.
+   - **Error Alerts**:
+     - Display of specific error messages related to each field for better user guidance.
+     - Non-field errors for general login issues.
+   - **Sign Up and Login Links**:
+     - A link directing users to the sign-up page if they do not have an account.
+   - **Submit Button**:
+     - A prominent button to submit the form and authenticate the user.
+
+3. **Responsive Design**:
+   - The layout adjusts seamlessly for different screen sizes, ensuring usability on both desktop and mobile devices.
+   - Divisions for the form and image to maintain visual appeal and functionality across various devices.
+
+This page ensures that users can easily log in to the FitTribe community, with sufficient error handling to guide them through any issues during the authentication process.
+
+
+Screenshots:
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop](docs/readme_images/screenshots_desktop/signin_desktop.png)
+</details>
+
+<br>
+
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile](docs/readme_images/screenshots_mobile/signin_mobile.png)
+</details>
+
+<br>
+
+---
+
+#### Signed In Homepage (Feed)
+
+The **Signed In Homepage (Feed)** provides a personalized feed for authenticated users, showing blog posts from followed users.
+
+**Key Features:**
+
+1. **Personalized Feed**:
+   - **Fetch Blogs**: Uses an API call to retrieve blog posts from followed users.
+   - **Error Handling**: Displays any errors encountered during the fetch process.
+   - **Conditional Content**:
+     - Displays a welcome message and personalized feed content.
+     - Shows a list of blog posts if available.
+     - Shows a message if no blog posts are available or if the user isn't following anyone.
+
+2. **Blog Display**:
+   - **Blog Card Component**: Each blog post is displayed using the **BlogCard** component, providing a consistent and visually appealing layout.
+
+#### Blog Card Component
+
+The **Blog Card Component** is used to display individual blog posts within the feed, showcasing key details and enabling interaction.
+
+**Key Features:**
+
+1. **Blog Information**:
+   - **Profile Link**: Links to the profile of the blog owner, including their profile picture.
+   - **Blog Title and Owner**: Displays the title of the blog and the owner's name.
+   - **Date Posted**: Shows the date the blog was created.
+
+2. **Content Display**:
+   - **Sanitized Content**: Displays a preview of the blog content using `DOMPurify` to ensure safe HTML rendering.
+   - **Read More Link**: Provides a link to the full blog post.
+
+3. **Blog Image**:
+   - **Conditional Display**: Displays an image associated with the blog post if available and not using the default placeholder image.
+
+4. **Interactions**:
+   - **Like/Unlike**: Allows users to like or unlike the blog post. The like button is disabled for the blog owner to prevent self-likes.
+   - **Like Tooltip**: Displays a tooltip explaining why the blog owner cannot like their own post.
+   - **Comments Count**: Shows the number of comments on the blog post.
+
+5. **Responsive Design**:
+   - **Adaptive Layout**: Ensures the blog card is displayed correctly across different devices and screen sizes. 
+
+These features ensure that users have a seamless and engaging experience while interacting with the blog content on the FitTribe platform.
+
+
+Screenshots:
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop](docs/readme_images/screenshots_desktop/homepage_logged_in_desktop.png)
+</details>
+
+<br>
+
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile](docs/readme_images/screenshots_mobile/homepage_logged_in_mobile.png)
+</details>
+
+<br>
+
+---
+
+#### Blogs Page
+
+The **Blogs Page** is the main page for users to view all blog posts on the FitTribe platform. It allows users to browse through various blog posts, read them, and create new posts.
+
+**Key Features:**
+
+1. **Page Header**:
+   - **Title**: The page prominently displays the title "Blogs" at the top.
+   - **Error Handling**: Displays an error message if there is an issue fetching the blogs.
+   - **Divider**: A visual divider below the title for better organization.
+
+2. **Create Blog Button**:
+   - **Create Blog**: A button that navigates the user to the blog creation page, allowing them to create new blog posts.
+
+3. **Blog List**:
+   - **Blog Cards**: Each blog post is represented as a card displaying a brief overview. Users can click on a card to view the full blog post.
+   - **Dynamic Fetching**: The blog posts are fetched dynamically from the server and displayed as a list of cards.
+
+4. **Responsive Design**:
+   - **Layout**: The page layout is designed to be responsive, ensuring it looks good on various devices, including desktops, tablets, and mobile phones.
+   - **Column Adjustment**: Blog cards adjust their layout based on the screen size to provide an optimal viewing experience.
+
+5. **Navigation**:
+   - **Links**: Users can easily navigate to the blog creation page or individual blog posts using the provided links and buttons.
+
+This page ensures that users have a seamless experience when browsing through blog posts, viewing details, and creating new content on the platform.
+
+Screenshots:
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop]()
+</details>
+
+<br>
+
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile]()
+</details>
+
+<br>
+
+---
+
+#### Blog Create Page
+
+The **Blog Create Page** allows users to create new blog posts on the FitTribe platform. This page is designed to provide a smooth and intuitive experience for users to share their fitness stories, tips, and experiences.
+
+**Key Features:**
+
+1. **Page Header**:
+   - **Title**: Displays the page title "New Blog Entry" at the top.
+   - **Divider**: A visual divider below the title for better organization.
+
+2. **Blog Form**:
+   - **Title Field**: 
+     - Input for entering the title of the blog post.
+     - Error handling to display warnings if the title is invalid.
+   - **Content Field**:
+     - Rich text editor (ReactQuill) for entering the blog content.
+     - Error handling for content-related issues.
+   - **Cover Image Field**:
+     - Dropzone for uploading a cover image.
+     - Image preview and option to remove the uploaded image.
+     - Error handling for invalid image files.
+   - **Image Upload Field**:
+     - Dropzone for uploading additional images.
+     - Image preview and option to remove the uploaded image.
+     - Error handling for invalid image files.
+
+3. **Submit Button**:
+   - **Publish Now**: Button to submit the form and create the blog post.
+   - **Loading Spinner**: Displayed while the form is being submitted to indicate progress.
+
+4. **Error Handling**:
+   - **Field-specific Errors**: Displays specific error messages related to each form field.
+   - **Non-field Errors**: Displays general error messages for any other issues during the blog creation process.
+
+5. **Responsive Design**:
+   - The layout adjusts seamlessly for different screen sizes, ensuring usability on both desktop and mobile devices.
+   - Dropzones and form fields are designed to be user-friendly and accessible across various devices.
+
+This page ensures that users can easily create and publish blog posts with sufficient error handling to guide them through any issues during the creation process.
+
+Screenshots:
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop]()
+</details>
+
+<br>
+
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile]()
+</details>
+
+<br>
+
+---
+
+#### Blog Detail Page
+
+The **Blog Detail Page** allows users to view a specific blog post in detail, along with its comments. Users can also interact with the blog by liking, unliking, or commenting on it.
+
+**Key Features:**
+
+1. **Blog Display**:
+   - **Banner Image**: Displays the main image for the blog.
+   - **Blog Title**: Showcases the title of the blog post.
+   - **Blog Content**: Sanitized HTML content of the blog is rendered.
+
+2. **Author Information**:
+   - **Profile Link**: Link to the author’s profile with their profile picture and username.
+   - **Post Date**: Displays the date the blog was posted.
+
+3. **Interactions**:
+   - **Like/Unlike Functionality**:
+     - Users can like or unlike the blog post.
+     - Owners of the blog cannot like their own posts.
+   - **Comments**:
+     - Users can add comments to the blog post.
+     - Comments are displayed in a scrollable section with infinite scroll for loading more comments.
+
+4. **Actions for Blog Owners**:
+   - **Edit/Delete Options**: Blog owners have dropdown options to edit or delete the blog post.
+
+5. **Responsive Design**:
+   - The layout is responsive and adjusts to different screen sizes for optimal viewing experience on both desktop and mobile devices.
+
+6. **Error Handling**:
+   - Displays alerts for any errors that occur while loading the blog or comments.
+
+7. **Delete Confirmation**:
+   - A modal dialog box is shown to confirm the deletion of the blog post.
+
+**Components**:
+- **BlogCommentCreateForm**: Form for creating new comments.
+- **BlogComment**: Displays each comment with options to edit or delete (if the user is the comment owner).
+- **BlogEditComment**: Form for editing existing comments.
+
+This page ensures a comprehensive view of the blog post along with user interactions and feedback.
+
+
+Screenshots:
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop]()
+</details>
+
+<br>
+
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile]()
+</details>
+
+<br>
+
+#### Blog Comment Create Form
+
+The **Blog Comment Create Form** component allows users to add new comments to a blog post.
+
+**Key Features:**
+
+1. **Comment Input**:
+   - **Text Area**: A text area for users to enter their comment.
+   - **Error Handling**: Displays an error if the comment is empty.
+
+2. **Submit Button**:
+   - **Post**: Button to submit the comment.
+
+3. **Responsive Design**:
+   - The layout adjusts seamlessly for different screen sizes.
+
+This form provides a straightforward way for users to engage with blog content by adding their comments.
+
+#### Blog Comment
+
+The **Blog Comment** component displays individual comments on a blog post.
+
+**Key Features:**
+
+1. **Comment Display**:
+   - **Owner Information**: Shows the profile picture and username of the comment owner.
+   - **Comment Text**: Displays the text of the comment.
+   - **Timestamp**: Shows the time when the comment was last updated.
+
+2. **Actions for Comment Owners**:
+   - **Edit/Delete Options**: Comment owners can edit or delete their comments.
+
+3. **Edit Form**:
+   - **BlogEditComment**: Form for editing existing comments.
+
+4. **Responsive Design**:
+   - The layout adjusts seamlessly for different screen sizes.
+
+This component ensures that comments are displayed in a user-friendly manner with options for owners to manage their comments.
+
+#### Blog Edit Comment
+
+The **Blog Edit Comment** component allows users to edit their existing comments on a blog post.
+
+**Key Features:**
+
+1. **Edit Comment Input**:
+   - **Text Area**: A text area pre-filled with the existing comment text for editing.
+
+2. **Submit and Cancel Buttons**:
+   - **Save**: Button to submit the updated comment.
+   - **Cancel**: Button to cancel the edit and close the form.
+
+3. **Responsive Design**:
+   - The layout adjusts seamlessly for different screen sizes.
+
+This component provides an intuitive way for users to update their comments, ensuring they can make corrections or improvements to their previous posts.
+
+
+---
+
+#### Blog Edit Page
+
+The **Blog Edit Page** allows users to edit their existing blog posts. This page ensures that users can update their blog content efficiently while providing robust error handling and user feedback.
+
+**Key Features:**
+
+1. **Blog Data Fetching**:
+   - On component mount, the page fetches the blog data using the blog ID from the URL parameters.
+   - It checks if the current user is authorized to edit the blog post and redirects unauthorized users back to the blogs page.
+
+2. **Form Inputs**:
+   - **Title**: Text input for the blog title.
+   - **Content**: Rich text editor (ReactQuill) for the blog content.
+   - **Cover Image**: Dropzone for uploading a banner image with a preview of the selected image.
+   - **Image Upload**: Dropzone for uploading additional images with a preview of the selected image.
+
+3. **Error Handling**:
+   - Displays appropriate error messages for each field if there are any issues with the input.
+   - Shows alerts for general errors such as unauthorized access or blog not found.
+
+4. **Form Submission**:
+   - On form submission, it sends a PUT request to update the blog post with the new data.
+   - Displays a loading spinner while the request is being processed.
+
+5. **Responsive Design**:
+   - The layout adjusts seamlessly for different screen sizes, ensuring usability on both desktop and mobile devices.
+
+This page provides a comprehensive interface for users to update their blog posts, ensuring a smooth and intuitive editing experience with proper feedback and error handling.
+
+Screenshots:
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop]()
+</details>
+
+<br>
+
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile]()
+</details>
+
+<br>
+
+---
+
+#### Profile Page
+
+The **Profile Page** displays detailed information about a user's profile, including their personal details, follower statistics, and bio.
+
+**Key Features:**
+
+1. **Profile Header**:
+   - **Cover Image**: A wide cover image displayed at the top of the profile.
+   - **Profile Image**: A rounded profile picture of the user, displayed prominently.
+
+2. **User Information**:
+   - **Name and Username**: The user's display name and username are shown prominently.
+   - **Join Date**: The date when the user joined the platform.
+
+3. **Edit Profile**:
+   - **Edit Button**: If the current user is viewing their own profile, an "Edit Profile" button is displayed to allow profile modifications.
+
+4. **Follow/Unfollow**:
+   - **Follow/Unfollow Button**: If the profile belongs to another user, the current user can follow or unfollow them using this button.
+
+5. **Follower Statistics**:
+   - **Followers Count**: Displays the number of followers the user has.
+   - **Following Count**: Displays the number of users the user is following.
+
+6. **Bio**:
+   - **User Bio**: A section for the user's personal bio or description.
+
+7. **Loading and Error Handling**:
+   - **Loading Spinner**: A spinner is displayed while the profile data is being fetched.
+   - **Error Messages**: Alerts are shown for any errors encountered during data fetching.
+   - **Not Found Message**: A specific message for when the profile is not found.
+
+8. **Navigation**:
+   - **Go Back Button**: A button to navigate back to the user's own profile if an error or profile not found issue occurs.
+
+This page ensures that users can view and interact with profile information, follow or unfollow users, and manage their own profiles effectively.
+
+Screenshots:
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop](docs/readme_images/screenshots_desktop/profile_desktop.png)
+</details>
+
+<br>
+
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile](docs/readme_images/screenshots_mobile/profile_mobile.png)
+</details>
+
+<br>
+
+---
+
+#### Edit Profile Page
+
+The **Edit Profile Page** allows users to update their profile details, including personal information, profile image, and cover image. This page provides a user-friendly interface to ensure a seamless editing experience.
+
+**Key Features:**
+
+1. **Profile Data Fetching**:
+   - On component mount, the page fetches the profile data using the profile ID from the URL parameters.
+   - It checks if the current user is authorized to edit the profile and redirects unauthorized users to their profile page.
+
+2. **Form Inputs**:
+   - **Name**: Text input for the user's name.
+   - **Email**: Text input for the user's email address.
+   - **Bio**: Textarea input for the user's biography.
+   - **Display Name**: Checkbox to choose whether to display the real name on the profile.
+
+3. **Image Uploads**:
+   - **Profile Image**: Dropzone for uploading a new profile image with a preview of the selected image.
+   - **Cover Image**: Dropzone for uploading a new cover image with a preview of the selected image.
+
+4. **Error Handling**:
+   - Displays appropriate error messages for each field if there are any issues with the input.
+   - Shows alerts for general errors such as unauthorized access or profile not found.
+
+5. **Form Submission**:
+   - On form submission, it sends a PUT request to update the profile with the new data.
+   - Displays a loading spinner while the request is being processed.
+
+6. **Responsive Design**:
+   - The layout adjusts seamlessly for different screen sizes, ensuring usability on both desktop and mobile devices.
+
+This page provides a comprehensive interface for users to update their profile details, ensuring a smooth and intuitive editing experience with proper feedback and error handling.
+
+Screenshots:
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop]()
+</details>
+
+<br>
+
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile]()
+</details>
+
+<br>
+
+---
+
+#### Following Page
+
+The **Following Page** displays a list of profiles that the current user is following. This page provides a user-friendly interface to manage following relationships.
+
+**Key Features:**
+
+1. **Data Fetching**:
+   - On component mount, the page fetches the list of profiles the user is following from the API.
+   - Sets the fetched data into the state and handles any errors by displaying an alert.
+
+2. **Following List**:
+   - Displays a list of profiles that the user is following.
+   - Each list item includes the name of the followed profile and a button to unfollow the profile.
+
+3. **Unfollow Functionality**:
+   - Provides an "Unfollow" button next to each followed profile.
+   - On clicking the "Unfollow" button, it sends a DELETE request to the API to unfollow the profile.
+   - Updates the state to remove the unfollowed profile from the list.
+
+4. **Error Handling**:
+   - Displays an alert if there are any errors during the data fetching or unfollowing process.
+
+5. **Responsive Design**:
+   - The layout adjusts seamlessly for different screen sizes, ensuring usability on both desktop and mobile devices.
+
+This page ensures that users can easily manage their following relationships, providing clear feedback and a smooth experience.
+
+Screenshots:
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop]()
+</details>
+
+<br>
+
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile]()
+</details>
+
+<br>
+
+---
+
+#### Groups Page
+
+The **Groups Page** allows users to explore and manage their memberships in various fitness groups within the FitTribe community. This page provides functionality for viewing, joining, and leaving groups.
+
+**Key Features:**
+
+1. **Data Fetching**:
+   - On component mount, the page fetches the list of available groups from the API.
+   - Sets the fetched data into the state and handles any errors by displaying an alert.
+
+2. **Group Listing**:
+   - Displays a list of groups in card format, each showing the group's logo, name, and a truncated description.
+   - Clicking on a group card navigates the user to the detailed group page.
+
+3. **Join/Leave Group**:
+   - Provides "Join Group" and "Leave Group" buttons for each group, depending on the user's membership status.
+   - Clicking the buttons sends a request to the API to join or leave the group and updates the state accordingly.
+
+4. **Conditional Group Creation**:
+   - Displays a "Create a New Group" button for users with admin or staff roles, allowing them to create new groups.
+
+5. **Error Handling**:
+   - Displays an alert if there are any errors during the data fetching process.
+
+6. **Responsive Design**:
+   - The layout adjusts seamlessly for different screen sizes, ensuring usability on both desktop and mobile devices.
+
+This page ensures that users can easily find and manage their group memberships, providing clear feedback and a smooth experience.
+
+Screenshots:
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop]()
+</details>
+
+<br>
+
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile]()
+</details>
+
+<br>
+
+---
+
+#### Create Group Page
+
+The **Create Group Page** allows authorized users to create new groups on the FitTribe platform. This page is designed to be intuitive, guiding users through the process of setting up a group with a name, description, and images.
+
+**Key Features:**
+
+1. **Permission Check**:
+   - Only superusers and staff members are allowed to create groups.
+   - If a user without proper permissions tries to access the page, an error message is displayed, and they are redirected.
+
+2. **Form Fields**:
+   - **Group Name**:
+     - Input field for entering the group name.
+     - Displays validation errors if the name is invalid or already taken.
+   - **Group Description**:
+     - Rich text editor (ReactQuill) for entering a detailed description of the group.
+     - Utilizes DOMPurify to sanitize the input and prevent XSS attacks.
+   - **Banner Image**:
+     - Dropzone for uploading a banner image.
+     - Preview of the uploaded image and option to remove it.
+   - **Group Logo**:
+     - Dropzone for uploading a group logo.
+     - Preview of the uploaded logo and option to remove it.
+
+3. **Form Submission**:
+   - Submits the form data, including images, to the server using multipart/form-data.
+   - Displays a loading spinner during the submission process.
+   - Handles errors and displays appropriate messages.
+
+4. **Responsive Design**:
+   - The layout adjusts seamlessly for different screen sizes, ensuring usability on both desktop and mobile devices.
+
+This page ensures that the group creation process is straightforward, with clear instructions and feedback, making it easy for authorized users to set up new groups on the platform.
+
+
+Screenshots:
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop]()
+</details>
+
+<br>
+
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile]()
+</details>
+
+<br>
+
+---
+
+#### Group Details Page
+
+The **Group Details Page** provides a comprehensive view of a specific group on the FitTribe platform. This page displays detailed information about the group, including its description, events, and membership options.
+
+**Key Features:**
+
+1. **Group Information**:
+   - **Banner Image**: Displays the group's banner at the top of the page.
+   - **Group Logo**: Shows the group's logo next to the group name.
+   - **Group Name**: Displays the group's name prominently.
+   - **Creation Date**: Shows the date the group was created.
+
+2. **Membership Actions**:
+   - **Join/Leave Group Button**: Allows users to join or leave the group with dynamic button labels and actions based on membership status.
+   - **Admin Options**:
+     - **Edit Group**: Accessible to staff members for editing group details.
+     - **Delete Group**: Accessible to staff members for deleting the group.
+
+3. **Group Description**:
+   - Sanitized HTML content to prevent XSS attacks and ensure safe rendering of the group's description.
+
+4. **Upcoming Events**:
+   - **Event List**: Displays a list of upcoming events related to the group.
+   - **Event Details**:
+     - Event name, location, start and end times.
+     - Indicates if the user has joined an event with a badge.
+   - **Create Event Button**: Allows superusers and staff to create new events for the group.
+
+5. **Responsive Design**:
+   - The layout adjusts seamlessly for different screen sizes, ensuring usability on both desktop and mobile devices.
+
+6. **Modals**:
+   - **Delete Confirmation Modal**: Confirms if the user wants to delete the group, preventing accidental deletions.
+
+This page ensures that users have all the necessary information about a group, including the ability to manage membership and view upcoming events.
+
+
+Screenshots:
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop]()
+</details>
+
+<br>
+
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile]()
+</details>
+
+<br>
+
+---
+
+#### Group Edit Page
+
+The **Group Edit Page** allows authorized users to edit the details of a specific group on the FitTribe platform. This page ensures that users can update group information, including the name, description, banner, and logo.
+
+**Key Features:**
+
+1. **Group Information Editing**:
+   - **Group Name**: Input field for updating the group's name.
+   - **Group Description**: Rich text editor (ReactQuill) for updating the group's description, with DOMPurify sanitization to prevent XSS attacks.
+
+2. **Image Uploads**:
+   - **Banner Image**:
+     - Drag and drop interface for uploading a new banner image.
+     - Preview of the current banner image.
+   - **Group Logo**:
+     - Drag and drop interface for uploading a new group logo.
+     - Preview of the current group logo.
+
+3. **Error Handling**:
+   - Display of error messages related to each form field, ensuring users are aware of any issues that need correction before submission.
+   - Permission error handling to restrict access to authorized users only.
+   - 404 error handling if the group is not found.
+
+4. **Form Submission**:
+   - Submission button to update the group information.
+   - Loading spinner to indicate the form submission process.
+
+5. **Responsive Design**:
+   - Ensures the page layout adjusts seamlessly for different screen sizes, providing usability on both desktop and mobile devices.
+
+6. **Redirects and Feedback**:
+   - Redirects users to the groups page if they do not have permission to edit the group.
+   - Provides feedback to users if the group is not found or if they do not have the necessary permissions.
+
+This page facilitates the efficient management and updating of group details by authorized users, ensuring that the group's information remains current and accurate.
+
+Screenshots:
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop]()
+</details>
+
+<br>
+
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile]()
+</details>
+
+<br>
+
+---
+
+#### Event Create Page
+
+The **Event Create Page** allows users to create new events within a specific group on the FitTribe platform. This page provides a form to input event details and upload images, ensuring a comprehensive and user-friendly event creation process.
+
+**Key Features:**
+
+1. **Event Details Form**:
+   - **Event Name**:
+     - Input field for entering the event name.
+     - Error handling to display warnings if the event name is invalid or missing.
+   - **Event Description**:
+     - Rich text editor (ReactQuill) for entering the event description.
+     - Error handling to display warnings if the description is invalid or missing.
+   - **Event Location**:
+     - Input field for entering the location of the event.
+     - Error handling to display warnings if the location is invalid or missing.
+
+2. **Event Date and Time**:
+   - **Start Date and Time**:
+     - Input fields for selecting the event's start date and time.
+     - Error handling to display warnings if the start date or time is invalid or missing.
+   - **End Date and Time**:
+     - Input fields for selecting the event's end date and time.
+     - Error handling to display warnings if the end date or time is invalid or missing.
+
+3. **Image Upload**:
+   - **Banner Image**:
+     - Drag and drop interface for uploading a banner image.
+     - Preview of the uploaded banner image.
+     - Error handling to display warnings if the banner image is invalid.
+
+4. **Form Submission**:
+   - **Submit Button**:
+     - Button to submit the form and create the event.
+     - Loading spinner to indicate the form submission process.
+
+5. **Error Handling**:
+   - Display of specific error messages related to each form field to guide the user in correcting any issues.
+   - General error messages for overall form submission errors.
+
+6. **Responsive Design**:
+   - The layout adjusts seamlessly for different screen sizes, ensuring usability on both desktop and mobile devices.
+
+This page ensures that users can create events with all necessary details, including images, while providing sufficient error handling to guide them through any issues during the creation process.
+
+Screenshots:
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop]()
+</details>
+
+<br>
+
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile]()
+</details>
+
+<br>
+
+---
+
+#### Event Detail Page
+
+The **Event Detail Page** provides a detailed view of a specific event within a group on the FitTribe platform. It includes comprehensive event information and offers interaction options for users.
+
+**Key Features:**
+
+1. **Event Details**:
+   - **Banner Image**: Displays the event's banner image if available.
+   - **Event Title**: Prominently displays the title of the event.
+   - **Location**: Shows the location of the event.
+   - **Date and Time**:
+     - **Start Time**: Displays the event's start date and time.
+     - **End Time**: Displays the event's end date and time.
+   - **Event Description**:
+     - Sanitized HTML content to ensure safe rendering of the event description.
+
+2. **User Interaction**:
+   - **Join/Leave Event**:
+     - Button to join the event if the user is not yet a member.
+     - Button to leave the event if the user is already a member.
+   - **Staff Options**:
+     - Dropdown menu for staff members to edit or delete the event.
+
+3. **Navigation**:
+   - **Return to Group Button**:
+     - Button to navigate back to the group's main page.
+
+4. **Modals**:
+   - **Delete Event Confirmation Modal**:
+     - Modal to confirm the deletion of the event, ensuring users do not accidentally delete an event.
+
+5. **Error Handling**:
+   - Displays a loading spinner while fetching event data.
+   - Shows an error alert if the event details fail to load.
+
+This page ensures that users have access to all necessary details and interaction options for events within a group, enhancing user engagement and administrative control.
+
+Screenshots:
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop]()
+</details>
+
+<br>
+
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile]()
+</details>
+
+<br>
+
+---
+
+#### Event Edit Page
+
+The **Event Edit Page** is designed for administrators to modify the details of an existing event within a group on the FitTribe platform. It provides a comprehensive form to update all relevant event information.
+
+**Key Features:**
+
+1. **Event Form**:
+   - **Event Name**: Input field to edit the event's name.
+   - **Event Description**:
+     - Rich text editor for a detailed event description.
+   - **Event Location**: Input field to update the event's location.
+   - **Date and Time**:
+     - **Start Date**: Input field to change the event's start date.
+     - **Start Time**: Input field to change the event's start time.
+     - **End Date**: Input field to change the event's end date.
+     - **End Time**: Input field to change the event's end time.
+   - **Banner**:
+     - Dropzone for uploading a new banner image.
+     - Preview of the uploaded banner image.
+
+2. **Submission Handling**:
+   - **Submit Button**:
+     - Button to submit the form and update the event.
+     - Displays a loading indicator while the form is being submitted.
+   - **Error Handling**:
+     - Displays specific error messages related to each field for better user guidance.
+     - Handles server-side errors and displays them to the user.
+
+3. **Navigation**:
+   - Redirects to the event detail page upon successful update.
+
+This page ensures that administrators can efficiently update event details, maintaining the accuracy and relevance of event information on the platform.
+
+
+Screenshots:
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop]()
+</details>
+
+<br>
+
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile]()
+</details>
+
+<br>
+
+---
+
+#### 404 Error Page
+
+The **404 Error Page** is designed to inform users that the page they are trying to access does not exist on the FitTribe platform. This page provides a user-friendly error message and an option to navigate back to the homepage.
+
+**Key Features:**
+
+1. **Error Message**:
+   - **Heading**: A clear "Error 404" heading to indicate the error.
+   - **Description**: A brief description stating "Page Not Found" to inform the user of the error.
+
+2. **Visual Indicator**:
+   - **Icon**: A prominent red "X" icon with a beat animation to visually represent the error.
+
+3. **Navigation**:
+   - **Go to Homepage Button**: A button that redirects the user to the homepage, providing a quick way to continue browsing the site.
+
+This page ensures users are clearly informed when they encounter a non-existent page and offers a straightforward path to return to the main site.
+
+
+Screenshots:
+
+<details>
+<summary>
+Desktop
+</summary>
+
+![Desktop]()
+</details>
+
+<br>
+
+<details>
+<summary>
+Mobile
+</summary>
+
+![Mobile]()
+</details>
+
+<br>
+
+---
+
 ### Future Features
 
 ## Languages
