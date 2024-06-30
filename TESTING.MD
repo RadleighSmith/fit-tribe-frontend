@@ -392,3 +392,22 @@ We utilized the [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator
 |                                                                                                    | **AC 4**: The system should validate that the uploaded image meets the required dimensions and file size limits. | PASS       |
 |                                                                                                    | **AC 5**: If the user does not have a cover photo, a default image should be displayed on the profile page.     | PASS       |
 
+
+### Form Input Testing
+
+| **Form**           | **Handles Change** | **Handles Errors** | **Handles Submit** |
+|--------------------|---------------------|--------------------|--------------------|
+| Signup             | PASS                | PASS               | PASS               |
+| Signin             | PASS                | PASS               | PASS               |
+| ProfileCreate      | PASS                | PASS               | PASS               |
+| ProfileEdit        | PASS                | PASS               | PASS               |
+| BlogCreate         | PASS                | PASS               | PASS               |
+| BlogEdit           | PASS                | PASS               | PASS               |
+| CommentCreate      | PASS                | PASS               | PASS               |
+| CommentEdit        | PASS                | PASS               | PASS               |
+| GroupCreate        | PASS                | PASS               | PASS               |
+| GroupEdit          | PASS                | PASS               | PASS               |
+| EventCreate        | PASS                | PASS               | PASS               |
+| EventEdit          | PASS                | PASS               | PASS               |
+
+
