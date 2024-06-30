@@ -137,3 +137,9 @@
         padding-bottom: 8rem;
     }
 }
+
+@media (max-width: 746px) {
+    .HeroSection {
+        max-height: 500px;
+    }
+}

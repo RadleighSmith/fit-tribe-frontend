@@ -15,14 +15,14 @@
 
 .DatePosted {
   font-size: 0.9em;
-  color: grey;
+  color: #6c757d;
 }
 
 .DropdownToggle {
   border: none;
   background: none;
   padding: 0;
-  color: grey;
+  color: #6c757d;
 }
 
 .EventCard {
