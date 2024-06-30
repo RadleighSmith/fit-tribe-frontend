@@ -50,6 +50,10 @@ Backend Repo Link: [FitTribe Backend Repo](https://github.com/RadleighSmith/fit-
 
 [Forking a Branch](#forking-a-branch)
 
+[Connecting to the FitTribe API](#connecting-to-the-fittribe-api)
+
+[Deployment](#deployment)
+
 [Credits](#credits)
 
 [Achnowledgements](#achnowledgements)
@@ -2194,7 +2198,136 @@ The solution involved modifying the BlogsPage component to ensure that the setBl
 
 ## Cloning this Repository
 
+To work on this repository, you first need to clone it. Follow these instructions:
+
+1. **Clone the Repository from GitHub**:
+   - Navigate to the GitHub repository.
+   - Click the green "Code" button.
+   - Copy the repository URL.
+
+2. **Clone the Repository Locally**:
+   - In your Integrated Development Environment (IDE) or local coding environment, use the copied URL to clone the repository.
+
+### Example in VS Code:
+   - Open VS Code.
+   - Click on "Clone Git Repository..." from the start page or from the command palette.
+   - Paste the repository URL in the input box.
+   - Choose a local directory to save the repository.
+   - The repository should now be cloned and ready to work on in VS Code.
+
+### Example in CodeAnywhere:
+   - Click on "Add new workspace".
+   - Select "Create from your project repository".
+   - Paste the repository URL in the provided input box.
+   - CodeAnywhere will open a new workspace containing the repository.
+   - The repository should now be cloned and ready to work on in CodeAnywhere.
+
+3. **Install Dependencies**:
+   - Open a terminal in your IDE.
+   - Run the command: `npm install` to install all necessary dependencies.
+
+4. **Run the Application**:
+   - Check everything is working by running the program with: `npm start`.
+
+---
+
 ## Forking a Branch
+
+To protect the main branch and work on new features or fixes, you should fork a branch. Follow these instructions:
+
+1. **Create a New Branch on GitHub**:
+   - Navigate to the GitHub repository.
+   - Click on the branch symbol and text indicating the number of branches.
+   - Click on the green "New branch" button.
+   - Enter a name for the new branch and click "Create branch".
+   - Your new branch should now appear in the list of branches.
+
+2. **Clone the New Branch Locally**:
+   - Follow the steps for cloning the repository as mentioned above, but ensure you switch to the new branch after cloning.
+
+### Fork Directly from an Issue:
+   - Open the issue you want to address from the issues list or the project board.
+   - Look for the "Development" section on the right-hand side (on desktop).
+   - Click "Create a branch for this issue or link a pull request".
+   - This will create a new branch tied to the issue.
+
+---
+
+## Connecting to the FitTribe API
+
+To connect this frontend application to its corresponding API, follow these detailed steps:
+
+1. **Configure the API Deployment on Heroku**:
+   - Go to the Heroku dashboard and select the API application.
+   - Navigate to the "Settings" tab.
+   - Scroll down to the "Config Vars" section.
+   - Click "Reveal Config Vars".
+   - Add a new config var:
+     - **Key**: `CLIENT_ORIGIN`
+     - **Value**: The deployed URL of this frontend project. Ensure there is no trailing slash (/) at the end of the URL.
+   - Save the config var.
+
+2. **Setup Axios for API Requests in the Frontend**:
+   - Ensure Axios is installed in your frontend project. If not, install it using `npm install axios`.
+   - Configure Axios to point to the base URL of the API:
+     ```javascript
+     import axios from 'axios';
+
+     const apiClient = axios.create({
+       baseURL: 'https://APIBASEURL.com', 
+       headers: {
+         'Content-Type': 'application/json',
+       },
+     });
+
+     export default apiClient;
+     ```
+
+By following these steps, you will establish a seamless connection between the frontend application and the FitTribe API, allowing for smooth data exchange and functionality.
+
+## Deployment
+
+This project has been deployed using Heroku. Below are the detailed instructions for deploying a React application to Heroku.
+
+### Prerequisites
+
+- Ensure you have a Heroku account. If not, sign up at [Heroku](https://www.heroku.com/).
+- Make sure you have the Heroku CLI installed on your local machine. If not, download and install it from [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
+
+### Instructions to Deploy Using Heroku
+
+1. **Create a New Heroku Application**:
+   - Log in to your Heroku account and navigate to the [Heroku Dashboard](https://dashboard.heroku.com/).
+   - Click the "New" button located in the top right corner of the dashboard.
+   - Select "Create new app" from the dropdown menu.
+
+2. **Configure Your New Application**:
+   - **App Name**: Enter a unique name for your application. This name will form part of your application's URL (e.g., `your-app-name.herokuapp.com`).
+   - **Region**: Choose the region closest to your location for better performance (e.g., United States or Europe).
+   - Click "Create app" to proceed.
+
+3. **Deploying Your Application**:
+   - After creating the app, you will be directed to the app's dashboard. Click on the "Deploy" tab.
+   - Under the "Deploy" tab, choose your preferred deployment method. For this example, we'll use GitHub.
+
+4. **Connect to GitHub**:
+   - Scroll down to the "Deployment method" section and select "GitHub".
+   - If prompted, authorize Heroku to connect to your GitHub account.
+   - Search for the repository you want to deploy by entering the repository name in the search box.
+   - Once you find the correct repository, click "Connect".
+
+5. **Manual Deployment**:
+   - Under the "Manual deploy" section, choose the branch you want to deploy (e.g., `main` or `master`).
+   - Click "Deploy Branch". Heroku will start building your application. This may take a few minutes.
+   - Once the build process is complete, a message will appear saying: "Your app was successfully deployed".
+   - Click the "View" button to open your deployed application in a new tab.
+
+6. **Automatic Deployments (Optional)**:
+   - If you want Heroku to automatically deploy your app whenever you push changes to GitHub, you can enable "Automatic deploys".
+   - Under the "Automatic deploys" section, select the branch you want to automatically deploy from.
+   - Click "Enable Automatic Deploys".
+
+   *Remember to sacrifice a coffee to the deployment gods for a smooth and successful launch!*
 
 ## Credits
 
