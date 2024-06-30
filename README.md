@@ -2078,6 +2078,8 @@ The development of the FitTribe platform leverages various tools and technologie
 
 ## Testing and Validation
 
+For comprehensive details on all manual testing and validation procedures, please refer to the [TESTING.md](TESTING.md) file.
+
 ## Bugs & Fixes
 
 ## Cloning this Repository
