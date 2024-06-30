@@ -392,6 +392,7 @@ We utilized the [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator
 |                                                                                                    | **AC 4**: The system should validate that the uploaded image meets the required dimensions and file size limits. | PASS       |
 |                                                                                                    | **AC 5**: If the user does not have a cover photo, a default image should be displayed on the profile page.     | PASS       |
 
+---
 
 ### Form Input Testing
 
@@ -410,4 +411,64 @@ We utilized the [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator
 | EventCreate        | PASS                | PASS               | PASS               |
 | EventEdit          | PASS                | PASS               | PASS               |
 
+---
 
+### Accessibility Testing
+
+**Lighthouse**
+
+We used [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview), an open-source, automated tool, to perform a comprehensive audit of our web pages. Lighthouse evaluates various aspects of web accessibility based on the Web Content Accessibility Guidelines (WCAG). By running a Lighthouse audit, it can identify and address issues such as missing alt text for images, insufficient color contrast, and keyboard navigation problems. The tool provided actionable insights and recommendations for each identified issue, enabling us to enhance the accessibility of our platform. Through Lighthouse, we ensured that our website meets accessibility standards and delivers a better user experience for all users, including those with disabilities.
+
+The low scores on Best Practices for the Create and Edit pages are primarily due to the use of deprecated APIs. Specifically, DOM Mutation Events, including `DOMSubtreeModified`, `DOMNodeInserted`, `DOMNodeRemoved`, `DOMNodeRemovedFromDocument`, `DOMNodeInsertedIntoDocument`, and `DOMCharacterDataModified`, are deprecated and will be removed in future versions of Chrome. We believe this issue is caused by Quill, the rich text editor. We have reached out to Quill for guidance on this matter and will implement a fix in the next iteration or replace the rich text editor if necessary. Additionally, the Best Practices scores have been affected by the use of third-party cookies. Future versions of Chrome will no longer support third-party cookies, which are used by some of our integrations, such as Cloudinary for image hosting and Heroku for backend services. Unfortunately, we cannot resolve these issues immediately due to the dependencies on third-party services, but we are monitoring updates and will address them as soon as possible.
+
+Moreover, the accessibility scores for these pages have been impacted by Quill's buttons not providing accessible names. We are limited in our ability to modify Quill's internal structure but are exploring alternative editors that comply better with accessibility standards.
+
+Performance improvements are also on our roadmap for the next iteration. We plan to implement an on-demand image resizer and a loading spinner to ensure that the entire document has loaded before being displayed to the user. This will enhance the overall user experience by reducing load times and providing visual feedback during content loading. We are committed to continuously improving our site's performance and accessibility to offer the best possible user experience.
+
+Please see the results for Desktop and Mobile Below:
+
+**Lighthouse Testing Desktop**
+
+| Page Name            | Performance | Accessibility | Best Practices | SEO  |
+|----------------------|-------------|---------------|----------------|------|
+| Homepage (Logged out) | 85          | 100           | 96             | 100  |
+| Homepage (Logged In)  | 87          | 100           | 97             | 92   |
+| Login Page           | 86          | 100           | 96             | 100  |
+| Signup Page          | 86          | 100           | 96             | 100  |
+| Profile              | 78          | 100           | 78             | 100  |
+| Edit Profile         | 79          | 100           | 78             | 100  |
+| Blog List            | 78          | 100           | 78             | 92   |
+| Blog Create          | 86          | 90            | 59             | 92   |
+| Blog Edit            | 68          | 90            | 59             | 92   |
+| Blog Detail          | 78          | 100           | 78             | 100  |
+| Group List           | 88          | 100           | 78             | 100  |
+| Group Create         | 90          | 100           | 59             | 100  |
+| Group Detail         | 78          | 100           | 78             | 100  |
+| Group Edit           | 75          | 90            | 59             | 92   |
+| Following            | 91          | 100           | 78             | 100  |
+| Event Create         | 84          | 90            | 59             | 92   |
+| Event Edit           | 87          | 90            | 59             | 92   |
+| Event Detail         | 90          | 100           | 74             | 100  |
+
+**Lighthouse Testing Mobile**
+
+| Page Name            | Performance | Accessibility | Best Practices | SEO  |
+|----------------------|-------------|---------------|----------------|------|
+| Homepage (Logged out) | 60          | 100           | 96             | 100  |
+| Homepage (Logged In)  | 60          | 100           | 79             | 100  |
+| Login Page           | 59          | 100           | 96             | 100  |
+| Signup Page          | 60          | 100           | 96             | 100  |
+| Profile              | 61          | 100           | 79             | 100  |
+| Edit Profile         | 60          | 100           | 79             | 100  |
+| Blog List            | 61          | 100           | 79             | 100  |
+| Blog Create          | 59          | 90            | 61             | 92   |
+| Blog Edit            | 60          | 90            | 61             | 92   |
+| Blog Detail          | 64          | 90            | 75             | 100  |
+| Group List           | 62          | 100           | 79             | 100  |
+| Group Create         | 67          | 100           | 79             | 100  |
+| Group Detail         | 64          | 100           | 79             | 100  |
+| Group Edit           | 65          | 90            | 61             | 92   |
+| Following            | 68          | 100           | 79             | 100  |
+| Event Create         | 61          | 90            | 61             | 92   |
+| Event Edit           | 61          | 90            | 61             | 92   |
+| Event Detail         | 65          | 100           | 79             | 100  |
