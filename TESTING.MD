@@ -6,6 +6,9 @@
 
 [User Story Testing](#user-story-testing)
 
+[Accessibility Testing](#accessibility-testing)
+
+[Compatibility Testing](#compatibility-testing)
 
 ---
 
@@ -66,7 +69,7 @@ We utilized the [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator
 | TopNavBar.module.css          | Passed |
 
 
-#### User Story Testing
+## User Story Testing
 
 
 | **User Story**                                                                                                    | **Acceptance Criteria**                                                                                         | **Result** |
@@ -413,7 +416,7 @@ We utilized the [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator
 
 ---
 
-### Accessibility Testing
+## Accessibility Testing
 
 **Lighthouse**
 
@@ -472,3 +475,45 @@ Please see the results for Desktop and Mobile Below:
 | Event Create         | 61          | 90            | 61             | 92   |
 | Event Edit           | 61          | 90            | 61             | 92   |
 | Event Detail         | 65          | 100           | 79             | 100  |
+
+## Compatibility Testing
+
+This project was built and tested primarily in the Chrome browser. Upon completion and deployment, additional testing was conducted across various browsers and devices to ensure compatibility. The results are as follows:
+
+### Browser Testing
+
+| Route               | Specific View                  | Chrome | Safari | Firefox | Edge  |
+|---------------------|--------------------------------|--------|--------|---------|-------|
+| "/"                 | Home page for logged-out user  | PASS   | PASS   | PASS    | PASS  |
+| "/"                 | Home page for logged-in user   | PASS   | FAIL   | PASS    | PASS  |
+| "/signup"           | Sign-up page                   | PASS   | PASS   | PASS    | PASS  |
+| "/signin"           | Sign-in page                   | PASS   | FAIL   | PASS    | PASS  |
+| "/profile"          | Profile page                   | PASS   | FAIL   | PASS    | PASS  |
+| "/edit-profile"     | Edit profile page              | PASS   | FAIL   | PASS    | PASS  |
+| "/blogs"            | Blog list page                 | PASS   | FAIL   | PASS    | PASS  |
+| "/create-blog"      | Create blog page               | PASS   | FAIL   | PASS    | PASS  |
+| "/blogs/:id"        | Blog detail page               | PASS   | FAIL   | PASS    | PASS  |
+| "/groups"           | Group list page                | PASS   | FAIL   | PASS    | PASS  |
+| "/create-group"     | Create group page              | PASS   | FAIL   | PASS    | PASS  |
+| "/groups/:id"       | Group detail page              | PASS   | FAIL   | PASS    | PASS  |
+| "/groups/:id/edit"  | Edit group page                | PASS   | FAIL   | PASS    | PASS  |
+| "/following"        | Following page                 | PASS   | FAIL   | PASS    | PASS  |
+| "/create-event"     | Create event page              | PASS   | FAIL   | PASS    | PASS  |
+| "/events/:id/edit"  | Edit event page                | PASS   | FAIL   | PASS    | PASS  |
+| "/events/:id"       | Event detail page              | PASS   | FAIL   | PASS    | PASS  |
+| Unknown route       | Page not found                 | PASS   | PASS   | PASS    | PASS  |
+
+**Note:** The failure on Safari browsers (both mobile and desktop) is due to a known issue related to cross-site tracking and cookies. This issue arises because the project is deployed in separate frontend and backend repositories/URLs. If time permits, we will consider combining both backend and frontend under one terminal to resolve this issue.
+
+### Device Testing
+
+- **iPhone 13:**
+  - Tested the entire platform on Safari. Encountered issues with staying logged in due to cross-site tracking and cookies.
+- **Windows PC:**
+  - Tested on Chrome, Firefox, and Edge. All tests passed successfully.
+- **iPad Air:**
+  - Tested on Safari and Chrome. Safari experienced similar issues as on the iPhone 13 due to cross-site tracking and cookies. Chrome tests passed.
+- **MacBook Pro:**
+  - Tested on Safari and Chrome. Safari experienced similar issues as on the iPhone 13 due to cross-site tracking and cookies. Chrome tests passed.
+
+These tests highlight the need for improvements in handling cross-site tracking and cookies, especially for Safari users. Additionally, the performance on various devices will be enhanced in future iterations by implementing on-demand image resizing and a loading spinner to ensure the entire document loads before being displayed to the user.
