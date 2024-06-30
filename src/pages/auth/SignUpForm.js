@@ -46,7 +46,7 @@ const SignUpForm = () => {
             <Col className={`${styles.LeftCol} d-none d-lg-flex align-items-center justify-content-center`} lg={6}>
                 <div className={styles.Circle} />
                 <div className={styles.InnerCircle} />
-                <Image className={styles.FormImage} src={signUpImage} />
+                <Image className={styles.FormImage} alt="Sign Up Gym Picture" src={signUpImage} />
             </Col>
             <Col className={`d-flex align-items-center justify-content-center ${styles.RightCol}`} xs={12} lg={6}>
                 <Container className={`${appStyles.Content} p-4 m-2 m-sm-5`}>
