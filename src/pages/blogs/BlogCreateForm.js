@@ -131,12 +131,13 @@ const BlogCreateForm = () => {
                     <Form.Label>Cover Image:</Form.Label>
                     {bannerPreview && (
                         <div className="mb-3 position-relative">
-                            <Image src={bannerPreview} thumbnail />
+                            <Image src={bannerPreview} thumbnail alt="Banner Preview" />
                             <Button
                                 variant="danger"
                                 size="sm"
                                 className={`${formStyles.RemoveButton} position-absolute top-0 end-0`}
                                 onClick={() => setBlogData({ ...blogData, banner: null, bannerPreview: '' })}
+                                aria-label="Remove Banner"
                             >
                                 Remove
                             </Button>
@@ -150,7 +151,7 @@ const BlogCreateForm = () => {
                                     <p>Drop the files here ...</p> :
                                     <p>Drag and drop a banner image here, or click to select one</p>
                             }
-                            <i className="fas fa-upload fa-2x"></i>
+                            <i className="fas fa-upload fa-2x" aria-hidden="true"></i>
                         </div>
                     )}
                     {errors.banner?.map((message, idx) => (
@@ -173,12 +174,13 @@ const BlogCreateForm = () => {
                     <Form.Label>Image Upload:</Form.Label>
                     {imagePreview && (
                         <div className="mb-3 position-relative">
-                            <Image src={imagePreview} thumbnail />
+                            <Image src={imagePreview} thumbnail alt="Image Preview" />
                             <Button
                                 variant="danger"
                                 size="sm"
                                 className={`${formStyles.RemoveButton} position-absolute top-0 end-0`}
                                 onClick={() => setBlogData({ ...blogData, image: null, imagePreview: '' })}
+                                aria-label="Remove Image"
                             >
                                 Remove
                             </Button>
@@ -192,7 +194,7 @@ const BlogCreateForm = () => {
                                     <p>Drop the file here ...</p> :
                                     <p>Drag and drop an image here, or click to select one</p>
                             }
-                            <i className="fas fa-upload fa-2x"></i>
+                            <i className="fas fa-upload fa-2x" aria-hidden="true"></i>
                         </div>
                     )}
                     {errors.image?.map((message, idx) => (
@@ -204,7 +206,7 @@ const BlogCreateForm = () => {
                     <Alert key={idx} variant="warning">{message}</Alert>
                 ))}
                 
-                <Button type="submit" className={`${btnStyles.Button} ${btnStyles.ButtonWide}`} disabled={loading}>
+                <Button type="submit" className={`${btnStyles.Button} ${btnStyles.ButtonWide}`} disabled={loading} aria-label="Publish Blog">
                     {loading ? (
                         <>
                             <Spinner animation="border" size="sm" role="status" className="mr-2" />

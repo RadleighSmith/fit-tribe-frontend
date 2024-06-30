@@ -141,6 +141,7 @@ const BlogEditForm = () => {
                 <Button
                     className={`${btnStyles.Button} ${btnStyles.ButtonWide}`}
                     onClick={() => history.push('/blogs')}
+                    aria-label="Go Back"
                 >
                     Go Back
                 </Button>
@@ -151,10 +152,11 @@ const BlogEditForm = () => {
     if (notFound) {
         return (
             <Container className={appStyles.Content}>
-                <Alert variant="danger" className='text-center' >Blog not found.</Alert>
+                <Alert variant="danger" className='text-center'>Blog not found.</Alert>
                 <Button
                     className={`${btnStyles.Button} ${btnStyles.ButtonWide}`}
                     onClick={() => history.push('/blogs')}
+                    aria-label="Go Back to Blogs"
                 >
                     Go Back to Blogs
                 </Button>
@@ -186,13 +188,13 @@ const BlogEditForm = () => {
                     <Form.Label>Cover Image:</Form.Label>
                     {bannerPreview && (
                         <div className="mb-3 position-relative">
-                            <Image src={bannerPreview} fluid />
+                            <Image src={bannerPreview} fluid alt="Banner Preview" />
                         </div>
                     )}
                     <div {...bannerDropzone.getRootProps({ className: formStyles.Dropzone })}>
                         <input {...bannerDropzone.getInputProps()} />
                         <p>Drag and drop a banner image here, or click to select one</p>
-                        <i className="fas fa-upload fa-2x"></i>
+                        <i className="fas fa-upload fa-2x" aria-hidden="true"></i>
                     </div>
                     {errors.banner?.map((message, idx) => (
                         <Alert variant="warning" key={idx}>{message}</Alert>
@@ -215,13 +217,13 @@ const BlogEditForm = () => {
                     <Form.Label>Image Upload:</Form.Label>
                     {imagePreview && (
                         <div className="mb-3 position-relative">
-                            <Image src={imagePreview} fluid />
+                            <Image src={imagePreview} fluid alt="Image Preview" />
                         </div>
                     )}
                     <div {...imageDropzone.getRootProps({ className: formStyles.Dropzone })}>
                         <input {...imageDropzone.getInputProps()} />
                         <p>Drag and drop an image here, or click to select one</p>
-                        <i className="fas fa-upload fa-2x"></i>
+                        <i className="fas fa-upload fa-2x" aria-hidden="true"></i>
                     </div>
                     {errors.image?.map((message, idx) => (
                         <Alert variant="warning" key={idx}>{message}</Alert>
@@ -232,7 +234,7 @@ const BlogEditForm = () => {
                     <Alert key={idx} variant="warning">{message}</Alert>
                 ))}
 
-                <Button type="submit" className={`${btnStyles.Button} ${btnStyles.ButtonWide}`} disabled={loading}>
+                <Button type="submit" className={`${btnStyles.Button} ${btnStyles.ButtonWide}`} disabled={loading} aria-label="Update Blog">
                     {loading ? (
                         <>
                             <Spinner animation="border" size="sm" role="status" className="mr-2" />

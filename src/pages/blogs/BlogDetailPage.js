@@ -79,7 +79,7 @@ const BlogDetailPage = () => {
                 blog_like_id: data.id
             }));
         } catch (err) {
-            console.log(err);
+
         }
     };
 
@@ -92,7 +92,7 @@ const BlogDetailPage = () => {
                 blog_like_id: null
             }));
         } catch (err) {
-            console.log(err);
+
         }
     };
 
@@ -101,7 +101,7 @@ const BlogDetailPage = () => {
             await axiosRes.delete(`/blogs/${id}/`);
             history.push('/blogs');
         } catch (err) {
-            console.log(err);
+
         }
     };
 
@@ -116,6 +116,7 @@ const BlogDetailPage = () => {
                     <Button
                         className={`${btnStyles.Button} ${btnStyles.ButtonWide}`}
                         onClick={() => history.push('/blogs')}
+                        aria-label="Go Back to Blogs"
                     >
                         Go Back to Blogs
                     </Button>
@@ -130,14 +131,14 @@ const BlogDetailPage = () => {
                 <>
                     <Row>
                         <Col xs={12}>
-                            <Image src={blog.banner} className={styles.BannerImage} />
+                            <Image src={blog.banner} className={styles.BannerImage} alt="Blog Banner" />
                         </Col>
                     </Row>
                     <Row className="mt-3">
                         <Col xs={12} md={8}>
                             <div className="d-flex align-items-center">
-                                <Link to={`/profiles/${blog.profile_id}`} className={profileStyles.ProfileLink}>
-                                    <Image src={blog.profile_image} roundedCircle className={profileStyles.ProfileImage} />
+                                <Link to={`/profiles/${blog.profile_id}`} className={profileStyles.ProfileLink} aria-label={`Profile of ${blog.owner}`}>
+                                    <Image src={blog.profile_image} roundedCircle className={profileStyles.ProfileImage} alt="Profile" />
                                     <span className={profileStyles.ProfileUsername}>{blog.owner}</span>
                                 </Link>
                             </div>
@@ -146,7 +147,7 @@ const BlogDetailPage = () => {
                             <span className={styles.DatePosted}>Posted: {new Date(blog.created_at).toLocaleDateString()}</span>
                             {is_owner && (
                                 <Dropdown alignRight className="d-inline ml-3">
-                                    <Dropdown.Toggle variant="link" className={styles.DropdownToggle}>
+                                    <Dropdown.Toggle variant="link" className={styles.DropdownToggle} aria-label="Edit or Delete Blog">
                                         <i className="fas fa-ellipsis-h"></i>
                                     </Dropdown.Toggle>
 
@@ -167,14 +168,14 @@ const BlogDetailPage = () => {
                             <h1 className="text-center mt-3">{blog.title}</h1>
                             <div className={divider.BlueDivider} />
                             <div
-                                className={`${styles.Content} m-md-4 p-3  border rounded`}
+                                className={`${styles.Content} m-md-4 p-3 border rounded`}
                                 dangerouslySetInnerHTML={{
                                     __html: DOMPurify.sanitize(blog.content),
                                 }}
                             />
                             {blog.image && blog.image !== defaultBlogImage && (
                                 <div className="d-flex justify-content-center">
-                                    <Image src={blog.image} className={`${styles.BlogImage} mt-3 mb-2`} />
+                                    <Image src={blog.image} className={`${styles.BlogImage} mt-3 mb-2`} alt="Blog" />
                                 </div>
                             )}
                             <div className="d-flex justify-content-between align-items-center mt-3">
@@ -186,6 +187,7 @@ const BlogDetailPage = () => {
                                                 className={`fas fa-thumbs-up ${styles.Icon} ${styles.DisabledIcon}`}
                                                 onMouseEnter={() => setShowTooltip(true)}
                                                 onMouseLeave={() => setShowTooltip(false)}
+                                                aria-hidden="true"
                                             ></i>
                                             <Overlay target={likeButtonRef.current} show={showTooltip} placement="top">
                                                 {(props) => (
@@ -200,16 +202,18 @@ const BlogDetailPage = () => {
                                             <i
                                                 className={`fas fa-thumbs-up ${styles.Icon} ${styles.Liked}`}
                                                 onClick={handleUnlike}
+                                                aria-label="Unlike"
                                             ></i>
                                         ) : (
                                             <i
                                                 className={`fas fa-thumbs-up ${styles.Icon}`}
                                                 onClick={handleLike}
+                                                aria-label="Like"
                                             ></i>
                                         )
                                     )}
                                     <span className={styles.IconCounter}>{blog.blog_likes_count}</span>
-                                    <i className={`fas fa-comment ${styles.Icon} ml-3`}></i>
+                                    <i className={`fas fa-comment ${styles.Icon} ml-3`} aria-hidden="true"></i>
                                     <span className={styles.IconCounter}>{blog.blog_comments_count}</span>
                                 </div>
                             </div>
@@ -240,10 +244,10 @@ const BlogDetailPage = () => {
                 </Modal.Header>
                 <Modal.Body>Are you sure you want to delete this blog post?</Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+                    <Button variant="secondary" onClick={() => setShowDeleteModal(false)} aria-label="Cancel">
                         Cancel
                     </Button>
-                    <Button variant="danger" onClick={handleDelete}>
+                    <Button variant="danger" onClick={handleDelete} aria-label="Delete">
                         Delete
                     </Button>
                 </Modal.Footer>
