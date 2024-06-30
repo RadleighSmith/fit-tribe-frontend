@@ -22,7 +22,7 @@ const TopNavBar = () => {
             removeTokenTimestamp();
             setCurrentUser(null);
         } catch (err) {
-            console.log(err);
+
         }
     };
 
@@ -96,7 +96,7 @@ const TopNavBar = () => {
     );
 
     const sidebarLinks = (
-        <>  
+        <>
             <hr className={styles.Divider} />
             <NavLink exact to="/" className={styles.NavLink} activeClassName={styles.Active} onClick={() => setExpanded(false)}>
                 <i className="fas fa-home"></i> Home

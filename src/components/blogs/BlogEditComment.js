@@ -24,7 +24,7 @@ const BlogEditComment = ({ id, comment, setComments, setShowEditForm }) => {
             }));
             setShowEditForm(false);
         } catch (err) {
-            console.log(err);
+
         }
     };
 

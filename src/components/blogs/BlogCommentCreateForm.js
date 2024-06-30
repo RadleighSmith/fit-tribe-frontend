@@ -34,7 +34,7 @@ const BlogCommentCreateForm = ({ blogId, setBlog, setComments }) => {
             }));
             setComment('');
         } catch (err) {
-            console.log(err);
+
         }
     };
 

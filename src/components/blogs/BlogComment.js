@@ -28,7 +28,7 @@ const BlogComment = (props) => {
             }));
             setShowDeleteModal(false);
         } catch (err) {
-            console.log(err);
+
         }
     };
 
@@ -43,9 +43,9 @@ const BlogComment = (props) => {
                 />
             ) : (
                 <Media className='my-4 m-md-4 p-md-3 border rounded'>
-                    <Link 
-                    to={`/profiles/${profile_id}`}
-                    className='mt-2'
+                    <Link
+                        to={`/profiles/${profile_id}`}
+                        className='mt-2'
                     >
                         <ProfilePicture src={profile_image} />
                     </Link>

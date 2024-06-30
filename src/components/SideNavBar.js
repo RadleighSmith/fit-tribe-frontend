@@ -21,7 +21,7 @@ const SideNavBar = () => {
             removeTokenTimestamp();
             history.push('/signin');
         } catch (err) {
-            console.log(err);
+
         }
     };
 

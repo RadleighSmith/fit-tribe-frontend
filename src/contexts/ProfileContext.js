@@ -24,7 +24,7 @@ export const ProfileProvider = ({ children }) => {
                 following_id: data.id
             }));
         } catch (err) {
-            console.log(err);
+
         }
     };
 
@@ -37,7 +37,7 @@ export const ProfileProvider = ({ children }) => {
                 following_id: null
             }));
         } catch (err) {
-            console.log(err);
+
         }
     };
 
