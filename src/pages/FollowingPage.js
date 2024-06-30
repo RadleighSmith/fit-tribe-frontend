@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Button, Alert } from 'react-bootstrap';
 import { axiosReq } from '../api/axiosDefaults';
+import { useCurrentUser } from '../contexts/CurrentUserContext';
 import appStyles from '../App.module.css';
 import btnStyles from '../styles/Button.module.css';
 import divider from '../styles/Divider.module.css';
@@ -9,19 +10,22 @@ import divider from '../styles/Divider.module.css';
 const FollowingPage = () => {
     const [following, setFollowing] = useState([]);
     const [errors, setErrors] = useState(null);
+    const currentUser = useCurrentUser();
 
     useEffect(() => {
         const fetchFollowing = async () => {
-            try {
-                const { data } = await axiosReq.get('/followers/');
-                setFollowing(data.results);
-            } catch (err) {
-                setErrors(err.response?.data);
+            if (currentUser) {
+                try {
+                    const { data } = await axiosReq.get('/followers/');
+                    setFollowing(data.results);
+                } catch (err) {
+                    setErrors(err.response?.data);
+                }
             }
         };
 
         fetchFollowing();
-    }, []);
+    }, [currentUser]);
 
     const handleUnfollow = async (followId) => {
         try {

@@ -2196,6 +2196,27 @@ The root cause of the issue was that the setBlogs function was not being passed 
 #### Fix
 The solution involved modifying the BlogsPage component to ensure that the setBlogs function is passed to the BlogCard component as a prop. By including setBlogs in the props, we ensure that the BlogCard component has access to the state update function it needs to handle likes and unlikes. This change aligns the implementation with the homepage, where setBlogs was already being passed correctly.
 
+---
+
+### Bug Report 9
+
+#### Issue:
+The FollowingPage component in the frontend is displaying all followings instead of only the followings of the logged-in user.
+
+#### Cause:
+The component is fetching and displaying all follower relationships from the backend without filtering based on the current user's ID.
+
+#### Fix:
+1. Updated the backend `FollowerList` view to filter the queryset to include only the follower relationships where the owner is the current logged-in user.
+2. Modified the FollowingPage component in the frontend to properly fetch and display only the followings of the authenticated user.
+
+**Steps Taken:**
+1. Updated `FollowerList` in `views.py` to:
+   ```python
+   def get_queryset(self):
+       return Follower.objects.filter(owner=self.request.user)
+
+
 ## Cloning this Repository
 
 To work on this repository, you first need to clone it. Follow these instructions:
