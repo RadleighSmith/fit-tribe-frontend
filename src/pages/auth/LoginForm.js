@@ -48,7 +48,7 @@ const LoginForm = () => {
             <Col className={`${styles.LeftCol} d-none d-lg-flex align-items-center justify-content-center`} lg={6}>
                 <div className={styles.Circle} />
                 <div className={styles.InnerCircle} />
-                <Image className={styles.FormImage} src={signInImage} />
+                <Image className={styles.FormImage} alt="Sign in Gym Picture" src={signInImage} />
             </Col>
             <Col className={`d-flex align-items-center justify-content-center ${styles.RightCol}`} xs={12} lg={6}>
                 <Container className={`${appStyles.Content} p-4 m-2 m-sm-5`}>
