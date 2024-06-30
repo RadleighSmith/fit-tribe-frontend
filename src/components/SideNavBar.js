@@ -6,6 +6,7 @@ import styles from '../styles/SideNavBar.module.css';
 import btnstyles from '../styles/Button.module.css';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import { removeTokenTimestamp } from '../utils/utils';
 
 const SideNavBar = () => {
     const currentUser = useCurrentUser();
@@ -17,6 +18,7 @@ const SideNavBar = () => {
         try {
             await axios.post('/dj-rest-auth/logout/');
             setCurrentUser(null);
+            removeTokenTimestamp();
             history.push('/signin');
         } catch (err) {
             console.log(err);
