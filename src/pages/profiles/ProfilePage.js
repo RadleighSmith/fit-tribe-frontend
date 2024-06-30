@@ -66,10 +66,10 @@ const ProfilePage = () => {
         <Container className={appStyles.Content}>
             <div className={profileStyles.ProfileHeader}>
                 <div className={profileStyles.CoverImageContainer}>
-                    <Image src={cover_image} fluid className={profileStyles.CoverImage} />
+                    <Image src={cover_image} alt="Cover" fluid className={profileStyles.CoverImage} />
                 </div>
                 <div className={profileStyles.ProfileImageContainer}>
-                    <Image src={profile_image} roundedCircle className={profileStyles.ProfileImage} />
+                    <Image src={profile_image} alt="Profile" roundedCircle className={profileStyles.ProfileImage} />
                 </div>
             </div>
             <Row className="justify-content-between align-items-end ml-md-5">

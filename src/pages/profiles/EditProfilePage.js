@@ -189,14 +189,22 @@ const EditProfilePage = () => {
         <Container className={appStyles.Content}>
             <div className={profileStyles.ProfileHeader}>
                 <div className={profileStyles.CoverImageContainer}>
-                    <Image src={coverImagePreview} fluid className={profileStyles.CoverImage} />
-                    <Button onClick={handleCoverImageClick} className={`${btnStyles.Button} ${profileStyles.CoverImageButton}`}>
+                    <Image src={coverImagePreview} alt="Cover Image" fluid className={profileStyles.CoverImage} />
+                    <Button 
+                        onClick={handleCoverImageClick} 
+                        className={`${btnStyles.Button} ${profileStyles.CoverImageButton}`}
+                        aria-label="Change Cover Photo"
+                    >
                         Change Cover Photo
                     </Button>
                 </div>
                 <div className={profileStyles.ProfileImageContainer}>
-                    <Image src={profileImagePreview} roundedCircle className={profileStyles.ProfileImage} />
-                    <Button onClick={handleProfileImageClick} className={profileStyles.ProfileImageButton}>
+                    <Image src={profileImagePreview} alt="Profile Image" roundedCircle className={profileStyles.ProfileImage} />
+                    <Button 
+                        onClick={handleProfileImageClick} 
+                        className={profileStyles.ProfileImageButton}
+                        aria-label="Change Profile Photo"
+                    >
                         <i className="fa-solid fa-arrow-up-from-bracket fa-2xl" />
                     </Button>
                 </div>
