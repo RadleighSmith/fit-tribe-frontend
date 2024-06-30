@@ -158,9 +158,89 @@ To maintain focus and manage development resources effectively, certain features
 
 By clearly defining the scope, we ensure that our development efforts are concentrated on delivering the most critical features and functions that align with our strategic goals and meet the needs of our users. This focused approach allows us to create a robust and user-friendly platform within a manageable timeline and budget.
 
-#### User Stories:
+#### Agile Plan for FitTribe Development
 
-__User stories here__ 
+The agile plan for FitTribe development is structured into six sprints, each focusing on key features essential for the platform's success. The initial sprint targets Authentication and Navigation, establishing the foundational elements for user access and seamless navigation. Subsequent sprints build upon this foundation, with Sprint 2 dedicated to User Profiles, enabling users to create and manage their profiles. Sprint 3 focuses on Blogs, including comments and likes, fostering community engagement through content sharing. Sprint 4 integrates Following/Followers and Groups, facilitating user connections and community building. Sprint 5 addresses Group Events, allowing for organized group activities and events. The final sprint, Sprint 6, includes Final Touches and Error Handling, ensuring a polished user experience with personalized landing pages, responsive navigation, and a clear 404 error page. This agile approach is utilized for its iterative nature, allowing for continuous feedback, rapid adjustments, and the delivery of high-priority features in a phased manner. By breaking down the project into manageable sprints, the team can maintain focus, adapt to changes, and consistently deliver value to users.
+
+Team Velocity: 20 story points per sprint
+
+_**Sprint 1: Authentication and Navigation**_
+
+**User Stories for Authentication and Navigation**
+
+| **User Story**                                                                                                    | **Story Points** |
+|-------------------------------------------------------------------------------------------------------------------|------------------|
+| As a new user, I can create an account so that I can access the FitTribe platform and start using its features.    | 8                |
+| As a returning user, I can login so that I can access my account and personalized content on the FitTribe platform.| 6                |
+| As a logged-in user, I can logout so that I can securely end my session on the FitTribe platform.                  | 3                |
+| As a user, I can see a header on every page so that I can easily navigate the FitTribe platform and access key features. | 3            |
+
+**Total Story Points**: 20
+
+**_Sprint 2: User Profiles_**
+
+**User Stories for User Profiles**
+
+| **User Story**                                                                                                    | **Story Points** |
+|-------------------------------------------------------------------------------------------------------------------|------------------|
+| As a new user, I can create a profile so that I can share information about myself and my fitness goals with the FitTribe community. | 5          |
+| As a user, I can edit my profile so that I can update my personal information as needed.                          | 8                |
+| As a user, I can upload and update my profile cover photo so that I can personalize my profile page.              | 5                |
+| As a user, I can see a header on every page so that I can easily navigate the FitTribe platform and access key features. | 2            |
+
+**Total Story Points**: 20
+
+**_Sprint 3: Blogs (including Comments and Likes)_**
+
+**User Stories for Blogs**
+
+| **User Story**                                                                                                    | **Story Points** |
+|-------------------------------------------------------------------------------------------------------------------|------------------|
+| As an authenticated user, I can create a blog so that I can share my fitness experiences, tips, and knowledge with the FitTribe community. | 8           |
+| As a user, I can read blogs so that I can gain insights, tips, and information from other users' fitness experiences and knowledge. | 6       |
+| As a user, I can update my blog posts so that I can make corrections, add new information, or improve the content after publishing. | 3      |
+| As a user, I can delete my blog posts so that I can remove content I no longer want to share on the FitTribe platform. | 3           |
+
+**Total Story Points**: 20
+
+**_Sprint 4: Following / Followers and Groups_**
+
+**User Stories for Following / Followers and Groups**
+
+| **User Story**                                                                                                    | **Story Points** |
+|-------------------------------------------------------------------------------------------------------------------|------------------|
+| As a user, I can follow other users so that I can stay updated with their activities and content on the platform.  | 5                |
+| As a user, I can unfollow other users so that I can stop receiving updates from their activities and content on the platform. | 5          |
+| As an admin, I can create a group so that I can facilitate community engagement and organize members around common interests on the FitTribe platform. | 5      |
+| As a user, I can view the details of a group so that I can learn more about the group's purpose and activities.    | 5                |
+
+**Total Story Points**: 20
+
+**_Sprint 5: Group Events_**
+
+**User Stories for Group Events**
+
+| **User Story**                                                                                                    | **Story Points** |
+|-------------------------------------------------------------------------------------------------------------------|------------------|
+| As an admin, I can create an event within a group so that members can participate in scheduled activities.         | 5                |
+| As a user, I can view the details of an event so that I can learn more about the scheduled activities and participate. | 5           |
+| As an admin, I can update the details of an event so that I can keep the event's information current and relevant. | 5                |
+| As an admin, I can delete an event so that I can remove events that are no longer relevant or active.              | 5                |
+
+**Total Story Points**: 20
+
+**_Sprint 6: Final Touches and Error Handling_**
+
+**User Stories for Final Touches and Error Handling**
+
+| **User Story**                                                                                                    | **Story Points** |
+|-------------------------------------------------------------------------------------------------------------------|------------------|
+| As a user, I can land on a personalized landing page based on my authentication status so that I can access relevant content and information about the FitTribe platform. | 10           |
+| As a user, I can access a side navigation menu on larger devices so that I can easily navigate to different sections of the FitTribe platform. | 5            |
+| As a user, I can see a 404 error page when I navigate to a non-existent page so that I know the page is not available. | 5          |
+
+**Total Story Points**: 20
+
 
 ### The Structure Plane
 
