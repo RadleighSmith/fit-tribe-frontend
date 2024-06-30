@@ -476,6 +476,40 @@ Please see the results for Desktop and Mobile Below:
 | Event Edit           | 61          | 90            | 61             | 92   |
 | Event Detail         | 65          | 100           | 79             | 100  |
 
+**WAVE Testing**
+
+To ensure accessibility compliance, we utilized the WAVE tool to evaluate the accessibility of our web pages. The WAVE tool is a robust platform that identifies accessibility and Web Content Accessibility Guidelines (WCAG) errors on web pages.
+
+The majority of our pages passed the WAVE testing with no errors. However, some pages, specifically the create and edit pages, showed 12 errors. These errors are primarily due to missing form labels and empty buttons, which stem from the Quill rich text editor used on these pages. Quill does not provide accessible names for its buttons, resulting in these accessibility issues.
+
+While we have passed the accessibility standards on most pages, we acknowledge the need to address the shortcomings associated with Quill. In future iterations, we plan to either find a solution to make Quill's buttons accessible or replace Quill with a different rich text editor that complies with accessibility standards. This will ensure that all our pages meet the highest accessibility requirements, providing a better user experience for everyone.
+
+Below are the results:
+
+| Page Name            | WAVE Testing Status | Errors |
+|----------------------|---------------------|--------|
+| Homepage (Logged out) | PASS                | 0      |
+| Homepage (Logged In)  | PASS                | 0      |
+| Login Page           | PASS                | 0      |
+| Signup Page          | PASS                | 0      |
+| Profile              | PASS                | 0      |
+| Edit Profile         | FAIL                | 12     |
+| Blog List            | PASS                | 0      |
+| Blog Create          | FAIL                | 12     |
+| Blog Edit            | FAIL                | 12     |
+| Blog Detail          | PASS                | 0      |
+| Group List           | PASS                | 0      |
+| Group Create         | FAIL                | 12     |
+| Group Detail         | PASS                | 0      |
+| Group Edit           | FAIL                | 12     |
+| Followers            | PASS                | 0      |
+| Event Create         | FAIL                | 12     |
+| Event Edit           | FAIL                | 12     |
+| Event Detail         | PASS                | 0      |
+
+**Note:** The failures on the create and edit pages are due to 12 errors related to missing form labels and empty buttons. This issue is caused by the Quill rich text editor, which does not provide accessible names on their buttons. Efforts will be made to address this in future iterations, either by applying fixes or by choosing a different rich text editor.
+
+
 ## Compatibility Testing
 
 This project was built and tested primarily in the Chrome browser. Upon completion and deployment, additional testing was conducted across various browsers and devices to ensure compatibility. The results are as follows:
