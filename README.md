@@ -2031,8 +2031,6 @@ The development of the FitTribe platform incorporates several frameworks and lib
 
 ## Tools and Technologies
 
-## Tools and Technologies
-
 The development of the FitTribe platform leverages various tools and technologies to ensure efficient workflows, high-quality code, and seamless collaboration among team members. Below are the key tools and technologies used:
 
 ### Version Control and Collaboration
@@ -2081,6 +2079,118 @@ The development of the FitTribe platform leverages various tools and technologie
 For comprehensive details on all manual testing and validation procedures, please refer to the [TESTING.md](TESTING.md) file.
 
 ## Bugs & Fixes
+
+### Bug Report 1
+
+#### Issue
+The BlogComment component in the application is generating a warning due to the usage of a non-boolean attribute alignleft in the Dropdown component. This warning indicates that the attribute alignleft is not recognized as a valid attribute, causing the application to log a warning message.
+
+#### Cause
+The root cause of this issue is the incorrect usage of the alignleft attribute within the Dropdown component. The Dropdown component does not support alignleft as a valid attribute. Instead, the appropriate attribute to use for aligning the dropdown menu is align, with a value of "right". This discrepancy causes the warning message: Warning: Received true for a non-boolean attribute alignleft.
+
+#### Fix
+To resolve this issue, the alignleft attribute in the Dropdown component should be replaced with the correct attribute align="right". This change ensures that the dropdown menu is aligned correctly without generating any warnings. By using the correct attribute, the Dropdown component behaves as expected, and the warning message is eliminated from the console. This fix ensures that the application adheres to the correct usage of attributes within React components, improving the overall code quality and user experience.
+
+---
+
+### Bug Report 2
+
+#### Issue
+Long unbroken words or long comments cause side-scrolling in the comments section, disrupting the user experience by requiring horizontal scrolling to read the content.
+
+#### Cause
+When a comment consists of a single long word without any space, it does not automatically wrap to the next line. This behaviour leads to side-scrolling as the content overflows the container.
+
+#### Fix
+Implement CSS properties to ensure long words break correctly within their container. The necessary CSS properties are:
+- `word-wrap: break-word;`
+- `overflow-wrap: break-word;`
+- `white-space: pre-wrap;`
+- `word-break: break-word;`
+
+#### Result
+Long unbroken words in comments will now wrap correctly within their container, preventing side-scrolling and improving the overall user experience by ensuring comments remain fully readable without horizontal scrolling.
+
+---
+
+### Bug Report 3
+
+#### Issue
+The issue occurs because the react-dropzone component is being used with invalid MIME types, leading to warnings about skipped files and invalid file extensions.
+
+#### Cause
+The warnings are caused by the useDropzone hook being configured with incorrect MIME types or invalid file extensions. The MIME types specified do not match valid types recognized by the browser, resulting in files being skipped or rejected.
+
+#### Fix
+To resolve this issue, we need to ensure that the useDropzone hook is configured with correct and valid MIME types. The following code shows how to properly configure the useDropzone hook to accept only valid JPEG and PNG files.
+
+---
+
+### Bug Report 4
+
+#### Issue
+Users receive a warning message: `validateDOMNesting(...): <div> cannot appear as a descendant of <p>` when rendering the BlogCard component.
+
+#### Cause
+The BlogCard component renders content using the `dangerouslySetInnerHTML` method, which can insert various HTML elements, including `<div>`, inside a `<p>` tag. This results in an invalid HTML structure, causing the warning message.
+
+#### Fix
+To resolve this issue, the BlogCard component needs to be updated so that the content rendered by `dangerouslySetInnerHTML` is placed inside a `<div>` rather than a `<p>` tag. This ensures that any HTML elements inserted do not violate HTML nesting rules. Additionally, the "Read More" link should be placed outside of the `dangerouslySetInnerHTML` container to prevent any structural issues and ensure proper formatting.
+
+#### Implementation
+You should ensure that the `sanitizedContent` is wrapped in a `<div>` element instead of a `<p>`, and the "Read More" link should be appended outside this container to maintain a valid and readable HTML structure. By implementing these changes, the HTML will be properly structured, and the warning message will be resolved, ensuring that the BlogCard component renders correctly without nesting issues.
+
+---
+
+### Bug Report 5
+
+#### Issue
+Users were not seeing an error message on the profile page when trying to access a profile that does not exist. Instead, they were only seeing the error in the console.
+
+#### Cause
+The original implementation of the ProfileContext and ProfilePage components did not handle 404 errors properly. The error message was logged to the console but not displayed to the user. There was no mechanism to set a notFound state, which would allow the ProfilePage to display a specific message when a profile is not found.
+
+#### Fix
+The ProfileContext was updated to include a notFound state. The `fetchProfileData` function now sets this state to true if a 404 error is encountered. The ProfilePage component was updated to check the notFound state and display an appropriate error message to the user if the profile is not found.
+
+---
+
+### Bug Report 6
+
+#### Issue
+When running the application in React's StrictMode, the warning "findDOMNode is deprecated in StrictMode" is encountered. This issue arises from the OverlayTrigger component used within the BlogCard component.
+
+#### Cause
+The findDOMNode method is deprecated in React's StrictMode because it can lead to unexpected behaviors and conflicts with future versions of React. The OverlayTrigger component from React Bootstrap internally uses findDOMNode, leading to this warning.
+
+#### Fix
+To resolve this issue, replace the OverlayTrigger component with the Overlay component, which allows for direct references to the DOM elements. This approach avoids the use of findDOMNode and aligns with React's recommendations for future compatibility.
+
+---
+
+### Bug Report 7
+
+#### Issue
+When a group is edited, all users are removed from the group membership.
+
+#### Cause
+The GroupSerializer includes a members field that is updated during group edits. Since the frontend does not provide a new list of members during the update, the members field gets reset, effectively removing all members from the group.
+
+#### Fix
+Modify the GroupSerializer to ensure that the members field is not processed during updates. Instead, only handle the members field during creation and leave it unchanged during updates. This will prevent the unintentional removal of group members when a group is edited.
+
+---
+
+### Bug Report 8
+
+#### Issue
+The "like" and "unlike" functionality on the blogs page was not working correctly. Users were unable to like or unlike blog posts from the blogs page, despite the same functionality working correctly on the homepage. An error message indicated that the setBlogs function was not a function.
+
+#### Cause
+The root cause of the issue was that the setBlogs function was not being passed as a prop to the BlogCard component when it was used on the blogs page. This omission caused the component to fail when trying to call setBlogs during the like or unlike operations. The BlogCard component relies on this function to update the state of the blogs, and without it, the component could not perform the necessary state updates.
+
+#### Fix
+The solution involved modifying the BlogsPage component to ensure that the setBlogs function is passed to the BlogCard component as a prop. By including setBlogs in the props, we ensure that the BlogCard component has access to the state update function it needs to handle likes and unlikes. This change aligns the implementation with the homepage, where setBlogs was already being passed correctly.
 
 ## Cloning this Repository
 
