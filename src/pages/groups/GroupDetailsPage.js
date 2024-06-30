@@ -38,7 +38,7 @@ const GroupDetailsPage = () => {
         const { data } = await axios.get(`/group-events/?group=${id}`);
         setEvents(data.results);
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     };
 
@@ -54,7 +54,7 @@ const GroupDetailsPage = () => {
         is_member: true,
       }));
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -66,7 +66,7 @@ const GroupDetailsPage = () => {
         is_member: false,
       }));
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -75,7 +75,7 @@ const GroupDetailsPage = () => {
       await axios.delete(`/groups/${id}/`);
       history.push('/groups');
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -101,19 +101,19 @@ const GroupDetailsPage = () => {
         <>
           <Row>
             <Col xs={12}>
-              <Image src={group.banner} className={styles.BannerImage} fluid />
+              <Image src={group.banner} className={styles.BannerImage} fluid alt="Group banner" />
             </Col>
           </Row>
           <Row className="m-3 align-items-center">
             <Col xs={12} lg={8} className="d-flex align-items-center flex-column flex-lg-row">
-              <Image src={group.group_logo} className={`${styles.GroupLogo} mb-3 mb-lg-0`} />
-              <h1 className='m-2 text-center text-lg-left'>{group.name}</h1>
+              <Image src={group.group_logo} className={`${styles.GroupLogo} mb-3 mb-lg-0`} alt="Group logo" />
+              <h1 className="m-2 text-center text-lg-left">{group.name}</h1>
             </Col>
             <Col xs={12} lg={4} className="text-lg-right pt-2 text-center text-lg-right">
               <span className={styles.DatePosted}>Created: {new Date(group.created_at).toLocaleDateString()}</span>
               {currentUser && currentUser.is_staff && (
                 <Dropdown alignRight className="d-inline ml-2">
-                  <Dropdown.Toggle variant="link" className={styles.DropdownToggle}>
+                  <Dropdown.Toggle variant="link" className={styles.DropdownToggle} aria-label="Group options">
                     <i className="fas fa-ellipsis-h"></i>
                   </Dropdown.Toggle>
 
@@ -129,11 +129,21 @@ const GroupDetailsPage = () => {
               )}
               <div className="mt-3">
                 {group.is_member ? (
-                  <Button variant="danger" onClick={handleLeaveGroup} className={`${btnStyles.ButtonRed} ${btnStyles.ButtonLarge}`}>
+                  <Button 
+                    variant="danger" 
+                    onClick={handleLeaveGroup} 
+                    className={`${btnStyles.ButtonRed} ${btnStyles.ButtonLarge}`}
+                    aria-label={`Leave ${group.name}`}
+                  >
                     Leave Group
                   </Button>
                 ) : (
-                  <Button variant="primary" onClick={handleJoinGroup} className={`${btnStyles.Button} ${btnStyles.ButtonLarge}`}>
+                  <Button 
+                    variant="primary" 
+                    onClick={handleJoinGroup} 
+                    className={`${btnStyles.Button} ${btnStyles.ButtonLarge}`}
+                    aria-label={`Join ${group.name}`}
+                  >
                     Join Group
                   </Button>
                 )}
@@ -150,10 +160,12 @@ const GroupDetailsPage = () => {
           </Row>
           <Row className="mt-5">
             <Col xs={12} className="text-center text-lg-left">
-              <h2 className='mx-5'>Upcoming Events</h2>
+              <h2 className="mx-5">Upcoming Events</h2>
               {currentUser && (currentUser.is_superuser || currentUser.is_staff) && (
                 <Link to={`/groups/${id}/create-event`}>
-                  <Button className={`${btnStyles.Button} ${btnStyles.ButtonWide} my-4`}>Create a New Event</Button>
+                  <Button className={`${btnStyles.Button} ${btnStyles.ButtonWide} my-4`}>
+                    Create a New Event
+                  </Button>
                 </Link>
               )}
             </Col>
@@ -174,9 +186,9 @@ const GroupDetailsPage = () => {
                           <i className="fa-regular fa-calendar fa-2x"></i>
                         </Col>
                         <Col xs={9} md={10}>
-                          <h4>
+                          <h3>
                             {event.name} {event.is_joined && <Badge variant="success">Joined</Badge>}
-                          </h4>
+                          </h3>
                           <p><strong>Location:</strong> {event.location}</p>
                           <p><strong>Start Time:</strong> {formatDateTime(event.start_date, event.start_time)}</p>
                           <p><strong>End Time:</strong> {formatDateTime(event.end_date, event.end_time)}</p>

@@ -42,7 +42,7 @@ const GroupsPage = () => {
         )
       );
     } catch (err) {
-      console.log(err);
+      // Handle error
     }
   };
 
@@ -55,7 +55,7 @@ const GroupsPage = () => {
         )
       );
     } catch (err) {
-      console.log(err);
+      // Handle error
     }
   };
 
@@ -97,10 +97,10 @@ const GroupsPage = () => {
                 <Card.Body>
                   <Row className="align-items-center">
                     <Col xs={12} sm={2} className="d-flex justify-content-center">
-                      <Image src={group.group_logo} thumbnail className={groupStyles.GroupLogo} />
+                      <Image src={group.group_logo} thumbnail className={groupStyles.GroupLogo} alt="Group Logo" />
                     </Col>
                     <Col xs={12} sm={6}>
-                      <h4 className={groupStyles.GroupLink}>{group.name}</h4>
+                      <h2 className={`${groupStyles.GroupLink} ${groupStyles.SmallHeading}`}>{group.name}</h2>
                       <p dangerouslySetInnerHTML={{ __html: truncateDescription(group.description) }} />
                     </Col>
                     <Col xs={12} sm={4} className="d-flex justify-content-center justify-content-sm-end mt-2 mt-sm-0">
@@ -111,6 +111,7 @@ const GroupsPage = () => {
                               variant="danger"
                               onClick={(e) => { e.stopPropagation(); handleLeaveGroup(group.id); }}
                               className={`${btnStyles.ButtonRed} ${btnStyles.ButtonLarge} mx-2`}
+                              aria-label={`Leave ${group.name}`}
                             >
                               Leave Group
                             </Button>
@@ -119,6 +120,7 @@ const GroupsPage = () => {
                               variant="primary"
                               onClick={(e) => { e.stopPropagation(); handleJoinGroup(group.id); }}
                               className={`${btnStyles.Button} ${btnStyles.ButtonLarge} mx-2`}
+                              aria-label={`Join ${group.name}`}
                             >
                               Join Group
                             </Button>

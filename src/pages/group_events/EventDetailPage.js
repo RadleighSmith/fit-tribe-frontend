@@ -41,7 +41,7 @@ const EventDetailPage = () => {
         is_joined: true,
       }));
     } catch (err) {
-      console.log(err);
+      // Handle error if needed
     }
   };
 
@@ -53,7 +53,7 @@ const EventDetailPage = () => {
         is_joined: false,
       }));
     } catch (err) {
-      console.log(err);
+      // Handle error if needed
     }
   };
 
@@ -62,7 +62,7 @@ const EventDetailPage = () => {
       await axios.delete(`/group-events/${eventId}/`);
       history.push(`/groups/${event.group}`);
     } catch (err) {
-      console.log(err);
+      // Handle error if needed
     }
   };
 
@@ -83,7 +83,9 @@ const EventDetailPage = () => {
         <>
           <Row>
             <Col xs={12}>
-              <Image src={event.banner} className={`${styles.BannerImage} img-fluid`} />
+              {event.banner && (
+                <Image src={event.banner} className={`${styles.BannerImage} img-fluid`} alt="Event banner" />
+              )}
             </Col>
           </Row>
           <Row className="m-3 align-items-center">
@@ -93,17 +95,27 @@ const EventDetailPage = () => {
             <Col xs={12} lg={4} className="text-center text-lg-right pt-2">
               <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-end">
                 {event.is_joined ? (
-                  <Button variant="danger" onClick={handleLeaveEvent} className={`${btnStyles.ButtonRed} ${btnStyles.ButtonLarge} mx-2 my-2 my-lg-0`}>
+                  <Button 
+                    variant="danger" 
+                    onClick={handleLeaveEvent} 
+                    className={`${btnStyles.ButtonRed} ${btnStyles.ButtonLarge} mx-2 my-2 my-lg-0`}
+                    aria-label="Leave Event"
+                  >
                     Leave Event
                   </Button>
                 ) : (
-                  <Button variant="primary" onClick={handleJoinEvent} className={`${btnStyles.Button} ${btnStyles.ButtonLarge} mx-2 my-2 my-lg-0`}>
+                  <Button 
+                    variant="primary" 
+                    onClick={handleJoinEvent} 
+                    className={`${btnStyles.Button} ${btnStyles.ButtonLarge} mx-2 my-2 my-lg-0`}
+                    aria-label="Join Event"
+                  >
                     Join Event
                   </Button>
                 )}
                 {currentUser && currentUser.is_staff && (
                   <Dropdown alignRight className="d-inline mx-2 my-2 my-lg-0">
-                    <Dropdown.Toggle variant="link" className={styles.DropdownToggle}>
+                    <Dropdown.Toggle variant="link" className={styles.DropdownToggle} aria-label="More options">
                       <i className="fas fa-ellipsis-h"></i>
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
@@ -137,7 +149,12 @@ const EventDetailPage = () => {
           </Row>
           <Row className="mt-3">
             <Col xs={12} className="text-center">
-              <Button variant="secondary" onClick={() => history.push(`/groups/${event.group}`)} className={`${btnStyles.Button} ${btnStyles.ButtonWide}`}>
+              <Button 
+                variant="secondary" 
+                onClick={() => history.push(`/groups/${event.group}`)} 
+                className={`${btnStyles.Button} ${btnStyles.ButtonWide}`}
+                aria-label="Return to Group"
+              >
                 Return to Group
               </Button>
             </Col>
@@ -150,10 +167,10 @@ const EventDetailPage = () => {
         </Modal.Header>
         <Modal.Body>Are you sure you want to delete this event?</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+          <Button variant="secondary" onClick={() => setShowDeleteModal(false)} aria-label="Cancel delete event">
             Cancel
           </Button>
-          <Button variant="danger" onClick={handleDeleteEvent}>
+          <Button variant="danger" onClick={handleDeleteEvent} aria-label="Delete event">
             Delete
           </Button>
         </Modal.Footer>

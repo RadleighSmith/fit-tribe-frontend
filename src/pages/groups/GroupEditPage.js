@@ -217,13 +217,13 @@ const GroupEditPage = () => {
                     <Form.Label>Banner</Form.Label>
                     {bannerPreview && (
                         <div className="mb-3 position-relative">
-                            <Image src={bannerPreview} fluid />
+                            <Image src={bannerPreview} fluid alt="Banner preview" />
                         </div>
                     )}
                     <div {...getRootPropsBanner({ className: formStyles.Dropzone })}>
                         <input {...getInputPropsBanner()} />
                         <p>Drag and drop a banner image here, or click to select one</p>
-                        <i className="fas fa-upload fa-2x"></i>
+                        <i className="fas fa-upload fa-2x" aria-hidden="true"></i>
                     </div>
                     {errors.banner?.map((message, idx) => (
                         <Alert variant="warning" key={idx}>{message}</Alert>
@@ -234,13 +234,13 @@ const GroupEditPage = () => {
                     <Form.Label>Group Logo</Form.Label>
                     {logoPreview && (
                         <div className="mb-3 position-relative">
-                            <Image src={logoPreview} fluid />
+                            <Image src={logoPreview} fluid alt="Group logo preview" />
                         </div>
                     )}
                     <div {...getRootPropsLogo({ className: formStyles.Dropzone })}>
                         <input {...getInputPropsLogo()} />
                         <p>Drag and drop a group logo image here, or click to select one</p>
-                        <i className="fas fa-upload fa-2x"></i>
+                        <i className="fas fa-upload fa-2x" aria-hidden="true"></i>
                     </div>
                     {errors.group_logo?.map((message, idx) => (
                         <Alert variant="warning" key={idx}>{message}</Alert>
@@ -251,7 +251,7 @@ const GroupEditPage = () => {
                     <Alert key={idx} variant="warning">{message}</Alert>
                 ))}
 
-                <Button type="submit" className={`${btnStyles.Button} ${btnStyles.ButtonWide}`} disabled={submitting}>
+                <Button type="submit" className={`${btnStyles.Button} ${btnStyles.ButtonWide}`} disabled={submitting} aria-label="Update Group">
                     {submitting ? (
                         <>
                             <Spinner animation="border" size="sm" role="status" className="mr-2" />
