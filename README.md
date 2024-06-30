@@ -2292,7 +2292,7 @@ This project has been deployed using Heroku. Below are the detailed instructions
 ### Prerequisites
 
 - Ensure you have a Heroku account. If not, sign up at [Heroku](https://www.heroku.com/).
-- Make sure you have the Heroku CLI installed on your local machine. If not, download and install it from [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
+- Make sure you have the Heroku CLI installed on your local machine. If not, download and install it from [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli). (This is great for checking logs)
 
 ### Instructions to Deploy Using Heroku
 
@@ -2331,5 +2331,64 @@ This project has been deployed using Heroku. Below are the detailed instructions
 
 ## Credits
 
+### Code
+
+- We would like to extend our gratitude to the Moments app by Code Institute, which has been instrumental in the development of this project. The knowledge and resources provided by the Moments app have significantly influenced various aspects of our work, including:
+
+   - Installing necessary dependencies efficiently.
+   - Setting up and managing routing seamlessly.
+   - Deploying the application to Heroku with ease.
+   - Establishing a connection to the backend API.
+   - Creating and configuring authentication pages for sign-up and sign-in functionalities.
+   - Implementing the `useClickOutsideToggle` custom hook for better UI interactions.
+   - Utilizing the `axiosDefault` file for consistent API requests.
+   - Integrating the `CurrentUserContext`, which handles the current user state and axios token refreshing.
+   - Adopting utility functions from the `utils` file for improved code efficiency and maintainability.
+
+   The comprehensive guidance from the Moments app has been invaluable, allowing us to develop a robust and scalable application. Thank you, Code Institute!
+
+
+### Libraries and Frameworks
+
+- **React.js:** The core framework used for building the frontend application. Comprehensive documentation and guides from the official React website were heavily utilized.
+- **React Bootstrap:** Employed to leverage Bootstrap's UI components and styles within React. The documentation provided essential guidance on component usage and customization.
+- **React Dropzone:** Facilitated file uploads with drag-and-drop functionality. The library's documentation was crucial for understanding setup and integration.
+- **Axios:** Used for making HTTP requests to connect the frontend with the backend API. The official documentation provided detailed information on configuring and using Axios.
+
+### Icons and Fonts
+
+- **FontAwesome:** Provided a vast collection of icons used throughout the application. The documentation was essential for integrating and customizing icons.
+- **Google Fonts:** Used to include custom fonts for better typography. Montserrat and Roboto Mono fonts were integrated for a modern and clean look.
+
+### Images
+
+| File Name                     | Author            | Link                                                                                                      |
+|-------------------------------|-------------------|-----------------------------------------------------------------------------------------------------------|
+| cover_image_background_default| Kelly Sikkema     | [https://unsplash.com/photos/orange-and-black-usb-cable-on-brown-wooden-surface-IZOAOjvwhaM](https://unsplash.com/photos/orange-and-black-usb-cable-on-brown-wooden-surface-IZOAOjvwhaM) |
+| sign_up_image                 | Emily Sea         | [https://unsplash.com/photos/woman-stretching-coiWR0gT8Cw](https://unsplash.com/photos/woman-stretching-coiWR0gT8Cw) |
+| sign_in_image                 | Anastase Maragos  | [https://unsplash.com/photos/woman-in-black-long-sleeve-shirt-and-black-pants-sitting-on-exercise-equipment-HyvE5SiKMUs](https://unsplash.com/photos/woman-in-black-long-sleeve-shirt-and-black-pants-sitting-on-exercise-equipment-HyvE5SiKMUs) |
+| hero_image                    | Sven Mieke        | [https://unsplash.com/photos/black-and-gray-escalator-inside-building-MsCgmHuirDo](https://unsplash.com/photos/black-and-gray-escalator-inside-building-MsCgmHuirDo) |
+| CSS background                |                   | [https://heropatterns.com/](https://heropatterns.com/) |
+
+
 ## Achnowledgements
 
+### Code Institute
+
+A heartfelt thank you goes out to the entire team at Code Institute for igniting my passion and guiding me on the path to becoming a proficient full-stack software developer. Their meticulously crafted lessons and unwavering support have been instrumental in shaping my journey, and I am deeply grateful for their dedication.
+
+### Code Institute Student Care Team
+
+This project has been my most challenging endeavor to date, with numerous ups and downs along the way. Despite my aspirations, it couldn't reach the full scale I initially envisioned. Fortunately, the Student Care team at Code Institute was there to support me at every turn. They provided invaluable assistance during the Gitpod/Code Institute migration issues, ensuring that I could continue progressing. Their unwavering support and dedication have been a cornerstone of my journey, and for that, I am profoundly grateful.
+
+### Richard Wells - Code Institute Mentor
+
+I am immensely fortunate to have Richard as my mentor throughout this course. His guidance has been a beacon of light during challenging moments, ensuring I stay focused and empowered to overcome obstacles. I am truly indebted to him for his invaluable support and expertise.
+
+### My Family
+
+I extend my heartfelt appreciation to my family for their unwavering support throughout this journey. Though they may not be versed in coding, their encouragement and willingness to assist have been indispensable in bringing this project to fruition.
+
+### My Girlfriend, Ciara
+
+I am profoundly grateful to Ciara for her unwavering support since the inception of this course. Her patience, understanding, and unwavering belief in me have been the driving force behind my success so far.
