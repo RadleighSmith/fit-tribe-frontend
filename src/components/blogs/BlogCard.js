@@ -28,7 +28,7 @@ const BlogCard = ({ blog, setBlogs }) => {
                 )
             );
         } catch (err) {
-            console.log(err);
+
         }
     };
 
@@ -43,7 +43,7 @@ const BlogCard = ({ blog, setBlogs }) => {
                 )
             );
         } catch (err) {
-            console.log(err);
+
         }
     };
 
@@ -51,13 +51,18 @@ const BlogCard = ({ blog, setBlogs }) => {
         <Card className={appStyles.Content}>
             <Card.Body>
                 <div className={styles.BlogHeader}>
-                    <Link to={`/profiles/${blog.profile_id}`}>
-                        <Image src={blog.profile_image} roundedCircle className={profileStyles.ProfileImage} />
+                    <Link to={`/profiles/${blog.profile_id}`} aria-label={`Profile of ${blog.owner}`}>
+                        <Image
+                            src={blog.profile_image}
+                            roundedCircle
+                            className={profileStyles.ProfileImage}
+                            alt={`Profile picture of ${blog.owner}`}
+                        />
                     </Link>
                     <div className={styles.BlogInfo}>
                         <Card.Title className={styles.Title}>{blog.title}</Card.Title>
                         <div className={styles.OwnerAndDate}>
-                            <Link to={`/profiles/${blog.profile_id}`} className={profileStyles.ProfileLink}>
+                            <Link to={`/profiles/${blog.profile_id}`} className={profileStyles.ProfileLink} aria-label={`Profile of ${blog.owner}`}>
                                 <span className={styles.OwnerName}>{blog.owner}</span>
                             </Link>
                             <span className={styles.DatePosted}>{blog.created_at}</span>
@@ -66,10 +71,10 @@ const BlogCard = ({ blog, setBlogs }) => {
                 </div>
                 <Card.Text as="div">
                     <div dangerouslySetInnerHTML={{ __html: sanitizedContent.slice(0, 400) + '...' }}></div>
-                    <Link to={`/blogs/${blog.id}`}>Read More</Link>
+                    <Link to={`/blogs/${blog.id}`} className={styles.Link} aria-label={`Read more about ${blog.title}`}>Read More</Link>
                 </Card.Text>
                 {blog.image && blog.image !== defaultBlogImage && (
-                    <Card.Img variant="bottom" src={blog.image} className={styles.BlogImage} />
+                    <Card.Img variant="bottom" src={blog.image} className={styles.BlogImage} alt={`Image for blog titled ${blog.title}`} />
                 )}
                 <div className="d-flex justify-content-between align-items-center mt-3">
                     <div className="d-flex align-items-center">

@@ -28,7 +28,17 @@
 
 .DatePosted {
     margin-left: 1rem;
-    color: #999;
+    color: #727272;
+}
+
+.Link {
+    color: #025fa6;
+    text-decoration: none;
+}
+
+.Link:hover {
+    color: #025fa6;
+    font-weight: 600;
 }
 
 .BlogImage {
