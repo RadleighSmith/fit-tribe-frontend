@@ -937,7 +937,7 @@ Screenshots:
 Desktop
 </summary>
 
-![Desktop]()
+![Desktop](docs/readme_images/screenshots_desktop/blogs_page_desktop.png)
 </details>
 
 <br>
@@ -947,7 +947,7 @@ Desktop
 Mobile
 </summary>
 
-![Mobile]()
+![Mobile](docs/readme_images/screenshots_mobile/blogs_page_mobile.png)
 </details>
 
 <br>
@@ -1001,7 +1001,7 @@ Screenshots:
 Desktop
 </summary>
 
-![Desktop]()
+![Desktop](docs/readme_images/screenshots_desktop/blog_create_desktop.png)
 </details>
 
 <br>
@@ -1011,7 +1011,7 @@ Desktop
 Mobile
 </summary>
 
-![Mobile]()
+![Mobile](docs/readme_images/screenshots_mobile/blog_create_mobile.png)
 </details>
 
 <br>
@@ -1068,7 +1068,7 @@ Screenshots:
 Desktop
 </summary>
 
-![Desktop]()
+![Desktop](docs/readme_images/screenshots_desktop/blog_detail_desktop.png)
 </details>
 
 <br>
@@ -1078,7 +1078,7 @@ Desktop
 Mobile
 </summary>
 
-![Mobile]()
+![Mobile](docs/readme_images/screenshots_mobile/blog_detail_mobile.png)
 </details>
 
 <br>
@@ -1180,7 +1180,7 @@ Screenshots:
 Desktop
 </summary>
 
-![Desktop]()
+![Desktop](docs/readme_images/screenshots_desktop/blog_edit_desktop.png)
 </details>
 
 <br>
@@ -1190,7 +1190,7 @@ Desktop
 Mobile
 </summary>
 
-![Mobile]()
+![Mobile](docs/readme_images/screenshots_mobile/blog_edit_mobile.png)
 </details>
 
 <br>
@@ -1298,7 +1298,7 @@ Screenshots:
 Desktop
 </summary>
 
-![Desktop]()
+![Desktop](docs/readme_images/screenshots_desktop/edit_profile_desktop.png)
 </details>
 
 <br>
@@ -1308,7 +1308,7 @@ Desktop
 Mobile
 </summary>
 
-![Mobile]()
+![Mobile](docs/readme_images/screenshots_mobile/edit_profile_mobile.png)
 </details>
 
 <br>
@@ -1349,7 +1349,7 @@ Screenshots:
 Desktop
 </summary>
 
-![Desktop]()
+![Desktop](docs/readme_images/screenshots_desktop/following_desktop.png)
 </details>
 
 <br>
@@ -1359,7 +1359,7 @@ Desktop
 Mobile
 </summary>
 
-![Mobile]()
+![Mobile](docs/readme_images/screenshots_mobile/edit_profile_mobile.png)
 </details>
 
 <br>
@@ -1402,7 +1402,7 @@ Screenshots:
 Desktop
 </summary>
 
-![Desktop]()
+![Desktop](docs/readme_images/screenshots_desktop/groups_page_desktop.png)
 </details>
 
 <br>
@@ -1412,7 +1412,7 @@ Desktop
 Mobile
 </summary>
 
-![Mobile]()
+![Mobile](docs/readme_images/screenshots_mobile/groups_page_mobile.png)
 </details>
 
 <br>
@@ -1461,7 +1461,7 @@ Screenshots:
 Desktop
 </summary>
 
-![Desktop]()
+![Desktop](docs/readme_images/screenshots_desktop/groups_page_desktop.png)
 </details>
 
 <br>
@@ -1471,7 +1471,7 @@ Desktop
 Mobile
 </summary>
 
-![Mobile]()
+![Mobile](docs/readme_images/screenshots_mobile/groups_page_mobile.png)
 </details>
 
 <br>
@@ -1522,7 +1522,7 @@ Screenshots:
 Desktop
 </summary>
 
-![Desktop]()
+![Desktop](docs/readme_images/screenshots_desktop/groups_page_desktop.png)
 </details>
 
 <br>
@@ -1532,7 +1532,7 @@ Desktop
 Mobile
 </summary>
 
-![Mobile]()
+![Mobile](docs/readme_images/screenshots_mobile/groups_page_mobile.png)
 </details>
 
 <br>
@@ -1582,7 +1582,7 @@ Screenshots:
 Desktop
 </summary>
 
-![Desktop]()
+![Desktop](docs/readme_images/screenshots_desktop/group_edit_desktop.png)
 </details>
 
 <br>
@@ -1592,7 +1592,7 @@ Desktop
 Mobile
 </summary>
 
-![Mobile]()
+![Mobile](docs/readme_images/screenshots_mobile/group_edit_mobile.png)
 </details>
 
 <br>
@@ -1651,7 +1651,7 @@ Screenshots:
 Desktop
 </summary>
 
-![Desktop]()
+![Desktop](docs/readme_images/screenshots_desktop/event_create_desktop.png)
 </details>
 
 <br>
@@ -1661,7 +1661,7 @@ Desktop
 Mobile
 </summary>
 
-![Mobile]()
+![Mobile](docs/readme_images/screenshots_mobile/group_edit_mobile.png)
 </details>
 
 <br>
@@ -1712,7 +1712,7 @@ Screenshots:
 Desktop
 </summary>
 
-![Desktop]()
+![Desktop](docs/readme_images/screenshots_desktop/event_detail_desktop.png)
 </details>
 
 <br>
@@ -1722,7 +1722,7 @@ Desktop
 Mobile
 </summary>
 
-![Mobile]()
+![Mobile](docs/readme_images/screenshots_mobile/group_edit_mobile.png)
 </details>
 
 <br>
@@ -1770,7 +1770,7 @@ Screenshots:
 Desktop
 </summary>
 
-![Desktop]()
+![Desktop](docs/readme_images/screenshots_mobile/group_edit_mobile.png)
 </details>
 
 <br>
@@ -1780,7 +1780,7 @@ Desktop
 Mobile
 </summary>
 
-![Mobile]()
+![Mobile](docs/readme_images/screenshots_mobile/group_edit_mobile.png)
 </details>
 
 <br>
@@ -1813,7 +1813,7 @@ Screenshots:
 Desktop
 </summary>
 
-![Desktop]()
+![Desktop](docs/readme_images/screenshots_mobile/group_edit_mobile.png)
 </details>
 
 <br>
@@ -1823,7 +1823,7 @@ Desktop
 Mobile
 </summary>
 
-![Mobile]()
+![Mobile](docs/readme_images/screenshots_mobile/not_found_page_mobile.png)
 </details>
 
 <br>
