@@ -82,6 +82,7 @@ Our target audience includes:
 - Nutritionists interested in sharing and learning about diet and fitness.
 - Health-conscious individuals aiming to improve their lifestyle.
 - Athletes seeking specialized fitness content and community support.
+- Beginners looking for guidance and encouragement on their fitness journey.
 
 #### Problem Statement:
 
@@ -1966,9 +1967,9 @@ The development of the FitTribe platform leverages a variety of programming lang
    - **Role:** Markup and Styling
    - **Description:** HTML (HyperText Markup Language) is used for structuring the content on the web pages, while CSS (Cascading Style Sheets) is used for styling and layout. Together, they ensure that the FitTribe platform is both visually appealing and user-friendly. Advanced CSS techniques, such as Flexbox and Grid, help create responsive designs that work across various devices.
 
-4. **SQL:**
+4. **PostgreSQL:**
    - **Role:** Database Management
-   - **Description:** SQL (Structured Query Language) is used for managing and querying the relational database. FitTribe uses SQL to interact with the database for storing and retrieving user data, blog posts, comments, and other essential information. Django's ORM (Object-Relational Mapping) simplifies database operations by allowing developers to write database queries using Python code.
+   - **Description:** PostgreSQL is used as the relational database management system for FitTribe. It handles the storage, retrieval, and management of user data, blog posts, comments, and other essential information. Django's ORM (Object-Relational Mapping) simplifies database operations by allowing developers to write database queries using Python code, which are then translated into SQL queries for PostgreSQL.
 
 5. **JavaScript (Node.js):**
    - **Role:** Server-side Operations
